@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AKI — Yield Management & Packages</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{--cream:#FAF8F4;--beige:#F0EBE1;--gold:#C4A96A;--gold-light:#D4BC8A;--gold-dark:#9A7D42;--charcoal:#1C1A17;--text-main:#2A2318;--text-muted:#7A6E5E;--text-faint:#B0A898;--line:rgba(196,169,106,0.22);--card-bg:#FEFCF8;--card-border:rgba(196,169,106,0.22);--teal:#0F6E56;--teal-bg:#E1F5EE;--blue:#185FA5;--blue-bg:#E6F1FB;--amber:#854F0B;--amber-bg:#FAEEDA;--coral:#993C1D;--coral-bg:#FAECE7;--purple:#534AB7;--purple-bg:#EEEDFE;--font-serif:'Cormorant Garamond',Georgia,serif;--font-sans:'DM Sans',sans-serif;--max-w:860px;--pad:clamp(1.25rem,5vw,3rem);}
+    html{scroll-behavior:smooth;}body{background:var(--cream);color:var(--text-main);font-family:var(--font-sans);font-size:15px;line-height:1.65;}
+    .grain{position:fixed;inset:0;pointer-events:none;z-index:999;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:128px;}
+    nav{position:sticky;top:0;z-index:200;background:rgba(250,248,244,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);}
+    .nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 var(--pad);display:flex;align-items:center;height:60px;}
+    .nav-logo{font-family:var(--font-serif);font-size:1.45rem;font-weight:600;letter-spacing:.2em;color:var(--charcoal);text-decoration:none;flex-shrink:0;line-height:1;margin-right:2rem;}
+    .nav-logo small{display:block;font-size:9px;letter-spacing:.15em;color:var(--gold);text-transform:uppercase;font-family:var(--font-sans);font-weight:400;margin-top:2px;}
+    .nav-links{display:flex;align-items:center;gap:.1rem;flex:1;list-style:none;overflow-x:auto;}
+    .nav-links a{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;padding:.4rem .7rem;border-radius:4px;transition:color .15s,background .15s;white-space:nowrap;}
+    .nav-links a:hover,.nav-links a.active{color:var(--gold-dark);background:rgba(196,169,106,.08);}
+    .burger{display:none;margin-left:auto;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:.5rem;}
+    .burger span{display:block;width:22px;height:1.5px;background:var(--text-main);border-radius:2px;transition:all .25s;}
+    .burger.open span:nth-child(1){transform:rotate(45deg) translate(4.5px,4.5px);}
+    .burger.open span:nth-child(2){opacity:0;}
+    .burger.open span:nth-child(3){transform:rotate(-45deg) translate(4.5px,-4.5px);}
+    .mob{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(250,248,244,.98);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);z-index:190;padding:1rem var(--pad) 1.5rem;flex-direction:column;gap:.1rem;}
+    .mob.open{display:flex;}
+    .mob a{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;padding:.7rem 0;border-bottom:1px solid rgba(196,169,106,.1);transition:color .15s;}
+    .mob a:last-child{border-bottom:none;}.mob a:hover{color:var(--gold-dark);}
+    @media(max-width:700px){.nav-links{display:none;}.burger{display:flex;}}
+    .hero{max-width:var(--max-w);margin:0 auto;padding:4rem var(--pad) 3rem;border-bottom:1px solid var(--line);}
+    .hero-ey{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+    .hero-title{font-family:var(--font-serif);font-size:clamp(2.4rem,6vw,4rem);font-weight:300;line-height:1.1;color:var(--charcoal);margin-bottom:1.2rem;}
+    .hero-title em{font-style:italic;color:var(--gold-dark);}
+    .hero-desc{font-size:14px;color:var(--text-muted);max-width:520px;line-height:1.8;}
+    main{max-width:var(--max-w);margin:0 auto;padding:3rem var(--pad) 5rem;}
+    .sec-lbl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:2.5rem 0 1.2rem;padding-bottom:.5rem;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:.6rem;}
+    .sec-lbl-n{font-family:var(--font-serif);font-size:1rem;color:var(--gold-light);}
+    .insight{background:var(--card-bg);border-left:3px solid var(--gold);padding:.85rem 1.1rem;margin:.75rem 0;font-size:13.5px;color:var(--text-muted);line-height:1.7;border-radius:0 4px 4px 0;}
+    .insight strong{color:var(--charcoal);font-weight:500;}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:1rem;}
+    .card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:10px;padding:1.3rem 1.4rem;}
+    .card-badge{display:inline-block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:3px;margin-bottom:.75rem;font-weight:500;}
+    .b-teal{background:var(--teal-bg);color:var(--teal);}.b-blue{background:var(--blue-bg);color:var(--blue);}.b-amber{background:var(--amber-bg);color:var(--amber);}.b-coral{background:var(--coral-bg);color:var(--coral);}.b-purple{background:var(--purple-bg);color:var(--purple);}
+    .card-title{font-family:var(--font-serif);font-size:1.1rem;font-weight:400;color:var(--charcoal);line-height:1.25;margin-bottom:.5rem;}
+    .card-body{font-size:12.5px;color:var(--text-muted);line-height:1.7;}
+    .table-wrap{overflow-x:auto;border:1px solid var(--card-border);border-radius:8px;margin-bottom:1rem;}
+    table{width:100%;border-collapse:collapse;font-size:13px;}
+    th{text-align:left;font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text-faint);padding:.7rem 1rem;background:rgba(196,169,106,.05);border-bottom:1px solid var(--card-border);}
+    td{padding:.65rem 1rem;border-bottom:1px solid rgba(196,169,106,.1);color:var(--text-muted);vertical-align:top;line-height:1.5;}
+    tr:last-child td{border-bottom:none;}td:first-child{color:var(--text-main);font-weight:500;}tr.hl td{background:rgba(196,169,106,.04);}
+
+    /* CALENDAR GRID */
+    .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:1rem;}
+    .cal-day{border-radius:6px;padding:.5rem .3rem;text-align:center;font-size:11px;}
+    .cal-head{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-faint);text-align:center;padding:.4rem 0;font-weight:500;}
+    .cal-high{background:#E1F5EE;color:#0F6E56;font-weight:500;}
+    .cal-mid{background:var(--amber-bg);color:var(--amber);font-weight:500;}
+    .cal-low{background:var(--coral-bg);color:var(--coral);}
+    .cal-form{background:var(--purple-bg);color:var(--purple);}
+    .cal-legend{display:flex;gap:1rem;flex-wrap:wrap;font-size:11px;margin-bottom:1.5rem;}
+    .cal-legend-item{display:flex;align-items:center;gap:.4rem;}
+    .cal-dot{width:10px;height:10px;border-radius:2px;}
+
+    /* PACKAGE CARDS */
+    .pkg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:1rem;}
+    .pkg-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:10px;overflow:hidden;}
+    .pkg-head{padding:1rem 1.2rem;border-bottom:1px solid var(--line);}
+    .pkg-name{font-family:var(--font-serif);font-size:1.1rem;font-weight:400;color:var(--charcoal);margin-bottom:.3rem;}
+    .pkg-price{font-family:var(--font-serif);font-size:1.5rem;font-weight:300;color:var(--gold-dark);}
+    .pkg-price span{font-size:.75rem;color:var(--text-faint);font-family:var(--font-sans);}
+    .pkg-body{padding:.9rem 1.2rem;}
+    .pkg-item{font-size:12px;color:var(--text-muted);padding:.25rem 0 .25rem .9rem;position:relative;}
+    .pkg-item::before{content:"✓";position:absolute;left:0;color:var(--teal);font-size:10px;top:.3rem;}
+
+    footer{background:var(--charcoal);padding:2rem var(--pad);}
+    .footer-inner{max-width:var(--max-w);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;}
+    .footer-logo{font-family:var(--font-serif);font-size:1.3rem;font-weight:600;letter-spacing:.2em;color:rgba(250,248,244,.9);}
+    .footer-logo small{display:block;font-size:9px;letter-spacing:.15em;color:var(--gold-light);font-family:var(--font-sans);font-weight:400;text-transform:uppercase;margin-top:2px;}
+    .footer-nav{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap;}
+    .footer-nav a{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,248,244,.4);text-decoration:none;transition:color .15s;}
+    .footer-nav a:hover{color:var(--gold-light);}
+  </style>
+</head>
+<body>
+<div class="grain"></div>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">AKI<small>Hair &amp; Beauty · Maurice</small></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="aki-etude-marche.html">Étude de marché</a></li>
+      <li><a href="aki-juridique.html">Juridique</a></li>
+      <li><a href="aki-budget.html">Budget</a></li>
+      <li><a href="aki-fidelisation.html">Fidélisation</a></li>
+      <li><a href="aki-yield.html" class="active">Yield</a></li>
+      <li><a href="aki-formation.html">Formation</a></li>
+      <li><a href="aki-franchise.html">Franchise</a></li>
+    </ul>
+    <button class="burger" id="burger" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mob" id="mob">
+  <a href="index.html" onclick="closeNav()">Accueil</a>
+  <a href="aki-etude-marche.html" onclick="closeNav()">Étude de marché</a>
+  <a href="aki-juridique.html" onclick="closeNav()">Juridique</a>
+  <a href="aki-budget.html" onclick="closeNav()">Budget</a>
+  <a href="aki-fidelisation.html" onclick="closeNav()">Fidélisation</a>
+  <a href="aki-yield.html" onclick="closeNav()">Yield Management</a>
+  <a href="aki-formation.html" onclick="closeNav()">Formation digitale</a>
+  <a href="aki-franchise.html" onclick="closeNav()">Franchise</a>
+</div>
+
+<section class="hero">
+  <p class="hero-ey">Stratégie tarifaire — AKI</p>
+  <h1 class="hero-title">Yield management<br />&amp; <em>packages touristiques</em></h1>
+  <p class="hero-desc">Maximiser le chiffre d'affaires en ajustant les prix selon la demande, les jours et les profils clients. Créer des packages hôteliers irrésistibles pour la clientèle internationale.</p>
+</section>
+
+<main>
+  <div class="sec-lbl"><span class="sec-lbl-n">01</span> Principe du yield management pour un salon</div>
+  <div class="insight"><strong>Le yield management</strong> (ou revenue management) consiste à vendre la bonne prestation, au bon client, au bon moment, au bon prix. Utilisé par les hôtels et compagnies aériennes, il s'applique parfaitement à un salon avec des créneaux limités.</div>
+  <div class="cards">
+    <div class="card"><span class="card-badge b-teal">Forte demande</span><div class="card-title">Heures et jours pleins</div><div class="card-body">Vendredi après-midi, samedi, veille de fêtes, haute saison touristique (juillet–décembre). Prix standard ou +10–15 %. Pas de promo, pas de réduction. Créneaux réservés en priorité aux membres.</div></div>
+    <div class="card"><span class="card-badge b-amber">Demande moyenne</span><div class="card-title">Créneaux intermédiaires</div><div class="card-body">Mardi, mercredi, jeudi en journée. Prix standard. Offres abonnés actives. Packages duo disponibles. Idéal pour la clientèle hôtelière de milieu de semaine.</div></div>
+    <div class="card"><span class="card-badge b-purple">Faible demande</span><div class="card-title">Jours de formation</div><div class="card-body">Lundi et mercredi matin = jours de formation. Tarifs réduits –30 % pour la clientèle locale. Ces clients servent aussi de modèles pour les stagiaires. Double bénéfice : revenus + formation.</div></div>
+  </div>
+
+  <div class="sec-lbl"><span class="sec-lbl-n">02</span> Grille tarifaire différenciée par jour</div>
+  <div class="cal-legend">
+    <div class="cal-legend-item"><div class="cal-dot" style="background:#E1F5EE;border:1px solid #5DCAA5"></div><span style="color:#0F6E56">Tarif +10 % (forte demande)</span></div>
+    <div class="cal-legend-item"><div class="cal-dot" style="background:#FAEEDA;border:1px solid #EF9F27"></div><span style="color:#854F0B">Tarif standard</span></div>
+    <div class="cal-legend-item"><div class="cal-dot" style="background:#FAECE7;border:1px solid #F0997B"></div><span style="color:#993C1D">Tarif –20 % (remplissage)</span></div>
+    <div class="cal-legend-item"><div class="cal-dot" style="background:#EEEDFE;border:1px solid #AFA9EC"></div><span style="color:#534AB7">Jour formation –30 %</span></div>
+  </div>
+  <div class="cal-grid">
+    <div class="cal-head">Lun</div><div class="cal-head">Mar</div><div class="cal-head">Mer</div><div class="cal-head">Jeu</div><div class="cal-head">Ven</div><div class="cal-head">Sam</div><div class="cal-head">Dim</div>
+    <div class="cal-day cal-form">Matin formation</div>
+    <div class="cal-day cal-mid">Standard</div>
+    <div class="cal-day cal-form">Matin formation</div>
+    <div class="cal-day cal-mid">Standard</div>
+    <div class="cal-day cal-high">+10 %</div>
+    <div class="cal-day cal-high">+10 %</div>
+    <div class="cal-day cal-low">Fermé ou –20 %</div>
+    <div class="cal-day cal-mid">Après-midi std</div>
+    <div class="cal-day cal-mid">Standard</div>
+    <div class="cal-day cal-mid">Après-midi std</div>
+    <div class="cal-day cal-mid">Standard</div>
+    <div class="cal-day cal-high">+10 %</div>
+    <div class="cal-day cal-high">+10 %</div>
+    <div class="cal-day cal-low">–</div>
+  </div>
+  <div class="insight"><strong>Règle clé :</strong> les jours de formation (lundi et mercredi matin) sont les seuls jours à tarif réduit visible. Les autres réductions sont réservées aux abonnés ou proposées en promotions hebdo privées — jamais affichées publiquement pour protéger l'image premium.</div>
+
+  <div class="sec-lbl"><span class="sec-lbl-n">03</span> Packages touristiques hôteliers</div>
+  <div class="pkg-grid">
+    <div class="pkg-card">
+      <div class="pkg-head">
+        <div class="pkg-name">Package Évasion</div>
+        <div class="pkg-price">4 500 <span>MUR · ~90 €</span></div>
+      </div>
+      <div class="pkg-body">
+        <div class="pkg-item">Coupe + brushing femme</div>
+        <div class="pkg-item">Soin capillaire 30 min</div>
+        <div class="pkg-item">Massage crâne offert</div>
+        <div class="pkg-item">Boisson de bienvenue</div>
+        <div class="pkg-item">Navette hôtel (option)</div>
+      </div>
+    </div>
+    <div class="pkg-card">
+      <div class="pkg-head">
+        <div class="pkg-name">Package Duo</div>
+        <div class="pkg-price">8 000 <span>MUR · ~160 €</span></div>
+      </div>
+      <div class="pkg-body">
+        <div class="pkg-item">2 coupes + soins</div>
+        <div class="pkg-item">Manucure duo</div>
+        <div class="pkg-item">Champagne offert</div>
+        <div class="pkg-item">Réservation créneau privé</div>
+        <div class="pkg-item">Photos souvenir</div>
+      </div>
+    </div>
+    <div class="pkg-card">
+      <div class="pkg-head">
+        <div class="pkg-name">Package Mariage</div>
+        <div class="pkg-price">Sur devis <span>à partir 20 000 MUR</span></div>
+      </div>
+      <div class="pkg-body">
+        <div class="pkg-item">Coiffure mariée + témoin</div>
+        <div class="pkg-item">Maquillage + ongles</div>
+        <div class="pkg-item">Extensions de cils</div>
+        <div class="pkg-item">Salon privatisé (2h)</div>
+        <div class="pkg-item">Photographe partenaire</div>
+      </div>
+    </div>
+    <div class="pkg-card">
+      <div class="pkg-head">
+        <div class="pkg-name">Package VIP Séjour</div>
+        <div class="pkg-price">12 000 <span>MUR · ~240 €</span></div>
+      </div>
+      <div class="pkg-body">
+        <div class="pkg-item">Accès illimité 7 jours</div>
+        <div class="pkg-item">Coupe + coloration</div>
+        <div class="pkg-item">3 soins au choix</div>
+        <div class="pkg-item">Conseiller beauté dédié</div>
+        <div class="pkg-item">Trousse produits AKI offerte</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-lbl"><span class="sec-lbl-n">04</span> Partenariats hôteliers — modèle de collaboration</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th style="width:25%">Type de partenariat</th><th style="width:35%">Mécanisme</th><th style="width:20%">Commission hôtel</th><th style="width:20%">Bénéfice AKI</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>Concierge prescripteur</td><td>Le concierge recommande AKI à ses clients sur demande</td><td>5 % sur chaque prestation apportée</td><td>Flux régulier sans effort marketing</td></tr>
+        <tr><td>Package inclus séjour</td><td>L'hôtel intègre un bon AKI dans certains packages hôtel</td><td>10–15 % sur la valeur du bon</td><td>Visibilité + volume garanti</td></tr>
+        <tr class="hl"><td>Corner in-hotel</td><td>AKI ouvre un espace beauté dans l'hôtel (phase 3)</td><td>Loyer espace + % CA</td><td>Nouvelle source de revenus</td></tr>
+        <tr><td>Carte cadeau croisée</td><td>Les cartes cadeau AKI vendues en boutique hôtel</td><td>Commande minimale mensuelle</td><td>Nouvelle clientèle sans acquisition</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="insight"><strong>Priorité :</strong> contacter les directeurs des opérations ou chefs concierges des 3 principaux hôtels de la zone cible avant l'ouverture. Leur proposer une visite gratuite du salon + une réunion de présentation des packages. Un seul hôtel partenaire peut représenter 20 à 30 % du CA mensuel.</div>
+
+  <div class="sec-lbl"><span class="sec-lbl-n">05</span> Offres promotionnelles hebdomadaires</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th style="width:20%">Jour</th><th style="width:40%">Offre</th><th style="width:20%">Cible</th><th style="width:20%">Canal</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>Lundi</td><td>Flash lundi : –30 % sur les soins capillaires</td><td>Clientèle locale</td><td>Story Instagram</td></tr>
+        <tr><td>Mercredi</td><td>Duo mercredi : 2 personnes = –20 % chacune</td><td>Touristes couples</td><td>WhatsApp abonnés</td></tr>
+        <tr class="hl"><td>Jeudi</td><td>Happy hour 14h–16h : –15 % sur toutes prestations</td><td>Mix locale/touriste</td><td>Planity + RS</td></tr>
+        <tr><td>Dimanche</td><td>Carte cadeau –10 % (achat pour offrir)</td><td>Touristes partants</td><td>Email + SMS</td></tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">AKI<small>Hair &amp; Beauty · Île Maurice</small></div>
+    <ul class="footer-nav">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="aki-fidelisation.html">← Fidélisation</a></li>
+      <li><a href="aki-formation.html">Formation →</a></li>
+    </ul>
+  </div>
+</footer>
+<script>
+  function toggleNav(){document.getElementById('burger').classList.toggle('open');document.getElementById('mob').classList.toggle('open');}
+  function closeNav(){document.getElementById('burger').classList.remove('open');document.getElementById('mob').classList.remove('open');}
+  document.addEventListener('click',e=>{const b=document.getElementById('burger');const m=document.getElementById('mob');if(b&&m&&!b.contains(e.target)&&!m.contains(e.target)){b.classList.remove('open');m.classList.remove('open');}});
+</script>
+</body>
+</html>

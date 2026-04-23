@@ -3,382 +3,311 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AKI — Plan d'action stratégique</title>
+  <title>AKI — Hair & Beauty · Île Maurice</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --cream:#FAF8F4;--beige:#F0EBE1;
+      --gold:#C4A96A;--gold-light:#D4BC8A;--gold-dark:#9A7D42;
+      --charcoal:#1C1A17;--text-main:#2A2318;--text-muted:#7A6E5E;--text-faint:#B0A898;
+      --line:rgba(196,169,106,0.22);--card-bg:#FEFCF8;--card-border:rgba(196,169,106,0.22);
+      --font-serif:'Cormorant Garamond',Georgia,serif;--font-sans:'DM Sans',sans-serif;
+      --max-w:1020px;--pad:clamp(1.25rem,5vw,3rem);
+    }
+    html{scroll-behavior:smooth;}
+    body{background:var(--cream);color:var(--text-main);font-family:var(--font-sans);font-size:15px;line-height:1.65;min-height:100vh;}
+    .grain{position:fixed;inset:0;pointer-events:none;z-index:999;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:128px;}
+
+    /* NAV */
+    nav{position:sticky;top:0;z-index:200;background:rgba(250,248,244,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);}
+    .nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 var(--pad);display:flex;align-items:center;height:60px;}
+    .nav-logo{font-family:var(--font-serif);font-size:1.45rem;font-weight:600;letter-spacing:.2em;color:var(--charcoal);text-decoration:none;flex-shrink:0;line-height:1;margin-right:2rem;}
+    .nav-logo small{display:block;font-size:9px;letter-spacing:.15em;color:var(--gold);text-transform:uppercase;font-family:var(--font-sans);font-weight:400;margin-top:2px;}
+    .nav-links{display:flex;align-items:center;gap:.05rem;flex:1;list-style:none;overflow-x:auto;}
+    .nav-links a{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;padding:.4rem .65rem;border-radius:4px;transition:color .15s,background .15s;white-space:nowrap;}
+    .nav-links a:hover,.nav-links a.active{color:var(--gold-dark);background:rgba(196,169,106,.08);}
+    .burger{display:none;margin-left:auto;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:.5rem;}
+    .burger span{display:block;width:22px;height:1.5px;background:var(--text-main);border-radius:2px;transition:all .25s;}
+    .burger.open span:nth-child(1){transform:rotate(45deg) translate(4.5px,4.5px);}
+    .burger.open span:nth-child(2){opacity:0;}
+    .burger.open span:nth-child(3){transform:rotate(-45deg) translate(4.5px,-4.5px);}
+    .mob{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(250,248,244,.98);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);z-index:190;padding:1rem var(--pad) 1.5rem;flex-direction:column;gap:.1rem;}
+    .mob.open{display:flex;}
+    .mob a{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;padding:.7rem 0;border-bottom:1px solid rgba(196,169,106,.1);transition:color .15s;}
+    .mob a:last-child{border-bottom:none;}.mob a:hover{color:var(--gold-dark);}
+    @media(max-width:780px){.nav-links{display:none;}.burger{display:flex;}}
+
+    /* HERO */
+    .hero{max-width:var(--max-w);margin:0 auto;padding:5rem var(--pad) 4.5rem;display:grid;grid-template-columns:1.1fr 1fr;gap:5rem;align-items:center;}
+    .hero-ey{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.4rem;}
+    .hero-title{font-family:var(--font-serif);font-size:clamp(3rem,7vw,5.2rem);font-weight:300;line-height:1.05;color:var(--charcoal);margin-bottom:1.75rem;}
+    .hero-title em{font-style:italic;color:var(--gold-dark);}
+    .hero-desc{font-size:14.5px;color:var(--text-muted);line-height:1.85;margin-bottom:2.5rem;max-width:400px;}
+    .hero-btns{display:flex;gap:.75rem;flex-wrap:wrap;}
+    .btn-p{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;padding:.75rem 1.75rem;border-radius:4px;background:var(--charcoal);color:var(--cream);text-decoration:none;border:1px solid var(--charcoal);transition:background .2s;}
+    .btn-p:hover{background:var(--gold-dark);border-color:var(--gold-dark);}
+    .btn-s{font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:.75rem 1.75rem;border-radius:4px;border:1px solid var(--card-border);color:var(--text-muted);text-decoration:none;background:var(--card-bg);transition:border-color .2s,color .2s;}
+    .btn-s:hover{border-color:var(--gold);color:var(--gold-dark);}
+    .hero-right{display:flex;flex-direction:column;gap:.55rem;}
+    .stat-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;padding:1.1rem 1.3rem;display:flex;align-items:center;gap:1.1rem;}
+    .stat-icon{width:34px;height:34px;border-radius:6px;background:rgba(196,169,106,.1);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;color:var(--gold);}
+    .stat-val{font-family:var(--font-serif);font-size:1.55rem;font-weight:300;color:var(--charcoal);line-height:1;}
+    .stat-lbl{font-size:11px;color:var(--text-faint);letter-spacing:.05em;margin-top:2px;}
+
+    /* BAND */
+    .band{background:rgba(196,169,106,.06);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:2.5rem var(--pad);}
+    .band-inner{max-width:var(--max-w);margin:0 auto;display:flex;gap:2rem;flex-wrap:wrap;align-items:center;justify-content:space-between;}
+    .band-text{font-family:var(--font-serif);font-size:1.5rem;font-weight:300;color:var(--charcoal);}
+    .band-text em{font-style:italic;color:var(--gold-dark);}
+    .band-pills{display:flex;gap:.5rem;flex-wrap:wrap;}
+    .band-pill{font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:.3rem .85rem;border:1px solid var(--card-border);border-radius:20px;color:var(--text-muted);background:var(--card-bg);}
+
+    /* SECTIONS */
+    .sec-wrap{max-width:var(--max-w);margin:0 auto;padding:4rem var(--pad) 0;}
+    .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--line);}
+    .sec-title{font-family:var(--font-serif);font-size:1.8rem;font-weight:300;color:var(--charcoal);}
+    .sec-meta{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint);}
+
+    /* DOC GRID — 4 colonnes */
+    .doc-grid{max-width:var(--max-w);margin:0 auto;padding:1.5rem var(--pad) 1rem;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+    .doc-grid-2{max-width:var(--max-w);margin:0 auto;padding:0 var(--pad) 4rem;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+    .doc-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:10px;overflow:hidden;text-decoration:none;display:flex;flex-direction:column;transition:border-color .2s,transform .2s;}
+    .doc-card:hover{border-color:var(--gold);transform:translateY(-2px);}
+    .doc-top{padding:1.2rem 1.2rem .9rem;flex:1;}
+    .doc-num{font-family:var(--font-serif);font-size:2.5rem;font-weight:300;color:rgba(196,169,106,.16);line-height:1;margin-bottom:.6rem;}
+    .doc-tag{display:inline-block;font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:3px;margin-bottom:.6rem;font-weight:500;}
+    .t-teal{background:#E1F5EE;color:#0F6E56;}.t-blue{background:#E6F1FB;color:#185FA5;}.t-amber{background:#FAEEDA;color:#854F0B;}.t-coral{background:#FAECE7;color:#993C1D;}.t-purple{background:#EEEDFE;color:#534AB7;}.t-green{background:#EAF3DE;color:#3B6D11;}.t-pink{background:#FBEAF0;color:#993556;}.t-gray{background:#F1EFE8;color:#5F5E5A;}
+    .doc-title{font-family:var(--font-serif);font-size:1.05rem;font-weight:400;color:var(--charcoal);line-height:1.2;margin-bottom:.4rem;}
+    .doc-desc{font-size:11.5px;color:var(--text-muted);line-height:1.6;}
+    .doc-bot{padding:.75rem 1.2rem;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;}
+    .doc-meta-txt{font-size:10px;color:var(--text-faint);}
+    .doc-arrow{width:24px;height:24px;border-radius:50%;border:1px solid var(--card-border);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:12px;transition:all .15s;}
+    .doc-card:hover .doc-arrow{background:var(--gold);color:#fff;border-color:var(--gold);}
+
+    /* PHASES */
+    .phases-sec{background:var(--beige);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:4rem var(--pad);}
+    .phases-inner{max-width:var(--max-w);margin:0 auto;}
+    .phases-head{display:flex;align-items:baseline;gap:1rem;margin-bottom:2.5rem;}
+    .phases-title{font-family:var(--font-serif);font-size:1.8rem;font-weight:300;color:var(--charcoal);}
+    .phases-sub{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint);}
+    .phases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+    .phase-cell{background:var(--card-bg);padding:1.75rem 1.5rem;}
+    .phase-roman{font-family:var(--font-serif);font-size:2.5rem;font-weight:300;color:rgba(196,169,106,.28);line-height:1;margin-bottom:.9rem;}
+    .phase-name{font-family:var(--font-serif);font-size:1.1rem;font-weight:400;color:var(--charcoal);margin-bottom:.6rem;line-height:1.25;}
+    .phase-desc{font-size:12.5px;color:var(--text-muted);line-height:1.7;}
+    .phase-badge{display:inline-block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:3px;margin-top:.9rem;font-weight:500;}
+
+    /* QUOTE */
+    .quote-sec{max-width:var(--max-w);margin:0 auto;padding:5rem var(--pad);display:flex;flex-direction:column;align-items:center;text-align:center;}
+    .quote-line{width:1px;height:60px;background:linear-gradient(to bottom,transparent,var(--gold));margin-bottom:2.5rem;}
+    .quote-text{font-family:var(--font-serif);font-size:clamp(1.5rem,4vw,2.4rem);font-weight:300;color:var(--charcoal);line-height:1.4;max-width:600px;margin-bottom:1.5rem;}
+    .quote-text em{font-style:italic;color:var(--gold-dark);}
+    .quote-src{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint);}
+
+    /* FOOTER */
+    footer{background:var(--charcoal);padding:2.5rem var(--pad);}
+    .footer-inner{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:2rem;}
+    .footer-logo{font-family:var(--font-serif);font-size:1.4rem;font-weight:600;letter-spacing:.22em;color:rgba(250,248,244,.9);}
+    .footer-logo small{display:block;font-size:9px;letter-spacing:.15em;color:var(--gold-light);font-family:var(--font-sans);font-weight:400;text-transform:uppercase;margin-top:2px;}
+    .footer-nav{display:flex;gap:1rem;list-style:none;justify-content:center;flex-wrap:wrap;}
+    .footer-nav a{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,248,244,.4);text-decoration:none;transition:color .15s;}
+    .footer-nav a:hover{color:var(--gold-light);}
+    .footer-copy{font-size:11px;color:rgba(250,248,244,.22);text-align:right;line-height:1.7;}
+
+    @media(max-width:900px){
+      .doc-grid,.doc-grid-2{grid-template-columns:repeat(2,1fr);}
+      .hero{grid-template-columns:1fr;gap:3rem;padding:3.5rem var(--pad) 3rem;}
+      .hero-right{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;}
+      .phases-grid{grid-template-columns:1fr;}
+      .footer-inner{grid-template-columns:1fr;gap:1.5rem;}
+      .footer-copy{text-align:left;}
+      .footer-nav{justify-content:flex-start;}
+      .band-inner{flex-direction:column;gap:1.25rem;}
+    }
+    @media(max-width:520px){
+      .doc-grid,.doc-grid-2{grid-template-columns:1fr;}
+      .hero-right{grid-template-columns:1fr;}
+    }
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+    .hero-ey{animation:fadeUp .5s ease both;}
+    .hero-title{animation:fadeUp .5s .08s ease both;}
+    .hero-desc{animation:fadeUp .5s .16s ease both;}
+    .hero-btns{animation:fadeUp .5s .24s ease both;}
+    .hero-right{animation:fadeUp .55s .12s ease both;}
+  </style>
 </head>
 <body>
+<div class="grain"></div>
 
-  <div class="grain"></div>
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">AKI<small>Hair &amp; Beauty · Maurice</small></a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Accueil</a></li>
+      <li><a href="aki-etude-marche.html">Étude de marché</a></li>
+      <li><a href="aki-juridique.html">Juridique</a></li>
+      <li><a href="aki-budget.html">Budget</a></li>
+      <li><a href="aki-fidelisation.html">Fidélisation</a></li>
+      <li><a href="aki-yield.html">Yield</a></li>
+      <li><a href="aki-formation.html">Formation</a></li>
+      <li><a href="aki-franchise.html">Franchise</a></li>
+    </ul>
+    <button class="burger" id="burger" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mob" id="mob">
+  <a href="index.html" onclick="closeNav()">Accueil</a>
+  <a href="aki-etude-marche.html" onclick="closeNav()">Étude de marché</a>
+  <a href="aki-juridique.html" onclick="closeNav()">Juridique</a>
+  <a href="aki-budget.html" onclick="closeNav()">Budget</a>
+  <a href="aki-fidelisation.html" onclick="closeNav()">Fidélisation</a>
+  <a href="aki-yield.html" onclick="closeNav()">Yield Management</a>
+  <a href="aki-formation.html" onclick="closeNav()">Formation digitale</a>
+  <a href="aki-franchise.html" onclick="closeNav()">Franchise</a>
+</div>
 
-  <header>
-    <div class="header-inner">
-      <div class="logo-block">
-        <span class="logo-name">AKI</span>
-        <span class="logo-sub">Hair &amp; Beauty · Maurice</span>
-      </div>
-      <div class="header-label">Plan d'action stratégique</div>
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <p class="hero-ey">Projet entrepreneurial · France — Maurice · 2025</p>
+    <h1 class="hero-title">Salon.<br />Formation.<br /><em>Franchise.</em></h1>
+    <p class="hero-desc">AKI est un projet de salon de coiffure et spa premium à l'île Maurice, ancré dans le savoir-faire français, associé à un centre de formation certifiante et un modèle de franchise à l'international.</p>
+    <div class="hero-btns">
+      <a href="#documents" class="btn-p">Voir les documents</a>
+      <a href="aki-etude-marche.html" class="btn-s">Étude de marché</a>
     </div>
-    <div class="header-line"></div>
-  </header>
+  </div>
+  <div class="hero-right">
+    <div class="stat-card"><div class="stat-icon">✦</div><div><div class="stat-val">1,38 M</div><div class="stat-lbl">Touristes à Maurice en 2024</div></div></div>
+    <div class="stat-card"><div class="stat-icon">◈</div><div><div class="stat-val">100 m²</div><div class="stat-lbl">Salon &amp; spa premium</div></div></div>
+    <div class="stat-card"><div class="stat-icon">◎</div><div><div class="stat-val">8 docs</div><div class="stat-lbl">Dossier complet</div></div></div>
+    <div class="stat-card"><div class="stat-icon">❋</div><div><div class="stat-val">~125 k€</div><div class="stat-lbl">CA cible année 1</div></div></div>
+  </div>
+</section>
 
-  <main>
+<!-- BAND -->
+<div class="band">
+  <div class="band-inner">
+    <div class="band-text">Valoriser <em>l'excellence française</em> au cœur de l'Océan Indien</div>
+    <div class="band-pills">
+      <span class="band-pill">Coiffure</span>
+      <span class="band-pill">Esthétique</span>
+      <span class="band-pill">Formation</span>
+      <span class="band-pill">Franchise</span>
+      <span class="band-pill">Impact social</span>
+    </div>
+  </div>
+</div>
 
-    <section class="hero">
-      <p class="hero-eyebrow">Vision 2025 — 2027</p>
-      <h1 class="hero-title">De la fondation<br /><em>à la franchise</em></h1>
-      <p class="hero-desc">Un projet en trois phases : salon premium, centre de formation, marque internationale. Chaque étape construit la suivante.</p>
-      <div class="hero-phases">
-        <div class="hp" data-phase="1">Phase 1<span>Salon</span></div>
-        <div class="hp-arrow">→</div>
-        <div class="hp" data-phase="2">Phase 2<span>Formation</span></div>
-        <div class="hp-arrow">→</div>
-        <div class="hp" data-phase="3">Phase 3<span>Franchise</span></div>
+<!-- DOCUMENTS ROW 1 -->
+<div class="sec-wrap" id="documents">
+  <div class="sec-head">
+    <div class="sec-title">Dossier stratégique complet</div>
+    <div class="sec-meta">8 documents</div>
+  </div>
+</div>
+
+<div class="doc-grid">
+  <a href="aki-etude-marche.html" class="doc-card">
+    <div class="doc-top"><div class="doc-num">01</div><span class="doc-tag t-blue">Étude de marché</span><div class="doc-title">Marché Maurice 2025</div><div class="doc-desc">Concurrence, personas, pricing, projections financières, SWOT.</div></div>
+    <div class="doc-bot"><span class="doc-meta-txt">Données 2024–2025</span><div class="doc-arrow">→</div></div>
+  </a>
+  <a href="aki-juridique.html" class="doc-card">
+    <div class="doc-top"><div class="doc-num">02</div><span class="doc-tag t-amber">Juridique</span><div class="doc-title">Structuration juridique</div><div class="doc-desc">Auto-entreprise, INPI, Occupation Permit, 4 modèles de mails.</div></div>
+    <div class="doc-bot"><span class="doc-meta-txt">Checklist + mails</span><div class="doc-arrow">→</div></div>
+  </a>
+  <a href="aki-budget.html" class="doc-card">
+    <div class="doc-top"><div class="doc-num">03</div><span class="doc-tag t-coral">Budget</span><div class="doc-title">Budget prévisionnel</div><div class="doc-desc">Investissements, charges mensuelles, 3 scénarios de CA.</div></div>
+    <div class="doc-bot"><span class="doc-meta-txt">38–60 k€ ouverture</span><div class="doc-arrow">→</div></div>
+  </a>
+  <a href="aki-fidelisation.html" class="doc-card">
+    <div class="doc-top"><div class="doc-num">04</div><span class="doc-tag t-purple">Fidélisation</span><div class="doc-title">Abonnements &amp; carte métal</div><div class="doc-desc">3 formules d'abonnement, parrainage, carte nominative AKI Black.</div></div>
+    <div class="doc-bot"><span class="doc-meta-txt">CA récurrent</span><div class="doc-arrow">→</div></div>
+  </a>
+</div>
+
+<div class="doc-grid-2">
+  <a href="aki-yield.html" class="doc-card">
+    <div class="doc-top"><div class="doc-num">05</div><span class="doc-tag t-teal">Yield</span><div class="doc-title">Yield &amp; packages hôtels</div><div class="doc-desc">Tarification dynamique, packages touristiques, partenariats hôteliers.</div></div>
+    <div class="doc-bot"><span class="doc-meta-txt">4 packages</span><div class="doc-arrow">→</div></div>
+  </a>
+  <a href="aki-formation.html" class="doc-card">
+    <div class="doc-top"><div class="doc-num">06</div><span class="doc-tag t-green">Formation</span><div class="doc-title">Plateforme e-learning</div><div class="doc-desc">8 modules, présentiel + digital, certifications, partenariats institutionnels.</div></div>
+    <div class="doc-bot"><span class="doc-meta-txt">Phase 2</span><div class="doc-arrow">→</div></div>
+  </a>
+  <a href="aki-franchise.html" class="doc-card">
+    <div class="doc-top"><div class="doc-num">07</div><span class="doc-tag t-pink">Franchise</span><div class="doc-title">Stratégie franchise</div><div class="doc-desc">3 niveaux de franchise, holding France, expansion Océan Indien, projections.</div></div>
+    <div class="doc-bot"><span class="doc-meta-txt">Phase 3</span><div class="doc-arrow">→</div></div>
+  </a>
+  <a href="aki-juridique.html#mails" class="doc-card">
+    <div class="doc-top"><div class="doc-num">08</div><span class="doc-tag t-gray">Mails</span><div class="doc-title">Modèles de mails</div><div class="doc-desc">4 mails prêts à envoyer : CCI France-Maurice, EDB, Ambassade, MCCI.</div></div>
+    <div class="doc-bot"><span class="doc-meta-txt">À envoyer maintenant</span><div class="doc-arrow">→</div></div>
+  </a>
+</div>
+
+<!-- PHASES -->
+<section class="phases-sec" id="phases">
+  <div class="phases-inner">
+    <div class="phases-head">
+      <div class="phases-title">Les 3 phases du projet</div>
+      <div class="phases-sub">2025 — 2027</div>
+    </div>
+    <div class="phases-grid">
+      <div class="phase-cell">
+        <div class="phase-roman">I</div>
+        <div class="phase-name">Création du salon premium</div>
+        <div class="phase-desc">Ouvrir un salon de coiffure et spa de 100 m² à l'île Maurice. Cibler la clientèle touristique internationale via les hôtels 4 et 5 étoiles. Établir l'identité AKI et les partenariats hôteliers clés. Lancer les abonnements et la carte métallique.</div>
+        <span class="phase-badge t-teal">En cours de lancement</span>
       </div>
-    </section>
-
-    <section class="timeline" id="timeline">
-
-      <!-- BLOC 1 -->
-      <div class="phase-label">
-        <span class="phase-num">①</span>
-        <span class="phase-text">Socle juridique &amp; administratif</span>
+      <div class="phase-cell">
+        <div class="phase-roman">II</div>
+        <div class="phase-name">Centre de formation &amp; impact social</div>
+        <div class="phase-desc">Structurer un pôle de formation certifiante pour les coiffeurs mauriciens. Sessions en soirée, plateforme e-learning, partenariats Chambre des Métiers et Ambassade de France. Reverser 20 % du CA à des actions sociales locales.</div>
+        <span class="phase-badge t-blue">Phase 2</span>
       </div>
-
-      <div class="step" data-index="0">
-        <div class="step-left">
-          <div class="step-num">01</div>
-          <div class="step-line"></div>
-        </div>
-        <div class="step-card" onclick="toggleStep(this)">
-          <div class="step-header">
-            <div>
-              <div class="step-title">Structuration juridique</div>
-              <div class="step-sub">Créer les entités légales en France et à Maurice</div>
-            </div>
-            <div class="step-icon">+</div>
-          </div>
-          <div class="step-detail">
-            <ul>
-              <li>Créer une auto-entreprise (ou société) en France pour gérer la marque et commercialiser</li>
-              <li>Obtenir les autorisations d'exercer sur le sol mauricien</li>
-              <li>Se rapprocher de la Chambre des Métiers à l'Île Maurice</li>
-              <li>Clarifier le cadre légal pour une future franchise</li>
-              <li>Vérifier la disponibilité juridique du nom et déposer la marque</li>
-            </ul>
-          </div>
-        </div>
+      <div class="phase-cell">
+        <div class="phase-roman">III</div>
+        <div class="phase-name">Marque &amp; franchise internationale</div>
+        <div class="phase-desc">Déployer AKI comme label de qualité française à Maurice puis en Europe. 3 niveaux de franchise, holding France, gamme de produits capillaires, expansion Océan Indien. Objectif : 10 points de vente en année 5.</div>
+        <span class="phase-badge t-amber">Phase 3</span>
       </div>
+    </div>
+  </div>
+</section>
 
-      <div class="step" data-index="1">
-        <div class="step-left">
-          <div class="step-num">02</div>
-          <div class="step-line"></div>
-        </div>
-        <div class="step-card" onclick="toggleStep(this)">
-          <div class="step-header">
-            <div>
-              <div class="step-title">Étude de marché</div>
-              <div class="step-sub">Valider les hypothèses avant tout investissement</div>
-            </div>
-            <div class="step-icon">+</div>
-          </div>
-          <div class="step-detail">
-            <ul>
-              <li>Analyser le panier moyen beauté d'un client local mauricien et d'un touriste</li>
-              <li>Étudier la concurrence locale : salons existants, niveaux de prix</li>
-              <li>Identifier les flux touristiques dans la zone cible (hôtels 4 et 5 étoiles)</li>
-              <li>Valider la demande pour des formations professionnelles</li>
-              <li>Ajuster la grille tarifaire en conséquence</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+<!-- QUOTE -->
+<section class="quote-sec">
+  <div class="quote-line"></div>
+  <div class="quote-text">"Partager un savoir-faire, créer de l'emploi,<br /><em>laisser une trace durable.</em>"</div>
+  <div class="quote-src">Vision fondatrice · AKI · Île Maurice</div>
+</section>
 
-      <!-- BLOC 2 -->
-      <div class="phase-label">
-        <span class="phase-num">②</span>
-        <span class="phase-text">Identité de marque &amp; branding</span>
-      </div>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">AKI<small>Hair &amp; Beauty · Île Maurice</small></div>
+    <ul class="footer-nav">
+      <li><a href="aki-etude-marche.html">Marché</a></li>
+      <li><a href="aki-juridique.html">Juridique</a></li>
+      <li><a href="aki-budget.html">Budget</a></li>
+      <li><a href="aki-fidelisation.html">Fidélisation</a></li>
+      <li><a href="aki-yield.html">Yield</a></li>
+      <li><a href="aki-formation.html">Formation</a></li>
+      <li><a href="aki-franchise.html">Franchise</a></li>
+    </ul>
+    <div class="footer-copy">Dossier stratégique · 2025<br />Document confidentiel</div>
+  </div>
+</footer>
 
-      <div class="step" data-index="2">
-        <div class="step-left">
-          <div class="step-num">03</div>
-          <div class="step-line"></div>
-        </div>
-        <div class="step-card" onclick="toggleStep(this)">
-          <div class="step-header">
-            <div>
-              <div class="step-title">Naming &amp; identité visuelle</div>
-              <div class="step-sub">Poser les bases de l'image de marque AKI</div>
-            </div>
-            <div class="step-icon">+</div>
-          </div>
-          <div class="step-detail">
-            <ul>
-              <li>Finaliser le nom commercial : AKI / AKI Paris / AKI Signature / AKI Concept</li>
-              <li>Déposer la marque officiellement</li>
-              <li>Définir la palette visuelle : blanc, beige, doré — style épuré et premium</li>
-              <li>Créer le logo et le slogan associé au savoir-faire français</li>
-              <li>Décliner l'identité sur tous les supports (salon, digital, produits)</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="step" data-index="3">
-        <div class="step-left">
-          <div class="step-num">04</div>
-          <div class="step-line"></div>
-        </div>
-        <div class="step-card" onclick="toggleStep(this)">
-          <div class="step-header">
-            <div>
-              <div class="step-title">Positionnement &amp; personas</div>
-              <div class="step-sub">Définir les cibles et la promesse de valeur</div>
-            </div>
-            <div class="step-icon">+</div>
-          </div>
-          <div class="step-detail">
-            <ul>
-              <li>Persona 1 : touriste international haut de gamme — discrétion, qualité, expertise française</li>
-              <li>Persona 2 : client local — sensible au prix, aux promos, aux jours de formation</li>
-              <li>Construire la promesse : excellence française + accessibilité tarifaire</li>
-              <li>Définir une communication différenciée selon les deux segments</li>
-              <li>Préparer les offres : tarifs d'ouverture, promos hebdos, packages touristiques</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- BLOC 3 -->
-      <div class="phase-label">
-        <span class="phase-num">③</span>
-        <span class="phase-text">Création &amp; aménagement du salon</span>
-      </div>
-
-      <div class="step" data-index="4">
-        <div class="step-left">
-          <div class="step-num">05</div>
-          <div class="step-line"></div>
-        </div>
-        <div class="step-card" onclick="toggleStep(this)">
-          <div class="step-header">
-            <div>
-              <div class="step-title">Conception de l'espace</div>
-              <div class="step-sub">Aménager le salon de 100 m² avec l'expérience premium</div>
-            </div>
-            <div class="step-icon">+</div>
-          </div>
-          <div class="step-detail">
-            <ul>
-              <li>Organiser les espaces : coiffure, cabines esthétiques, onglerie, extensions de cils</li>
-              <li>Décorer selon l'identité visuelle AKI : minimalisme, élégance parisienne</li>
-              <li>Habiller le personnel : tenues uniformisées, posture, langage</li>
-              <li>Mettre en place un parcours client fluide et mémorable</li>
-              <li>Positionner le salon comme un lieu signature reconnaissable</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="step" data-index="5">
-        <div class="step-left">
-          <div class="step-num">06</div>
-          <div class="step-line"></div>
-        </div>
-        <div class="step-card" onclick="toggleStep(this)">
-          <div class="step-header">
-            <div>
-              <div class="step-title">Recrutement &amp; formation des équipes</div>
-              <div class="step-sub">Constituer et former les équipes locales aux standards français</div>
-            </div>
-            <div class="step-icon">+</div>
-          </div>
-          <div class="step-detail">
-            <ul>
-              <li>Recruter coiffeurs, esthéticiennes et staff d'accueil</li>
-              <li>Former aux standards français : accueil, qualité, discrétion</li>
-              <li>Créer un pipeline : former des talents locaux puis les employer</li>
-              <li>Contractualiser les profils (contrat pro, alternance)</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- BLOC 4 -->
-      <div class="phase-label">
-        <span class="phase-num">④</span>
-        <span class="phase-text">Marketing &amp; communication</span>
-      </div>
-
-      <div class="step" data-index="6">
-        <div class="step-left">
-          <div class="step-num">07</div>
-          <div class="step-line"></div>
-        </div>
-        <div class="step-card" onclick="toggleStep(this)">
-          <div class="step-header">
-            <div>
-              <div class="step-title">Stratégie marketing</div>
-              <div class="step-sub">Construire le plan de communication avant le lancement</div>
-            </div>
-            <div class="step-icon">+</div>
-          </div>
-          <div class="step-detail">
-            <ul>
-              <li>Définir la stratégie de prix : yield management, jours de formation moins chers</li>
-              <li>Préparer les canaux : Instagram, Facebook, influenceurs locaux</li>
-              <li>Créer les supports physiques : flyers, affichage dans les lieux touristiques</li>
-              <li>Nouer des partenariats hôteliers pour capter la clientèle touristique</li>
-              <li>Planifier la campagne de lancement : invitations ciblées, offres d'ouverture</li>
-              <li>Construire le storytelling : savoir-faire français, impact social, montée en gamme</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- BLOC 5 -->
-      <div class="phase-label">
-        <span class="phase-num">⑤</span>
-        <span class="phase-text">Présence digitale</span>
-      </div>
-
-      <div class="step" data-index="7">
-        <div class="step-left">
-          <div class="step-num">08</div>
-          <div class="step-line"></div>
-        </div>
-        <div class="step-card" onclick="toggleStep(this)">
-          <div class="step-header">
-            <div>
-              <div class="step-title">Site web &amp; outils de réservation</div>
-              <div class="step-sub">Créer l'écosystème digital du salon</div>
-            </div>
-            <div class="step-icon">+</div>
-          </div>
-          <div class="step-detail">
-            <ul>
-              <li>Créer un site web premium : storytelling, services, galerie, réservation en ligne</li>
-              <li>Mettre en place une application de prise de RDV (inspiration Planity)</li>
-              <li>Automatiser les réservations pour optimiser le taux de remplissage</li>
-              <li>Collecter les données clients pour affiner les offres</li>
-              <li>Ouvrir et animer les réseaux sociaux Instagram et Facebook</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- BLOC 6 -->
-      <div class="phase-label">
-        <span class="phase-num">⑥</span>
-        <span class="phase-text">Lancement du salon</span>
-      </div>
-
-      <div class="step" data-index="8">
-        <div class="step-left">
-          <div class="step-num">09</div>
-          <div class="step-line"></div>
-        </div>
-        <div class="step-card" onclick="toggleStep(this)">
-          <div class="step-header">
-            <div>
-              <div class="step-title">Ouverture &amp; activation</div>
-              <div class="step-sub">Lancer les opérations et générer les premiers clients</div>
-            </div>
-            <div class="step-icon">+</div>
-          </div>
-          <div class="step-detail">
-            <ul>
-              <li>Lancer les offres d'ouverture : tarifs préférentiels, invitations ciblées</li>
-              <li>Activer les partenariats hôteliers pour convertir la clientèle existante</li>
-              <li>Mettre en place les offres promotionnelles hebdomadaires</li>
-              <li>Objectif opérationnel : 10 clients minimum par jour</li>
-              <li>Suivre les indicateurs : taux de remplissage, panier moyen, taux de conversion</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- BLOC 7 -->
-      <div class="phase-label">
-        <span class="phase-num">⑦</span>
-        <span class="phase-text">Pôle formation</span>
-      </div>
-
-      <div class="step" data-index="9">
-        <div class="step-left">
-          <div class="step-num">10</div>
-          <div class="step-line"></div>
-        </div>
-        <div class="step-card" onclick="toggleStep(this)">
-          <div class="step-header">
-            <div>
-              <div class="step-title">Déploiement de la formation</div>
-              <div class="step-sub">Structurer le centre de formation physique et digital</div>
-            </div>
-            <div class="step-icon">+</div>
-          </div>
-          <div class="step-detail">
-            <ul>
-              <li>Créer les programmes : techniques, standards internationaux, accueil client</li>
-              <li>Proposer des sessions en soirée pour les actifs en journée</li>
-              <li>Développer la plateforme de formation à distance et le logiciel dédié</li>
-              <li>Partenariats : ambassade de Maurice, chambre des métiers, réseaux français</li>
-              <li>Communiquer sur l'impact social : emplois créés, parcours transformés</li>
-              <li>Reverser 20 % du CA à des actions sociales et le valoriser publiquement</li>
-              <li>Monétiser : programmes certifiants, abonnements e-learning</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- BLOC 8 -->
-      <div class="phase-label">
-        <span class="phase-num">⑧</span>
-        <span class="phase-text">Expansion &amp; franchise</span>
-      </div>
-
-      <div class="step" data-index="10">
-        <div class="step-left">
-          <div class="step-num">11</div>
-          <div class="step-line last"></div>
-        </div>
-        <div class="step-card" onclick="toggleStep(this)">
-          <div class="step-header">
-            <div>
-              <div class="step-title">Développement de la marque &amp; franchise</div>
-              <div class="step-sub">Dupliquer le modèle à Maurice puis à l'international</div>
-            </div>
-            <div class="step-icon">+</div>
-          </div>
-          <div class="step-detail">
-            <ul>
-              <li>Créer un manuel opérationnel et des process standardisés</li>
-              <li>Obtenir le droit de franchiser sur le sol mauricien</li>
-              <li>Lancer une gamme de produits capillaires français</li>
-              <li>Déployer dans d'autres hôtels et nouveaux points de vente</li>
-              <li>Étendre le modèle en Europe (opportunités de marché)</li>
-              <li>Générer des revenus via droits d'entrée, redevances, ventes de produits</li>
-              <li>Positionner AKI comme un label de qualité française reconnu</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-    </section>
-
-    <footer>
-      <div class="footer-inner">
-        <span class="footer-logo">AKI</span>
-        <span class="footer-copy">Plan stratégique — Île Maurice</span>
-      </div>
-    </footer>
-
-  </main>
-
-  <script src="main.js"></script>
+<script>
+  function toggleNav(){document.getElementById('burger').classList.toggle('open');document.getElementById('mob').classList.toggle('open');}
+  function closeNav(){document.getElementById('burger').classList.remove('open');document.getElementById('mob').classList.remove('open');}
+  document.addEventListener('click',e=>{const b=document.getElementById('burger');const m=document.getElementById('mob');if(b&&m&&!b.contains(e.target)&&!m.contains(e.target)){b.classList.remove('open');m.classList.remove('open');}});
+</script>
 </body>
 </html>

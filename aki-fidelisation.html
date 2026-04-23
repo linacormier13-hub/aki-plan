@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AKI — Fidélisation & Abonnements</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #FAF8F4; --beige: #F0EBE1;
+      --gold: #C4A96A; --gold-light: #D4BC8A; --gold-dark: #9A7D42;
+      --charcoal: #1C1A17; --text-main: #2A2318;
+      --text-muted: #7A6E5E; --text-faint: #B0A898;
+      --line: rgba(196,169,106,0.22);
+      --card-bg: #FEFCF8; --card-border: rgba(196,169,106,0.22);
+      --teal: #0F6E56; --teal-bg: #E1F5EE;
+      --blue: #185FA5; --blue-bg: #E6F1FB;
+      --amber: #854F0B; --amber-bg: #FAEEDA;
+      --coral: #993C1D; --coral-bg: #FAECE7;
+      --purple: #534AB7; --purple-bg: #EEEDFE;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'DM Sans', sans-serif;
+      --max-w: 860px; --pad: clamp(1.25rem,5vw,3rem);
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--cream); color: var(--text-main); font-family: var(--font-sans); font-size: 15px; line-height: 1.65; }
+    .grain { position:fixed;inset:0;pointer-events:none;z-index:999;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:128px; }
+
+    /* NAV */
+    nav { position:sticky;top:0;z-index:200;background:rgba(250,248,244,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--line); }
+    .nav-inner { max-width:var(--max-w);margin:0 auto;padding:0 var(--pad);display:flex;align-items:center;height:60px;gap:0; }
+    .nav-logo { font-family:var(--font-serif);font-size:1.45rem;font-weight:600;letter-spacing:.2em;color:var(--charcoal);text-decoration:none;flex-shrink:0;line-height:1;margin-right:2rem; }
+    .nav-logo small { display:block;font-size:9px;letter-spacing:.15em;color:var(--gold);text-transform:uppercase;font-family:var(--font-sans);font-weight:400;margin-top:2px; }
+    .nav-links { display:flex;align-items:center;gap:.1rem;flex:1;list-style:none;overflow-x:auto; }
+    .nav-links a { font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;padding:.4rem .7rem;border-radius:4px;transition:color .15s,background .15s;white-space:nowrap; }
+    .nav-links a:hover,.nav-links a.active { color:var(--gold-dark);background:rgba(196,169,106,.08); }
+    .burger { display:none;margin-left:auto;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:.5rem; }
+    .burger span { display:block;width:22px;height:1.5px;background:var(--text-main);border-radius:2px;transition:all .25s; }
+    .burger.open span:nth-child(1){transform:rotate(45deg) translate(4.5px,4.5px);}
+    .burger.open span:nth-child(2){opacity:0;}
+    .burger.open span:nth-child(3){transform:rotate(-45deg) translate(4.5px,-4.5px);}
+    .mob { display:none;position:fixed;top:60px;left:0;right:0;background:rgba(250,248,244,.98);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);z-index:190;padding:1rem var(--pad) 1.5rem;flex-direction:column;gap:.1rem; }
+    .mob.open{display:flex;}
+    .mob a { font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;padding:.7rem 0;border-bottom:1px solid rgba(196,169,106,.1);transition:color .15s; }
+    .mob a:last-child{border-bottom:none;}
+    .mob a:hover{color:var(--gold-dark);}
+    @media(max-width:700px){.nav-links{display:none;}.burger{display:flex;}}
+
+    /* HERO */
+    .hero { max-width:var(--max-w);margin:0 auto;padding:4rem var(--pad) 3rem;border-bottom:1px solid var(--line); }
+    .hero-ey { font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem; }
+    .hero-title { font-family:var(--font-serif);font-size:clamp(2.4rem,6vw,4rem);font-weight:300;line-height:1.1;color:var(--charcoal);margin-bottom:1.2rem; }
+    .hero-title em { font-style:italic;color:var(--gold-dark); }
+    .hero-desc { font-size:14px;color:var(--text-muted);max-width:520px;line-height:1.8; }
+
+    /* LAYOUT */
+    main { max-width:var(--max-w);margin:0 auto;padding:3rem var(--pad) 5rem; }
+    .sec-lbl { font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:2.5rem 0 1.2rem;padding-bottom:.5rem;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:.6rem; }
+    .sec-lbl-n { font-family:var(--font-serif);font-size:1rem;color:var(--gold-light); }
+    .insight { background:var(--card-bg);border-left:3px solid var(--gold);padding:.85rem 1.1rem;margin:.75rem 0;font-size:13.5px;color:var(--text-muted);line-height:1.7;border-radius:0 4px 4px 0; }
+    .insight strong { color:var(--charcoal);font-weight:500; }
+
+    /* CARDS GRID */
+    .cards { display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:1rem; }
+    .card { background:var(--card-bg);border:1px solid var(--card-border);border-radius:10px;padding:1.3rem 1.4rem; }
+    .card-badge { display:inline-block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:3px;margin-bottom:.75rem;font-weight:500; }
+    .b-teal{background:var(--teal-bg);color:var(--teal);}
+    .b-blue{background:var(--blue-bg);color:var(--blue);}
+    .b-amber{background:var(--amber-bg);color:var(--amber);}
+    .b-coral{background:var(--coral-bg);color:var(--coral);}
+    .b-purple{background:var(--purple-bg);color:var(--purple);}
+    .card-title { font-family:var(--font-serif);font-size:1.1rem;font-weight:400;color:var(--charcoal);line-height:1.25;margin-bottom:.5rem; }
+    .card-body { font-size:12.5px;color:var(--text-muted);line-height:1.7; }
+
+    /* PRICING CARDS */
+    .pricing-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:1.5rem; }
+    .pricing-card { background:var(--card-bg);border:1px solid var(--card-border);border-radius:10px;overflow:hidden; }
+    .pricing-card.featured { border-color:var(--gold); }
+    .pricing-head { padding:1.25rem 1.3rem;border-bottom:1px solid var(--line); }
+    .pricing-tier { font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint);margin-bottom:.4rem;font-weight:500; }
+    .pricing-name { font-family:var(--font-serif);font-size:1.3rem;font-weight:400;color:var(--charcoal);margin-bottom:.5rem; }
+    .pricing-price { font-family:var(--font-serif);font-size:2rem;font-weight:300;color:var(--charcoal);line-height:1; }
+    .pricing-price span { font-size:.9rem;color:var(--text-muted);font-family:var(--font-sans);font-weight:400; }
+    .pricing-body { padding:1.1rem 1.3rem; }
+    .pricing-item { font-size:12.5px;color:var(--text-muted);padding:.3rem 0 .3rem 1rem;border-bottom:1px solid rgba(196,169,106,.07);position:relative; }
+    .pricing-item:last-child{border-bottom:none;}
+    .pricing-item::before { content:"–";position:absolute;left:0;color:var(--gold-light);font-size:11px; }
+
+    /* METAL CARD VISUAL */
+    .metal-card-wrap { display:flex;justify-content:center;margin:2rem 0; }
+    .metal-card {
+      width:340px;height:200px;border-radius:16px;
+      background:linear-gradient(135deg,#2A2318 0%,#3D3224 40%,#C4A96A 70%,#9A7D42 100%);
+      padding:1.5rem 1.75rem;display:flex;flex-direction:column;justify-content:space-between;
+      box-shadow:0 8px 32px rgba(28,26,23,.3);
+      position:relative;overflow:hidden;
+    }
+    .metal-card::before { content:'';position:absolute;inset:0;background:linear-gradient(45deg,rgba(196,169,106,.15) 0%,transparent 50%,rgba(196,169,106,.08) 100%); }
+    .metal-card-logo { font-family:var(--font-serif);font-size:1.4rem;font-weight:600;letter-spacing:.22em;color:rgba(250,248,244,.9);z-index:1; }
+    .metal-card-bottom { display:flex;justify-content:space-between;align-items:flex-end;z-index:1; }
+    .metal-card-tier { font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(196,169,106,.8);margin-bottom:.3rem; }
+    .metal-card-name { font-size:13px;color:rgba(250,248,244,.7);letter-spacing:.06em; }
+    .metal-card-chip { width:36px;height:26px;border-radius:4px;background:linear-gradient(135deg,#D4BC8A,#9A7D42);opacity:.8; }
+
+    /* TABLE */
+    .table-wrap { overflow-x:auto;border:1px solid var(--card-border);border-radius:8px;margin-bottom:1rem; }
+    table { width:100%;border-collapse:collapse;font-size:13px; }
+    th { text-align:left;font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text-faint);padding:.7rem 1rem;background:rgba(196,169,106,.05);border-bottom:1px solid var(--card-border); }
+    td { padding:.65rem 1rem;border-bottom:1px solid rgba(196,169,106,.1);color:var(--text-muted);vertical-align:top;line-height:1.5; }
+    tr:last-child td{border-bottom:none;}
+    td:first-child{color:var(--text-main);font-weight:500;}
+    tr.hl td{background:rgba(196,169,106,.04);}
+
+    /* FOOTER */
+    footer { background:var(--charcoal);padding:2rem var(--pad); }
+    .footer-inner { max-width:var(--max-w);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem; }
+    .footer-logo { font-family:var(--font-serif);font-size:1.3rem;font-weight:600;letter-spacing:.2em;color:rgba(250,248,244,.9); }
+    .footer-logo small { display:block;font-size:9px;letter-spacing:.15em;color:var(--gold-light);font-family:var(--font-sans);font-weight:400;text-transform:uppercase;margin-top:2px; }
+    .footer-nav { display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap; }
+    .footer-nav a { font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,248,244,.4);text-decoration:none;transition:color .15s; }
+    .footer-nav a:hover{color:var(--gold-light);}
+    @media(max-width:580px){ .pricing-grid{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+<div class="grain"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">AKI<small>Hair &amp; Beauty · Maurice</small></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="aki-etude-marche.html">Étude de marché</a></li>
+      <li><a href="aki-juridique.html">Juridique</a></li>
+      <li><a href="aki-budget.html">Budget</a></li>
+      <li><a href="aki-fidelisation.html" class="active">Fidélisation</a></li>
+      <li><a href="aki-yield.html">Yield</a></li>
+      <li><a href="aki-formation.html">Formation</a></li>
+      <li><a href="aki-franchise.html">Franchise</a></li>
+    </ul>
+    <button class="burger" id="burger" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mob" id="mob">
+  <a href="index.html" onclick="closeNav()">Accueil</a>
+  <a href="aki-etude-marche.html" onclick="closeNav()">Étude de marché</a>
+  <a href="aki-juridique.html" onclick="closeNav()">Juridique</a>
+  <a href="aki-budget.html" onclick="closeNav()">Budget</a>
+  <a href="aki-fidelisation.html" onclick="closeNav()">Fidélisation</a>
+  <a href="aki-yield.html" onclick="closeNav()">Yield Management</a>
+  <a href="aki-formation.html" onclick="closeNav()">Formation digitale</a>
+  <a href="aki-franchise.html" onclick="closeNav()">Franchise</a>
+</div>
+
+<section class="hero">
+  <p class="hero-ey">Stratégie de fidélisation — AKI</p>
+  <h1 class="hero-title">Parrainage, abonnements<br />&amp; <em>carte métallique</em></h1>
+  <p class="hero-desc">Transformer chaque client en ambassadeur. Créer des revenus récurrents et prévisibles via des offres d'abonnement différenciées et un programme de parrainage structuré.</p>
+</section>
+
+<main>
+
+  <div class="sec-lbl"><span class="sec-lbl-n">01</span> Pourquoi un programme de fidélisation ?</div>
+  <div class="insight"><strong>Le constat :</strong> acquérir un nouveau client coûte 5 à 7 fois plus cher que de conserver un client existant. Un programme de fidélisation bien conçu transforme le salon en revenu prévisible mensuel et réduit la dépendance aux flux touristiques saisonniers.</div>
+  <div class="cards">
+    <div class="card">
+      <span class="card-badge b-teal">Bénéfice client</span>
+      <div class="card-title">Accès privilégié &amp; économies</div>
+      <div class="card-body">Le client s'engage, paie moins à chaque visite, accède à des avantages exclusifs. Il se sent reconnu et valorisé — sentiment fort chez une clientèle premium.</div>
+    </div>
+    <div class="card">
+      <span class="card-badge b-blue">Bénéfice salon</span>
+      <div class="card-title">Cash-flow régulier &amp; fidélité</div>
+      <div class="card-body">Chaque abonnement souscrit = revenu garanti ce mois-ci, peu importe le remplissage. Avec 50 abonnés à 80 €/mois = 4 000 € de CA sécurisé avant même d'ouvrir.</div>
+    </div>
+    <div class="card">
+      <span class="card-badge b-amber">Levier bouche-à-oreille</span>
+      <div class="card-title">Le parrainage comme moteur</div>
+      <div class="card-body">Un client satisfait qui ramène un ami vaut 10 fois plus qu'une publicité. Le parrainage rémunère ce comportement naturel et l'amplifie.</div>
+    </div>
+  </div>
+
+  <div class="sec-lbl"><span class="sec-lbl-n">02</span> Les 3 formules d'abonnement mensuel</div>
+
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="pricing-head">
+        <div class="pricing-tier">Formule essentielle</div>
+        <div class="pricing-name">AKI Soin</div>
+        <div class="pricing-price">2 500 <span>MUR/mois<br/>~50 €</span></div>
+      </div>
+      <div class="pricing-body">
+        <div class="pricing-item">1 coupe + brushing/mois</div>
+        <div class="pricing-item">–10 % sur tous les soins</div>
+        <div class="pricing-item">Réservation prioritaire</div>
+        <div class="pricing-item">Accès promotions hebdo</div>
+      </div>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pricing-head">
+        <div class="pricing-tier" style="color:var(--gold)">⭐ Formule phare</div>
+        <div class="pricing-name">AKI Premium</div>
+        <div class="pricing-price">4 500 <span>MUR/mois<br/>~90 €</span></div>
+      </div>
+      <div class="pricing-body">
+        <div class="pricing-item">2 prestations au choix/mois</div>
+        <div class="pricing-item">–20 % sur toutes les prestations</div>
+        <div class="pricing-item">Accès créneaux VIP (matin)</div>
+        <div class="pricing-item">1 soin offert par trimestre</div>
+        <div class="pricing-item">Invitations soirées exclusives</div>
+      </div>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-head">
+        <div class="pricing-tier">Formule prestige</div>
+        <div class="pricing-name">AKI Black</div>
+        <div class="pricing-price">9 000 <span>MUR/mois<br/>~180 €</span></div>
+      </div>
+      <div class="pricing-body">
+        <div class="pricing-item">Prestations illimitées (base)</div>
+        <div class="pricing-item">–30 % sur toutes les prestations</div>
+        <div class="pricing-item">Carte métallique nominative</div>
+        <div class="pricing-item">Accès réservé hors heures</div>
+        <div class="pricing-item">Cadeau de bienvenue AKI</div>
+        <div class="pricing-item">Conseiller beauté dédié</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight"><strong>Cible par formule :</strong> AKI Soin → clientèle locale régulière. AKI Premium → locaux aisés + expatriés résidents. AKI Black → dirigeants, hôteliers, clientèle très haut de gamme résidant à Maurice.</div>
+
+  <div class="sec-lbl"><span class="sec-lbl-n">03</span> La carte métallique AKI</div>
+
+  <div class="metal-card-wrap">
+    <div class="metal-card">
+      <div class="metal-card-logo">AKI</div>
+      <div class="metal-card-bottom">
+        <div>
+          <div class="metal-card-tier">Membre Black</div>
+          <div class="metal-card-name">Prénom Nom</div>
+        </div>
+        <div class="metal-card-chip"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <span class="card-badge b-amber">Design</span>
+      <div class="card-title">Carte en métal brossé doré</div>
+      <div class="card-body">Carte nominative gravée au laser. Couleur : noir mat + dorure AKI. Format carte bancaire standard. Coût de production : 15 – 25 € par carte. Elle devient un objet de prestige que le membre montre naturellement.</div>
+    </div>
+    <div class="card">
+      <span class="card-badge b-purple">Avantages exclusifs</span>
+      <div class="card-title">Accès &amp; privilèges Black</div>
+      <div class="card-body">Accès au salon avant/après les heures d'ouverture sur demande. Boisson offerte à chaque visite. File d'attente zéro — créneau toujours disponible sous 24h. Invitation aux événements partenaires (hôtels, boutiques).</div>
+    </div>
+    <div class="card">
+      <span class="card-badge b-coral">Statut social</span>
+      <div class="card-title">Signal de reconnaissance</div>
+      <div class="card-body">À Maurice, dans les cercles aisés, avoir la carte AKI Black devient un signe de statut. L'objet physique crée de la conversation et génère des parrainages naturels sans effort.</div>
+    </div>
+  </div>
+
+  <div class="sec-lbl"><span class="sec-lbl-n">04</span> Programme de parrainage</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:25%">Niveau parrainage</th>
+          <th style="width:25%">Récompense parrain</th>
+          <th style="width:25%">Récompense filleul</th>
+          <th style="width:25%">Condition</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="hl"><td>1 ami parrainé</td><td>1 soin offert (valeur 1 500 MUR)</td><td>–20 % sur 1ère visite</td><td>Le filleul vient au salon</td></tr>
+        <tr><td>3 amis parrainés</td><td>1 mois d'abonnement offert</td><td>–20 % sur 1ère visite</td><td>Dans un délai de 3 mois</td></tr>
+        <tr class="hl"><td>5 amis parrainés</td><td>Upgrade AKI Premium (1 mois)</td><td>–25 % sur 1ère visite</td><td>Dans un délai de 6 mois</td></tr>
+        <tr><td>Ambassadeur (10+)</td><td>Abonnement AKI Black offert</td><td>–30 % sur 1ère visite</td><td>Sur l'année</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insight"><strong>Comment ça marche concrètement :</strong> chaque membre reçoit un code de parrainage unique (ex : AKI-MARIE) à partager. Le code est saisi lors de la réservation en ligne sur Planity. Le système attribue automatiquement les récompenses. Aucune gestion manuelle.</div>
+
+  <div class="sec-lbl"><span class="sec-lbl-n">05</span> Projections revenus fidélisation</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:30%">Scénario</th>
+          <th style="width:20%">Abonnés</th>
+          <th style="width:25%">Formule moyenne</th>
+          <th style="width:25%">CA mensuel garanti</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="hl"><td>Démarrage (3 mois)</td><td>20 abonnés</td><td>AKI Soin ~50 €</td><td>~1 000 €/mois</td></tr>
+        <tr><td>Développement (6 mois)</td><td>50 abonnés</td><td>Mix Soin + Premium</td><td>~3 500 €/mois</td></tr>
+        <tr class="hl"><td>Maturité (12 mois)</td><td>100 abonnés</td><td>Mix complet</td><td>~7 500 €/mois</td></tr>
+        <tr><td>Objectif cible</td><td>150 abonnés</td><td>Répartition 60/30/10</td><td>~11 000 €/mois</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="insight"><strong>Impact :</strong> avec 150 abonnés, plus de la moitié du seuil de rentabilité est couvert par les abonnements seuls, indépendamment des passages en caisse. C'est la vraie stabilité financière du salon.</div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">AKI<small>Hair &amp; Beauty · Île Maurice</small></div>
+    <ul class="footer-nav">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="aki-yield.html">Yield →</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  function toggleNav(){document.getElementById('burger').classList.toggle('open');document.getElementById('mob').classList.toggle('open');}
+  function closeNav(){document.getElementById('burger').classList.remove('open');document.getElementById('mob').classList.remove('open');}
+  document.addEventListener('click',e=>{const b=document.getElementById('burger');const m=document.getElementById('mob');if(b&&m&&!b.contains(e.target)&&!m.contains(e.target)){b.classList.remove('open');m.classList.remove('open');}});
+</script>
+</body>
+</html>
