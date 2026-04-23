@@ -128,32 +128,8 @@
 <body>
 <div class="grain"></div>
 
-<nav>
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">AKI<small>Hair &amp; Beauty · Maurice</small></a>
-    <ul class="nav-links">
-      <li><a href="index.html">Accueil</a></li>
-      <li><a href="aki-etude-marche.html">Étude de marché</a></li>
-      <li><a href="aki-juridique.html">Juridique</a></li>
-      <li><a href="aki-budget.html">Budget</a></li>
-      <li><a href="aki-fidelisation.html" class="active">Fidélisation</a></li>
-      <li><a href="aki-yield.html">Yield</a></li>
-      <li><a href="aki-formation.html">Formation</a></li>
-      <li><a href="aki-franchise.html">Franchise</a></li>
-    </ul>
-    <button class="burger" id="burger" onclick="toggleNav()"><span></span><span></span><span></span></button>
-  </div>
-</nav>
-<div class="mob" id="mob">
-  <a href="index.html" onclick="closeNav()">Accueil</a>
-  <a href="aki-etude-marche.html" onclick="closeNav()">Étude de marché</a>
-  <a href="aki-juridique.html" onclick="closeNav()">Juridique</a>
-  <a href="aki-budget.html" onclick="closeNav()">Budget</a>
-  <a href="aki-fidelisation.html" onclick="closeNav()">Fidélisation</a>
-  <a href="aki-yield.html" onclick="closeNav()">Yield Management</a>
-  <a href="aki-formation.html" onclick="closeNav()">Formation digitale</a>
-  <a href="aki-franchise.html" onclick="closeNav()">Franchise</a>
-</div>
+
+
 
 <section class="hero">
   <p class="hero-ey">Stratégie de fidélisation — AKI</p>
@@ -322,10 +298,8 @@
   </div>
 </footer>
 
-<script>
-  function toggleNav(){document.getElementById('burger').classList.toggle('open');document.getElementById('mob').classList.toggle('open');}
-  function closeNav(){document.getElementById('burger').classList.remove('open');document.getElementById('mob').classList.remove('open');}
-  document.addEventListener('click',e=>{const b=document.getElementById('burger');const m=document.getElementById('mob');if(b&&m&&!b.contains(e.target)&&!m.contains(e.target)){b.classList.remove('open');m.classList.remove('open');}});
-</script>
+
+
+<script src="nav.js"></script>
 </body>
 </html>

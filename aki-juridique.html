@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AKI — Structuration juridique · Guide complet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #FAF8F4;
+      --beige: #E8E0D0;
+      --gold: #C4A96A;
+      --gold-light: #D4BC8A;
+      --gold-dark: #9A7D42;
+      --charcoal: #1C1A17;
+      --text-main: #2A2318;
+      --text-muted: #7A6E5E;
+      --text-faint: #B0A898;
+      --line: rgba(196,169,106,0.22);
+      --card-bg: #FEFCF8;
+      --card-border: rgba(196,169,106,0.22);
+      --teal: #0F6E56; --teal-bg: #E1F5EE; --teal-border: #5DCAA5;
+      --amber: #854F0B; --amber-bg: #FAEEDA; --amber-border: #EF9F27;
+      --blue: #185FA5; --blue-bg: #E6F1FB; --blue-border: #85B7EB;
+      --coral: #993C1D; --coral-bg: #FAECE7; --coral-border: #F0997B;
+      --purple: #534AB7; --purple-bg: #EEEDFE; --purple-border: #AFA9EC;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'DM Sans', sans-serif;
+      --max-w: 820px;
+      --pad: clamp(1.5rem, 5vw, 3rem);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .grain {
+      position: fixed; inset: 0; pointer-events: none; z-index: 999;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 128px;
+    }
+
+    /* NAV */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,248,244,0.93);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .header-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 1rem var(--pad);
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .logo-name { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 600; letter-spacing: .18em; color: var(--charcoal); }
+    .logo-sub { font-size: 10px; letter-spacing: .12em; color: var(--gold); text-transform: uppercase; display: block; margin-top: 1px; }
+    .header-nav { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .nav-pill {
+      font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
+      padding: .3rem .75rem; border: 1px solid var(--card-border);
+      border-radius: 20px; color: var(--text-muted);
+      background: var(--card-bg); text-decoration: none;
+      transition: border-color .15s, color .15s;
+    }
+    .nav-pill:hover { border-color: var(--gold); color: var(--gold-dark); }
+
+    /* HERO */
+    .hero {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 4rem var(--pad) 3rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .hero-eyebrow { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .hero-title { font-family: var(--font-serif); font-size: clamp(2.2rem, 6vw, 3.8rem); font-weight: 300; line-height: 1.1; color: var(--charcoal); margin-bottom: 1.2rem; }
+    .hero-title em { font-style: italic; color: var(--gold-dark); }
+    .hero-desc { font-size: 14px; color: var(--text-muted); max-width: 540px; line-height: 1.8; margin-bottom: 2rem; }
+
+    /* PRIORITY BANNER */
+    .priority-bar {
+      background: var(--teal-bg);
+      border: 1px solid var(--teal-border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      display: flex; align-items: flex-start; gap: .75rem;
+      margin-bottom: 1rem;
+    }
+    .priority-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); flex-shrink: 0; margin-top: .45rem; }
+    .priority-text { font-size: 13.5px; color: var(--teal); line-height: 1.6; }
+    .priority-text strong { font-weight: 500; }
+
+    /* MAIN */
+    main { max-width: var(--max-w); margin: 0 auto; padding: 3rem var(--pad) 5rem; }
+
+    /* COUNTRY BLOCK */
+    .country-block { margin-bottom: 3.5rem; }
+    .country-header {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 2rem; padding-bottom: 1rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .country-flag { font-size: 2rem; }
+    .country-title { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 300; color: var(--charcoal); }
+    .country-sub { font-size: 12px; color: var(--text-muted); letter-spacing: .06em; }
+
+    /* STEP */
+    .step { display: flex; gap: 0; margin-bottom: 1rem; }
+    .step-left { display: flex; flex-direction: column; align-items: center; width: 3.2rem; flex-shrink: 0; }
+    .step-num {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-serif); font-size: 1rem; font-weight: 400;
+      color: var(--gold-dark); background: var(--card-bg);
+      border: 1px solid var(--card-border); flex-shrink: 0;
+    }
+    .step-vline { flex: 1; width: 1px; background: var(--line); min-height: 1rem; margin-top: .3rem; }
+    .step-vline.last { background: transparent; }
+    .step-body { flex: 1; padding-bottom: 1.5rem; }
+
+    .step-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .step-card-header {
+      padding: 1.1rem 1.25rem;
+      cursor: pointer;
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem;
+      transition: background .15s;
+    }
+    .step-card-header:hover { background: rgba(196,169,106,0.04); }
+    .step-card.open .step-card-header { border-bottom: 1px solid var(--line); }
+    .step-card-title { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 400; color: var(--charcoal); line-height: 1.3; margin-bottom: .25rem; }
+    .step-card-sub { font-size: 12px; color: var(--text-muted); }
+    .step-toggle { font-size: 1.3rem; font-weight: 300; color: var(--gold); flex-shrink: 0; line-height: 1; transition: transform .25s; margin-top: 2px; }
+    .step-card.open .step-toggle { transform: rotate(45deg); }
+
+    .step-card-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s ease, opacity .3s ease;
+      opacity: 0;
+    }
+    .step-card.open .step-card-body { max-height: 1200px; opacity: 1; }
+    .step-card-inner { padding: 1.25rem; }
+
+    /* BADGES */
+    .badge { display: inline-flex; align-items: center; gap: .3rem; font-size: 10px; letter-spacing: .06em; padding: 3px 9px; border-radius: 3px; margin-bottom: .75rem; text-transform: uppercase; font-weight: 500; }
+    .badge-teal { background: var(--teal-bg); color: var(--teal); }
+    .badge-amber { background: var(--amber-bg); color: var(--amber); }
+    .badge-blue { background: var(--blue-bg); color: var(--blue); }
+    .badge-coral { background: var(--coral-bg); color: var(--coral); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+
+    /* DOCS LIST */
+    .docs-list { margin: .5rem 0 1rem; }
+    .doc-item {
+      display: flex; align-items: flex-start; gap: .6rem;
+      font-size: 13px; color: var(--text-muted);
+      padding: .4rem 0; border-bottom: 1px solid rgba(196,169,106,0.08);
+      line-height: 1.5;
+    }
+    .doc-item:last-child { border-bottom: none; }
+    .doc-check { width: 16px; height: 16px; border-radius: 3px; border: 1px solid var(--card-border); background: var(--cream); flex-shrink: 0; margin-top: 1px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .15s, border-color .15s; }
+    .doc-check.checked { background: var(--teal); border-color: var(--teal); }
+    .doc-check.checked::after { content: "✓"; font-size: 10px; color: #fff; font-weight: 500; }
+    .doc-text { flex: 1; }
+
+    /* INSIGHT */
+    .insight {
+      background: var(--card-bg); border-left: 3px solid var(--gold);
+      padding: .85rem 1.1rem; margin: .75rem 0;
+      font-size: 13px; color: var(--text-muted); line-height: 1.7;
+      border-radius: 0 4px 4px 0;
+    }
+    .insight strong { color: var(--charcoal); font-weight: 500; }
+
+    /* COST BOX */
+    .cost-row { display: flex; justify-content: space-between; align-items: center; padding: .5rem 0; border-bottom: 1px solid rgba(196,169,106,0.08); font-size: 13px; }
+    .cost-row:last-child { border-bottom: none; }
+    .cost-label { color: var(--text-muted); }
+    .cost-val { font-weight: 500; color: var(--charcoal); }
+    .cost-total { background: rgba(196,169,106,0.08); border-radius: 4px; padding: .6rem .75rem; display: flex; justify-content: space-between; margin-top: .5rem; }
+    .cost-total span:first-child { font-size: 12px; color: var(--text-muted); }
+    .cost-total span:last-child { font-weight: 500; color: var(--gold-dark); }
+
+    /* CONTACT BLOCK */
+    .contact-block {
+      background: var(--blue-bg); border: 1px solid var(--blue-border);
+      border-radius: 8px; padding: 1rem 1.25rem; margin: .75rem 0;
+    }
+    .contact-label { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); margin-bottom: .5rem; font-weight: 500; }
+    .contact-line { font-size: 13px; color: var(--text-main); line-height: 1.7; }
+    .contact-line a { color: var(--blue); text-decoration: none; font-weight: 500; }
+    .contact-line a:hover { text-decoration: underline; }
+
+    /* EMAIL TEMPLATE */
+    .email-wrap { margin-top: 1rem; }
+    .email-header {
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(196,169,106,0.08); border-radius: 6px 6px 0 0;
+      padding: .65rem 1rem; border: 1px solid var(--card-border);
+    }
+    .email-label { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; }
+    .copy-btn {
+      font-size: 11px; letter-spacing: .05em; text-transform: uppercase;
+      color: var(--gold-dark); background: transparent;
+      border: 1px solid var(--card-border); border-radius: 4px;
+      padding: .25rem .7rem; cursor: pointer; transition: background .15s, border-color .15s;
+      font-family: var(--font-sans);
+    }
+    .copy-btn:hover { background: var(--card-bg); border-color: var(--gold); }
+    .copy-btn.copied { color: var(--teal); border-color: var(--teal-border); }
+    .email-body {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-top: none; border-radius: 0 0 6px 6px;
+      padding: 1.1rem 1.25rem;
+      font-size: 13px; color: var(--text-muted);
+      line-height: 1.85; white-space: pre-wrap;
+      font-family: var(--font-sans);
+    }
+
+    /* SUMMARY TABLE */
+    .summary { margin-top: 3rem; }
+    .summary-label { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; padding-bottom: .6rem; border-bottom: 1px solid var(--line); }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--card-border); border-radius: 8px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { text-align: left; font-size: 10px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--text-faint); padding: .7rem 1rem; background: rgba(196,169,106,0.05); border-bottom: 1px solid var(--card-border); }
+    td { padding: .65rem 1rem; border-bottom: 1px solid rgba(196,169,106,0.1); color: var(--text-muted); vertical-align: top; line-height: 1.5; }
+    tr:last-child td { border-bottom: none; }
+    td:first-child { font-weight: 500; color: var(--text-main); }
+    tr.hl td { background: rgba(196,169,106,0.04); }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--line); }
+    .footer-inner { max-width: var(--max-w); margin: 0 auto; padding: 2rem var(--pad); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-logo { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 600; letter-spacing: .18em; color: var(--charcoal); }
+    .footer-copy { font-size: 11px; color: var(--text-faint); }
+
+    @media (max-width: 580px) {
+      .header-nav { display: none; }
+      .step-left { width: 2.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header>
+  <div class="header-inner">
+    <div>
+      <span class="logo-name">AKI</span>
+      <span class="logo-sub">Hair &amp; Beauty · Île Maurice</span>
+    </div>
+    
+  </div>
+</header>
+
+<section class="hero">
+  <p class="hero-eyebrow">Guide pratique — étape par étape</p>
+  <h1 class="hero-title">Structuration<br /><em>juridique AKI</em></h1>
+  <p class="hero-desc">Toutes les démarches à effectuer, dans l'ordre, avec les contacts exacts, les documents à préparer et les modèles de mails prêts à envoyer.</p>
+  <div class="priority-bar">
+    <div class="priority-dot"></div>
+    <div class="priority-text"><strong>Priorité absolue cette semaine :</strong> vérifier la disponibilité du nom AKI sur data.inpi.fr (gratuit, 5 minutes) et envoyer le mail à la CCI France-Maurice. Ces deux actions débloquent tout le reste.</div>
+  </div>
+</section>
+
+<main>
+
+  <!-- FRANCE -->
+  <div class="country-block" id="france">
+    <div class="country-header">
+      <span class="country-flag">🇫🇷</span>
+      <div>
+        <div class="country-title">Partie 1 — France</div>
+        <div class="country-sub">Créer la structure légale française · Protéger la marque</div>
+      </div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="step">
+      <div class="step-left">
+        <div class="step-num">1</div>
+        <div class="step-vline"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-card" id="card1">
+          <div class="step-card-header" onclick="toggle('card1')">
+            <div>
+              <div class="step-card-title">Créer l'auto-entreprise (micro-entreprise)</div>
+              <div class="step-card-sub">Gratuit · En ligne · 30 minutes · formalites.entreprises.gouv.fr</div>
+            </div>
+            <div class="step-toggle">+</div>
+          </div>
+          <div class="step-card-body">
+            <div class="step-card-inner">
+              <span class="badge badge-teal">Gratuit</span>
+              <div class="insight"><strong>Où :</strong> formalites.entreprises.gouv.fr — créer un compte FranceConnect ou direct, puis "Déclarer une nouvelle activité".</div>
+
+              <p style="font-size:13px;color:var(--text-muted);margin-bottom:.75rem;font-weight:500">Documents à préparer :</p>
+              <div class="docs-list">
+                <div class="doc-item"><div class="doc-check" onclick="checkDoc(this)"></div><div class="doc-text">Pièce d'identité (carte nationale ou passeport)</div></div>
+                <div class="doc-item"><div class="doc-check" onclick="checkDoc(this)"></div><div class="doc-text">Justificatif de domicile de moins de 3 mois</div></div>
+                <div class="doc-item"><div class="doc-check" onclick="checkDoc(this)"></div><div class="doc-text">Diplôme de coiffure (BP ou CAP) — obligatoire pour ouvrir un salon</div></div>
+                <div class="doc-item"><div class="doc-check" onclick="checkDoc(this)"></div><div class="doc-text">Numéro de sécurité sociale</div></div>
+              </div>
+
+              <div class="insight"><strong>Activité à déclarer :</strong> "Services de coiffure et soins de beauté" + "Formation professionnelle" si tu veux facturer de la formation depuis la France.</div>
+
+              <div class="cost-total">
+                <span>Coût total</span>
+                <span>0 €</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step">
+      <div class="step-left">
+        <div class="step-num">2</div>
+        <div class="step-vline"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-card" id="card2">
+          <div class="step-card-header" onclick="toggle('card2')">
+            <div>
+              <div class="step-card-title">Déposer la marque AKI à l'INPI</div>
+              <div class="step-card-sub">À faire en premier · Protection immédiate à la date de dépôt · inpi.fr</div>
+            </div>
+            <div class="step-toggle">+</div>
+          </div>
+          <div class="step-card-body">
+            <div class="step-card-inner">
+              <span class="badge badge-coral">Priorité absolue</span>
+
+              <div class="insight"><strong>Étape 0 — Avant tout :</strong> vérifie que le nom est disponible sur <a href="https://data.inpi.fr" target="_blank" style="color:var(--blue)">data.inpi.fr</a> → "Rechercher une marque". Gratuit, 5 minutes.</div>
+
+              <p style="font-size:13px;color:var(--text-muted);margin-bottom:.75rem;font-weight:500">Étapes sur inpi.fr :</p>
+              <div class="docs-list">
+                <div class="doc-item"><div class="doc-check" onclick="checkDoc(this)"></div><div class="doc-text">Aller sur <strong>inpi.fr</strong> → "Déposer une marque" → créer un compte</div></div>
+                <div class="doc-item"><div class="doc-check" onclick="checkDoc(this)"></div><div class="doc-text">Choisir le type : marque verbale (nom) + marque figurative (logo si prêt)</div></div>
+                <div class="doc-item"><div class="doc-check" onclick="checkDoc(this)"></div><div class="doc-text">Sélectionner les classes : <strong>Classe 44</strong> (coiffure, soins beauté) + <strong>Classe 41</strong> (formation) + <strong>Classe 35</strong> (franchise, commerce)</div></div>
+                <div class="doc-item"><div class="doc-check" onclick="checkDoc(this)"></div><div class="doc-text">Payer en ligne par carte bancaire</div></div>
+                <div class="doc-item"><div class="doc-check" onclick="checkDoc(this)"></div><div class="doc-text">Recevoir le récépissé de dépôt (protection juridique immédiate)</div></div>
+              </div>
+
+              <div class="docs-list" style="margin-top:.5rem">
+                <div class="cost-row"><span class="cost-label">Classe 44 (coiffure / beauté)</span><span class="cost-val">190 €</span></div>
+                <div class="cost-row"><span class="cost-label">Classe 41 (formation)</span><span class="cost-val">40 €</span></div>
+                <div class="cost-row"><span class="cost-label">Classe 35 (franchise)</span><span class="cost-val">40 €</span></div>
+                <div class="cost-row"><span class="cost-label">Dépôt logo (optionnel)</span><span class="cost-val">39 €</span></div>
+              </div>
+              <div class="cost-total">
+                <span>Budget estimé</span>
+                <span>270 – 309 €</span>
+              </div>
+              <div class="insight" style="margin-top:.75rem"><strong>Bon à savoir :</strong> la protection est valable 10 ans renouvelables. Une fois déposé, plus personne ne peut utiliser le nom AKI dans ces secteurs en France.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step">
+      <div class="step-left">
+        <div class="step-num">3</div>
+        <div class="step-vline last"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-card" id="card3">
+          <div class="step-card-header" onclick="toggle('card3')">
+            <div>
+              <div class="step-card-title">Contacter la CMA France (Chambre des Métiers)</div>
+              <div class="step-card-sub">Accompagnement artisan coiffeur · Gratuit · 3006</div>
+            </div>
+            <div class="step-toggle">+</div>
+          </div>
+          <div class="step-card-body">
+            <div class="step-card-inner">
+              <span class="badge badge-blue">Gratuit</span>
+              <div class="contact-block">
+                <div class="contact-label">Contact CMA France</div>
+                <div class="contact-line">
+                  Numéro unique : <strong>3006</strong> (appel gratuit, lun-ven)<br/>
+                  Site : <a href="https://www.artisanat.fr" target="_blank">artisanat.fr</a><br/>
+                  CMA Île-de-France (si basé à Paris) : <a href="https://www.cma-idf.fr" target="_blank">cma-idf.fr</a>
+                </div>
+              </div>
+              <div class="insight"><strong>À demander :</strong> immatriculation au Répertoire des Métiers, accompagnement projet à l'international, et informations sur les partenariats de formation.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAURICE -->
+  <div class="country-block" id="maurice">
+    <div class="country-header">
+      <span class="country-flag">🇲🇺</span>
+      <div>
+        <div class="country-title">Partie 2 — Île Maurice</div>
+        <div class="country-sub">Occupation Permit · Société locale · Partenariats institutionnels</div>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="step">
+      <div class="step-left">
+        <div class="step-num">4</div>
+        <div class="step-vline"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-card" id="card4">
+          <div class="step-card-header" onclick="toggle('card4')">
+            <div>
+              <div class="step-card-title">Contacter la CCI France-Maurice en priorité</div>
+              <div class="step-card-sub">1er contact à faire · Accompagnement implantation · Gratuit</div>
+            </div>
+            <div class="step-toggle">+</div>
+          </div>
+          <div class="step-card-body">
+            <div class="step-card-inner">
+              <span class="badge badge-teal">À faire cette semaine</span>
+              <div class="contact-block">
+                <div class="contact-label">CCI France Maurice</div>
+                <div class="contact-line">
+                  Blue Tower, Rue de l'Institut, Ébène, île Maurice<br/>
+                  Tél : <a href="tel:+23046690030">+230 466 90 30</a><br/>
+                  Mail : <a href="mailto:secretariat@ccifm.mu">secretariat@ccifm.mu</a><br/>
+                  Site : <a href="https://www.ccifm.mu" target="_blank">ccifm.mu</a>
+                </div>
+              </div>
+              <div class="insight"><strong>Pourquoi eux en premier ?</strong> La CCI France-Maurice accompagne les entrepreneurs français qui s'installent à Maurice. Ils connaissent toutes les démarches locales et peuvent te mettre en relation avec les bons interlocuteurs (EDB, avocats, comptables).</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 5 -->
+    <div class="step">
+      <div class="step-left">
+        <div class="step-num">5</div>
+        <div class="step-vline"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-card" id="card5">
+          <div class="step-card-header" onclick="toggle('card5')">
+            <div>
+              <div class="step-card-title">Obtenir l'Occupation Permit Investisseur (EDB)</div>
+              <div class="step-card-sub">Permis de créer et gérer une société à Maurice · ~400 € de frais</div>
+            </div>
+            <div class="step-toggle">+</div>
+          </div>
+          <div class="step-card-body">
+            <div class="step-card-inner">
+              <span class="badge badge-amber">Capital requis : 35 000 – 50 000 USD</span>
+
+              <div class="contact-block">
+                <div class="contact-label">Economic Development Board (EDB)</div>
+                <div class="contact-line">
+                  Site : <a href="https://edbmauritius.org" target="_blank">edbmauritius.org</a><br/>
+                  Mail : <a href="mailto:investmauritius@edbmauritius.org">investmauritius@edbmauritius.org</a><br/>
+                  Tél : +230 203 3800
+                </div>
+              </div>
+
+              <p style="font-size:13px;color:var(--text-muted);margin:.75rem 0 .5rem;font-weight:500">Documents à préparer :</p>
+              <div class="docs-list">
+                <div class="doc-item"><div class="doc-check" onclick="checkDoc(this)"></div><div class="doc-text">Passeport valide</div></div>
+                <div class="doc-item"><div class="doc-check" onclick="checkDoc(this)"></div><div class="doc-text">CV détaillé en anglais</div></div>
+                <div class="doc-item"><div class="doc-check" onclick="checkDoc(this)"></div><div class="doc-text">Diplômes de coiffure (traduits en anglais si nécessaire)</div></div>
+                <div class="doc-item"><div class="doc-check" onclick="checkDoc(this)"></div><div class="doc-text">Business plan complet (l'étude de marché AKI compte !)</div></div>
+                <div class="doc-item"><div class="doc-check" onclick="checkDoc(this)"></div><div class="doc-text">Acte de naissance</div></div>
+                <div class="doc-item"><div class="doc-check" onclick="checkDoc(this)"></div><div class="doc-text">Extrait de casier judiciaire vierge (moins de 6 mois)</div></div>
+                <div class="doc-item"><div class="doc-check" onclick="checkDoc(this)"></div><div class="doc-text">Preuve de transfert de fonds (35 000 – 50 000 USD sur compte mauricien)</div></div>
+              </div>
+
+              <div class="docs-list" style="margin-top:.5rem">
+                <div class="cost-row"><span class="cost-label">Frais de dossier EDB</span><span class="cost-val">~400 €</span></div>
+                <div class="cost-row"><span class="cost-label">Capital à transférer</span><span class="cost-val">35 000 – 50 000 USD</span></div>
+                <div class="cost-row"><span class="cost-label">Délai d'obtention</span><span class="cost-val">4 – 8 semaines</span></div>
+              </div>
+              <div class="cost-total">
+                <span>Durée du permis</span>
+                <span>10 ans renouvelables</span>
+              </div>
+
+              <div class="insight" style="margin-top:.75rem"><strong>Important :</strong> le capital transféré n'est pas perdu — c'est le capital de roulement de ta société à Maurice. Il financement l'aménagement du salon et les premiers mois d'activité.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 6 -->
+    <div class="step">
+      <div class="step-left">
+        <div class="step-num">6</div>
+        <div class="step-vline"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-card" id="card6">
+          <div class="step-card-header" onclick="toggle('card6')">
+            <div>
+              <div class="step-card-title">Contacter l'Ambassade de France à Maurice</div>
+              <div class="step-card-sub">Soutien institutionnel · Partenariat formation · Visibilité</div>
+            </div>
+            <div class="step-toggle">+</div>
+          </div>
+          <div class="step-card-body">
+            <div class="step-card-inner">
+              <span class="badge badge-blue">Soutien institutionnel</span>
+              <div class="contact-block">
+                <div class="contact-label">Ambassade de France à Maurice</div>
+                <div class="contact-line">
+                  Site : <a href="https://mu.ambafrance.org" target="_blank">mu.ambafrance.org</a><br/>
+                  Service économique : <a href="mailto:ambafrance.mu@diplomatie.fr">ambafrance.mu@diplomatie.fr</a><br/>
+                  Tél : +230 202 0100
+                </div>
+              </div>
+              <div class="insight"><strong>À leur présenter :</strong> l'axe formation et emploi du projet. L'ambassade peut soutenir officiellement un projet qui crée de l'emploi local et valorise le savoir-faire français — c'est exactement le cas d'AKI.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 7 -->
+    <div class="step">
+      <div class="step-left">
+        <div class="step-num">7</div>
+        <div class="step-vline last"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-card" id="card7">
+          <div class="step-card-header" onclick="toggle('card7')">
+            <div>
+              <div class="step-card-title">Enregistrer la société au Registrar of Companies</div>
+              <div class="step-card-sub">Après obtention de l'Occupation Permit · Port Louis</div>
+            </div>
+            <div class="step-toggle">+</div>
+          </div>
+          <div class="step-card-body">
+            <div class="step-card-inner">
+              <span class="badge badge-purple">Étape finale</span>
+              <div class="contact-block">
+                <div class="contact-label">Registrar of Companies</div>
+                <div class="contact-line">
+                  Site : <a href="https://companies.govmu.org" target="_blank">companies.govmu.org</a><br/>
+                  Mail : <a href="mailto:roc@mail.gov.mu">roc@mail.gov.mu</a><br/>
+                  Adresse : Emmanuel Anquetil Building, Port Louis
+                </div>
+              </div>
+              <div class="docs-list" style="margin-top:.5rem">
+                <div class="doc-item"><div class="doc-check" onclick="checkDoc(this)"></div><div class="doc-text">Memorandum of Association (statuts de la société)</div></div>
+                <div class="doc-item"><div class="doc-check" onclick="checkDoc(this)"></div><div class="doc-text">Preuve d'identité des actionnaires et directeurs</div></div>
+                <div class="doc-item"><div class="doc-check" onclick="checkDoc(this)"></div><div class="doc-text">Occupation Permit déjà obtenu</div></div>
+                <div class="doc-item"><div class="doc-check" onclick="checkDoc(this)"></div><div class="doc-text">Adresse du siège social à Maurice</div></div>
+              </div>
+              <div class="cost-total" style="margin-top:.75rem">
+                <span>Délai d'enregistrement</span>
+                <span>2 – 4 semaines</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODÈLES DE MAILS -->
+  <div id="mails" style="margin-bottom:3.5rem">
+    <div class="summary-label">Modèles de mails prêts à envoyer</div>
+
+    <!-- MAIL 1 -->
+    <div style="margin-bottom:2rem">
+      <div style="font-family:var(--font-serif);font-size:1.1rem;color:var(--charcoal);margin-bottom:.25rem">Mail 1 — CCI France-Maurice</div>
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:.75rem">À envoyer à : secretariat@ccifm.mu</div>
+      <div class="email-wrap">
+        <div class="email-header">
+          <span class="email-label">Objet : Projet d'implantation — Salon coiffure & formation AKI</span>
+          <button class="copy-btn" onclick="copyEmail('email1', this)">Copier</button>
+        </div>
+        <div class="email-body" id="email1">Bonjour,
+
+Je me permets de vous contacter car je développe un projet d'implantation à l'île Maurice dans le secteur de la coiffure et du bien-être.
+
+Mon projet consiste à ouvrir un salon de coiffure et spa premium sous la marque AKI, avec un positionnement haut de gamme inspiré des standards parisiens, associé à un centre de formation professionnelle destiné aux coiffeurs locaux.
+
+Ce projet combine trois axes :
+— Un salon de coiffure et spa (100 m²) ciblant la clientèle touristique internationale et locale
+— Un pôle de formation certifiante, en présentiel et à distance
+— Un modèle de franchise à développer sur l'île, puis à l'international
+
+Je suis actuellement en phase de structuration juridique et souhaiterais bénéficier de votre accompagnement pour :
+— Les démarches d'implantation à Maurice (Occupation Permit, création de société)
+— La réglementation locale du secteur beauté et coiffure
+— Les partenariats possibles avec des acteurs français et mauriciens
+
+Seriez-vous disponible pour un échange téléphonique ou une réunion dans les prochaines semaines ?
+
+Je reste à votre disposition pour vous faire parvenir notre business plan complet.
+
+Cordialement,
+[Votre prénom et nom]
+[Téléphone]
+[Email]</div>
+      </div>
+    </div>
+
+    <!-- MAIL 2 -->
+    <div style="margin-bottom:2rem">
+      <div style="font-family:var(--font-serif);font-size:1.1rem;color:var(--charcoal);margin-bottom:.25rem">Mail 2 — EDB Maurice (Occupation Permit)</div>
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:.75rem">À envoyer à : investmauritius@edbmauritius.org</div>
+      <div class="email-wrap">
+        <div class="email-header">
+          <span class="email-label">Objet : Investor Occupation Permit Application — Beauty Salon & Training Center</span>
+          <button class="copy-btn" onclick="copyEmail('email2', this)">Copier</button>
+        </div>
+        <div class="email-body" id="email2">Dear EDB Team,
+
+I am a French entrepreneur planning to establish a premium hair salon and professional training center in Mauritius under the brand name AKI.
+
+My project includes:
+— A 100 m² hair & beauty salon targeting high-end tourists and local clients
+— A professional training center for local hairdressers (in-person and e-learning)
+— A franchise model to be developed across Mauritius
+
+I am writing to enquire about the Investor Occupation Permit application process and to understand the eligibility criteria and required documentation.
+
+Could you please provide information on:
+— The current application process and timeline
+— Required documents for the Investor OP
+— Any specific requirements for the beauty/hairdressing sector
+
+I would be happy to share our full business plan upon request.
+
+Thank you for your assistance.
+
+Kind regards,
+[Your full name]
+[Phone number]
+[Email address]
+[French address]</div>
+      </div>
+    </div>
+
+    <!-- MAIL 3 -->
+    <div style="margin-bottom:2rem">
+      <div style="font-family:var(--font-serif);font-size:1.1rem;color:var(--charcoal);margin-bottom:.25rem">Mail 3 — Ambassade de France à Maurice</div>
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:.75rem">À envoyer à : ambafrance.mu@diplomatie.fr</div>
+      <div class="email-wrap">
+        <div class="email-header">
+          <span class="email-label">Objet : Projet entrepreneurial français à Maurice — Coiffure & Formation professionnelle</span>
+          <button class="copy-btn" onclick="copyEmail('email3', this)">Copier</button>
+        </div>
+        <div class="email-body" id="email3">Bonjour,
+
+Je suis entrepreneur(e) français(e) et je développe un projet d'implantation à l'île Maurice visant à valoriser le savoir-faire français dans le secteur de la coiffure et à créer de l'emploi local qualifié.
+
+Mon projet, sous la marque AKI, comprend :
+— Un salon de coiffure et spa premium (100 m²) à destination de la clientèle touristique internationale
+— Un centre de formation professionnelle certifiante pour les coiffeurs mauriciens, en présentiel et en ligne
+— Un reversement de 20 % du chiffre d'affaires à des actions sociales locales
+
+Ce projet s'inscrit dans une logique de coopération franco-mauricienne : il apporte une valeur ajoutée économique à l'île (emplois, formation, compétences), tout en promouvant l'excellence française dans un secteur clé du tourisme.
+
+Je souhaiterais savoir si l'Ambassade dispose de programmes d'accompagnement ou de soutien pour des projets de ce type, notamment en ce qui concerne :
+— Les partenariats avec des organismes de formation français reconnus
+— La mise en relation avec des institutions mauriciennes compétentes
+— Un éventuel soutien institutionnel au projet
+
+Je serais ravie de vous présenter notre dossier complet lors d'un échange.
+
+Dans l'attente de votre retour, je vous adresse mes cordiales salutations.
+
+[Votre prénom et nom]
+[Téléphone]
+[Email]</div>
+      </div>
+    </div>
+
+    <!-- MAIL 4 -->
+    <div style="margin-bottom:2rem">
+      <div style="font-family:var(--font-serif);font-size:1.1rem;color:var(--charcoal);margin-bottom:.25rem">Mail 4 — Chambre de Commerce de Maurice (MCCI)</div>
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:.75rem">À envoyer à : mcci@mcci.org</div>
+      <div class="email-wrap">
+        <div class="email-header">
+          <span class="email-label">Objet : Renseignements — Réglementation secteur coiffure & beauté à Maurice</span>
+          <button class="copy-btn" onclick="copyEmail('email4', this)">Copier</button>
+        </div>
+        <div class="email-body" id="email4">Bonjour,
+
+Je suis entrepreneur(e) français(e) et j'envisage d'ouvrir un salon de coiffure et spa premium à l'île Maurice, accompagné d'un centre de formation professionnelle certifiante.
+
+Avant de finaliser mes démarches d'implantation, je souhaiterais obtenir des informations sur :
+— Les autorisations spécifiques requises pour exercer la coiffure et l'esthétique à Maurice
+— La réglementation en vigueur pour les salons de beauté (normes d'hygiène, licences, etc.)
+— Les démarches pour recruter du personnel local dans ce secteur
+— Les éventuels partenariats ou programmes d'aide à la création d'entreprise dans le secteur des services
+
+Pourriez-vous m'orienter vers les interlocuteurs compétents ou me communiquer les documents nécessaires ?
+
+Je vous remercie par avance de votre aide.
+
+Cordialement,
+[Votre prénom et nom]
+[Téléphone]
+[Email]</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RÉCAPITULATIF -->
+  <div class="summary" id="recap">
+    <div class="summary-label">Récapitulatif — ordre & budget</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:5%">#</th>
+            <th style="width:28%">Action</th>
+            <th style="width:22%">Où / Qui</th>
+            <th style="width:20%">Coût</th>
+            <th style="width:25%">Délai</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="hl"><td>1</td><td>Vérifier dispo nom AKI</td><td>data.inpi.fr</td><td>Gratuit</td><td>5 minutes</td></tr>
+          <tr><td>2</td><td>Mail CCI France-Maurice</td><td>secretariat@ccifm.mu</td><td>Gratuit</td><td>Aujourd'hui</td></tr>
+          <tr class="hl"><td>3</td><td>Créer l'auto-entreprise</td><td>formalites.entreprises.gouv.fr</td><td>Gratuit</td><td>1 semaine</td></tr>
+          <tr><td>4</td><td>Déposer marque INPI</td><td>inpi.fr</td><td>270 – 309 €</td><td>Semaine 1-2</td></tr>
+          <tr class="hl"><td>5</td><td>Mail Ambassade France Maurice</td><td>ambafrance.mu@diplomatie.fr</td><td>Gratuit</td><td>Semaine 1</td></tr>
+          <tr><td>6</td><td>Mail EDB Maurice (OP Investisseur)</td><td>investmauritius@edbmauritius.org</td><td>Gratuit</td><td>Semaine 2</td></tr>
+          <tr class="hl"><td>7</td><td>Obtenir l'Occupation Permit</td><td>edbmauritius.org</td><td>~400 € + 35-50k$</td><td>4 – 8 semaines</td></tr>
+          <tr><td>8</td><td>Enregistrer la société Maurice</td><td>companies.govmu.org</td><td>~200 €</td><td>2 – 4 semaines</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="priority-bar" style="margin-top:1.5rem">
+      <div class="priority-dot"></div>
+      <div class="priority-text"><strong>Budget total des démarches administratives :</strong> environ 1 000 – 1 200 € (hors capital de 35 000 – 50 000 USD à transférer à Maurice, qui reste ton capital d'entreprise).</div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-logo">AKI</span>
+    <span class="footer-copy">Guide juridique · Île Maurice · 2025 — Document de travail confidentiel</span>
+  </div>
+</footer>
+
+<script>
+  function toggle(id) {
+    const card = document.getElementById(id);
+    const isOpen = card.classList.contains('open');
+    card.classList.toggle('open', !isOpen);
+    if (!isOpen) {
+      setTimeout(() => {
+        const rect = card.getBoundingClientRect();
+        if (rect.bottom > window.innerHeight - 60) {
+          card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }, 420);
+    }
+  }
+
+  function checkDoc(el) {
+    el.classList.toggle('checked');
+  }
+
+  function copyEmail(id, btn) {
+    const text = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = 'Copié !';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = 'Copier';
+        btn.classList.remove('copied');
+      }, 2500);
+    });
+  }
+</script>
+
+
+<script src="nav.js"></script>
+</body>
+</html>

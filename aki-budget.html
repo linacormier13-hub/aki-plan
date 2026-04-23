@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AKI — Budget prévisionnel complet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #FAF8F4; --beige: #F0EBE1;
+      --gold: #C4A96A; --gold-light: #D4BC8A; --gold-dark: #9A7D42;
+      --charcoal: #1C1A17; --text-main: #2A2318;
+      --text-muted: #7A6E5E; --text-faint: #B0A898;
+      --line: rgba(196,169,106,0.22);
+      --card-bg: #FEFCF8; --card-border: rgba(196,169,106,0.22);
+      --teal: #0F6E56; --teal-bg: #E1F5EE; --teal-b: #5DCAA5;
+      --blue: #185FA5; --blue-bg: #E6F1FB; --blue-b: #85B7EB;
+      --amber: #854F0B; --amber-bg: #FAEEDA; --amber-b: #EF9F27;
+      --coral: #993C1D; --coral-bg: #FAECE7; --coral-b: #F0997B;
+      --purple: #534AB7; --purple-bg: #EEEDFE; --purple-b: #AFA9EC;
+      --red: #A32D2D; --red-bg: #FCEBEB; --red-b: #F09595;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'DM Sans', sans-serif;
+      --max-w: 900px; --pad: clamp(1.25rem,5vw,3rem);
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--cream); color: var(--text-main); font-family: var(--font-sans); font-size: 15px; line-height: 1.65; }
+
+    .grain { position:fixed; inset:0; pointer-events:none; z-index:999; opacity:.025; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size:128px; }
+
+    /* NAV */
+    nav { position:sticky; top:0; z-index:200; background:rgba(250,248,244,.96); backdrop-filter:blur(14px); border-bottom:1px solid var(--line); }
+    .nav-inner { max-width:var(--max-w); margin:0 auto; padding:0 var(--pad); display:flex; align-items:center; height:60px; gap:0; }
+    .nav-logo { font-family:var(--font-serif); font-size:1.45rem; font-weight:600; letter-spacing:.2em; color:var(--charcoal); text-decoration:none; flex-shrink:0; line-height:1; margin-right:2rem; }
+    .nav-logo small { display:block; font-size:9px; letter-spacing:.15em; color:var(--gold); text-transform:uppercase; font-family:var(--font-sans); font-weight:400; margin-top:2px; }
+    .nav-links { display:flex; align-items:center; gap:.1rem; flex:1; list-style:none; }
+    .nav-links a { font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--text-muted); text-decoration:none; padding:.4rem .75rem; border-radius:4px; transition:color .15s,background .15s; white-space:nowrap; }
+    .nav-links a:hover,.nav-links a.active { color:var(--gold-dark); background:rgba(196,169,106,.08); }
+    .nav-burger { display:none; margin-left:auto; background:none; border:none; cursor:pointer; flex-direction:column; gap:5px; padding:.5rem; }
+    .nav-burger span { display:block; width:22px; height:1.5px; background:var(--text-main); border-radius:2px; transition:all .25s; }
+    .nav-burger.open span:nth-child(1){transform:rotate(45deg) translate(4.5px,4.5px);}
+    .nav-burger.open span:nth-child(2){opacity:0;}
+    .nav-burger.open span:nth-child(3){transform:rotate(-45deg) translate(4.5px,-4.5px);}
+    .mobile-nav { display:none; position:fixed; top:60px; left:0; right:0; background:rgba(250,248,244,.98); backdrop-filter:blur(14px); border-bottom:1px solid var(--line); z-index:190; padding:1rem var(--pad) 1.5rem; flex-direction:column; gap:.1rem; }
+    .mobile-nav.open{display:flex;}
+    .mobile-nav a { font-size:13px; letter-spacing:.07em; text-transform:uppercase; color:var(--text-muted); text-decoration:none; padding:.7rem 0; border-bottom:1px solid rgba(196,169,106,.1); transition:color .15s; }
+    .mobile-nav a:last-child{border-bottom:none;}
+    .mobile-nav a:hover{color:var(--gold-dark);}
+
+    /* HERO */
+    .hero { max-width:var(--max-w); margin:0 auto; padding:4rem var(--pad) 3rem; border-bottom:1px solid var(--line); }
+    .hero-ey { font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem; }
+    .hero-title { font-family:var(--font-serif); font-size:clamp(2.4rem,6vw,4rem); font-weight:300; line-height:1.1; color:var(--charcoal); margin-bottom:1.2rem; }
+    .hero-title em { font-style:italic; color:var(--gold-dark); }
+    .hero-desc { font-size:14px; color:var(--text-muted); max-width:520px; line-height:1.8; margin-bottom:2rem; }
+
+    /* KPI GRID */
+    .kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin-bottom:1.5rem; }
+    .kpi { background:var(--card-bg); border:1px solid var(--card-border); border-radius:8px; padding:1rem 1.1rem; }
+    .kpi-lbl { font-size:11px; color:var(--text-faint); letter-spacing:.05em; margin-bottom:.4rem; }
+    .kpi-val { font-family:var(--font-serif); font-size:1.9rem; font-weight:300; color:var(--charcoal); line-height:1; }
+    .kpi-sub { font-size:11px; color:var(--text-muted); margin-top:.3rem; }
+
+    /* TABS */
+    .tabs-wrap { max-width:var(--max-w); margin:0 auto; padding:2.5rem var(--pad) 0; }
+    .tabs { display:flex; gap:.5rem; margin-bottom:2rem; }
+    .tab { font-size:12px; letter-spacing:.08em; text-transform:uppercase; padding:.5rem 1.2rem; border-radius:4px; border:1px solid var(--card-border); background:var(--card-bg); color:var(--text-muted); cursor:pointer; transition:all .15s; font-family:var(--font-sans); }
+    .tab.active { background:var(--charcoal); color:var(--cream); border-color:var(--charcoal); }
+    .tab:hover:not(.active) { border-color:var(--gold); color:var(--gold-dark); }
+
+    /* MAIN */
+    main { max-width:var(--max-w); margin:0 auto; padding:0 var(--pad) 5rem; }
+    .panel { display:none; }
+    .panel.active { display:block; }
+
+    /* SECTION LABEL */
+    .sec-lbl { font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin:2.5rem 0 1rem; padding-bottom:.5rem; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:.6rem; }
+    .sec-lbl-num { font-family:var(--font-serif); font-size:1rem; color:var(--gold-light); }
+
+    /* BUDGET ROWS */
+    .budget-block { margin-bottom:.4rem; }
+    .budget-row { display:flex; align-items:stretch; background:var(--card-bg); border:1px solid var(--card-border); border-radius:8px; overflow:hidden; margin-bottom:6px; cursor:pointer; transition:border-color .15s; }
+    .budget-row:hover { border-color:rgba(196,169,106,.5); }
+    .budget-row.open { border-color:var(--gold); }
+    .row-accent { width:4px; flex-shrink:0; }
+    .row-body { flex:1; padding:.85rem 1rem; display:flex; align-items:center; gap:1rem; }
+    .row-icon { font-size:15px; width:28px; text-align:center; flex-shrink:0; }
+    .row-content { flex:1; }
+    .row-title { font-size:13.5px; font-weight:500; color:var(--charcoal); line-height:1.2; }
+    .row-sub { font-size:11px; color:var(--text-faint); margin-top:2px; }
+    .row-right { text-align:right; flex-shrink:0; }
+    .row-amount { font-family:var(--font-serif); font-size:1.1rem; font-weight:400; color:var(--charcoal); line-height:1; }
+    .row-period { font-size:10px; color:var(--text-faint); letter-spacing:.06em; text-transform:uppercase; margin-top:2px; }
+    .row-toggle { font-size:1.1rem; font-weight:300; color:var(--gold); flex-shrink:0; transition:transform .2s; width:20px; text-align:center; }
+    .budget-row.open .row-toggle { transform:rotate(45deg); }
+    .row-detail { display:none; padding:.75rem 1rem .9rem 4.5rem; background:rgba(196,169,106,.03); border-top:1px solid var(--line); font-size:12.5px; color:var(--text-muted); line-height:1.7; }
+    .budget-row.open + .row-detail { display:block; }
+    .detail-items { display:flex; flex-direction:column; gap:.25rem; }
+    .detail-item { display:flex; justify-content:space-between; align-items:center; padding:.25rem 0; border-bottom:1px solid rgba(196,169,106,.07); }
+    .detail-item:last-child { border-bottom:none; }
+    .detail-name { color:var(--text-muted); }
+    .detail-val { font-weight:500; color:var(--text-main); flex-shrink:0; margin-left:.5rem; }
+    .detail-note { margin-top:.6rem; font-size:12px; color:var(--text-faint); font-style:italic; }
+
+    /* BADGE */
+    .badge { display:inline-block; font-size:9px; letter-spacing:.08em; text-transform:uppercase; padding:1px 6px; border-radius:3px; font-weight:500; margin-left:.4rem; vertical-align:middle; }
+    .b-required { background:var(--coral-bg); color:var(--coral); }
+    .b-recommended { background:var(--blue-bg); color:var(--blue); }
+    .b-optional { background:var(--teal-bg); color:var(--teal); }
+
+    /* SUBTOTAL */
+    .subtotal { display:flex; justify-content:space-between; align-items:center; padding:.6rem .9rem; background:rgba(196,169,106,.07); border-radius:6px; margin:-.2rem 0 .5rem; font-size:12.5px; }
+    .subtotal span:first-child { color:var(--text-muted); }
+    .subtotal span:last-child { font-weight:500; color:var(--gold-dark); font-family:var(--font-serif); font-size:1.05rem; }
+
+    /* TOTAL BAR */
+    .total-bar { background:var(--charcoal); border-radius:10px; padding:1.5rem 1.75rem; margin-top:2.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+    .total-label { font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:rgba(250,248,244,.5); margin-bottom:.25rem; }
+    .total-val { font-family:var(--font-serif); font-size:2.2rem; font-weight:300; color:var(--cream); line-height:1; }
+    .total-sub { font-size:11px; color:rgba(250,248,244,.4); margin-top:.25rem; }
+    .total-right { text-align:right; }
+    .total-right .total-label { text-align:right; }
+
+    /* ALERT BOX */
+    .alert { background:var(--amber-bg); border:1px solid var(--amber-b); border-radius:8px; padding:.9rem 1.1rem; margin-top:1.5rem; font-size:13px; color:var(--amber); line-height:1.7; }
+    .alert strong { font-weight:500; }
+
+    /* CHART BAR */
+    .chart-section { margin-top:2.5rem; }
+    .chart-row { display:flex; align-items:center; gap:.75rem; margin-bottom:.7rem; }
+    .chart-label { font-size:12px; color:var(--text-muted); width:160px; flex-shrink:0; text-align:right; }
+    .chart-track { flex:1; height:10px; background:rgba(196,169,106,.12); border-radius:5px; overflow:hidden; }
+    .chart-fill { height:100%; border-radius:5px; transition:width .6s ease; }
+    .chart-val { font-size:12px; font-weight:500; color:var(--text-main); width:80px; flex-shrink:0; }
+
+    /* FOOTER */
+    footer { background:var(--charcoal); padding:2.5rem var(--pad); }
+    .footer-inner { max-width:var(--max-w); margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem; }
+    .footer-logo { font-family:var(--font-serif); font-size:1.4rem; font-weight:600; letter-spacing:.2em; color:rgba(250,248,244,.9); }
+    .footer-logo small { display:block; font-size:9px; letter-spacing:.15em; color:var(--gold-light); font-family:var(--font-sans); font-weight:400; text-transform:uppercase; margin-top:2px; }
+    .footer-nav { display:flex; gap:1.5rem; list-style:none; flex-wrap:wrap; }
+    .footer-nav a { font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:rgba(250,248,244,.4); text-decoration:none; transition:color .15s; }
+    .footer-nav a:hover { color:var(--gold-light); }
+    .footer-copy { font-size:11px; color:rgba(250,248,244,.22); }
+
+    @media(max-width:640px){
+      .nav-links{display:none;}
+      .nav-burger{display:flex;}
+      .chart-label{width:100px;font-size:11px;}
+      .total-bar{flex-direction:column;text-align:center;}
+      .total-right{text-align:center;}
+    }
+  </style>
+</head>
+<body>
+<div class="grain"></div>
+
+<!-- NAV -->
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-ey">Budget prévisionnel — Projet AKI</p>
+  <h1 class="hero-title">Budget <em>complet</em><br />du projet</h1>
+  <p class="hero-desc">Tous les postes de dépenses du lancement : investissements uniques, charges mensuelles récurrentes et projections annuelles. Basé sur les données marché 2025.</p>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-lbl">Investissement initial</div><div class="kpi-val">~38 k€</div><div class="kpi-sub">Démarrage tout compris</div></div>
+    <div class="kpi"><div class="kpi-lbl">Charges mensuelles</div><div class="kpi-val">~4 800€</div><div class="kpi-sub">Hors salaires</div></div>
+    <div class="kpi"><div class="kpi-lbl">Seuil de rentabilité</div><div class="kpi-val">~10 c/j</div><div class="kpi-sub">10 clients à 50 € moy.</div></div>
+    <div class="kpi"><div class="kpi-lbl">Fonds de roulement</div><div class="kpi-val">6 mois</div><div class="kpi-sub">Trésorerie de sécurité</div></div>
+  </div>
+</section>
+
+<!-- TABS -->
+<div class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('invest')">Investissements initiaux</button>
+    <button class="tab" onclick="switchTab('mensuel')">Charges mensuelles</button>
+    <button class="tab" onclick="switchTab('annuel')">Vue annuelle</button>
+  </div>
+</div>
+
+<main>
+
+<!-- ========================
+     PANEL 1 — INVESTISSEMENTS
+======================== -->
+<div class="panel active" id="panel-invest">
+
+  <!-- JURIDIQUE & ADMINISTRATIF -->
+  <div class="sec-lbl"><span class="sec-lbl-num">01</span> Juridique &amp; administratif</div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--teal)"></div>
+      <div class="row-body">
+        <div class="row-icon">⚖</div>
+        <div class="row-content"><div class="row-title">Création auto-entreprise France<span class="badge b-required">Obligatoire</span></div><div class="row-sub">formalites.entreprises.gouv.fr</div></div>
+        <div class="row-right"><div class="row-amount">0 €</div><div class="row-period">Gratuit</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-items"><div class="detail-item"><span class="detail-name">Inscription Guichet unique INPI</span><span class="detail-val">0 €</span></div><div class="detail-item"><span class="detail-name">Immatriculation Répertoire des Métiers (CMA)</span><span class="detail-val">0 €</span></div></div><div class="detail-note">Entièrement gratuit depuis 2023. Délai : 1 semaine.</div></div>
+  </div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--coral)"></div>
+      <div class="row-body">
+        <div class="row-icon">™</div>
+        <div class="row-content"><div class="row-title">Dépôt marque AKI — INPI France<span class="badge b-required">Priorité absolue</span></div><div class="row-sub">3 classes · Protection 10 ans</div></div>
+        <div class="row-right"><div class="row-amount">309 €</div><div class="row-period">Une fois</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-items"><div class="detail-item"><span class="detail-name">Classe 44 — Coiffure &amp; beauté (base)</span><span class="detail-val">190 €</span></div><div class="detail-item"><span class="detail-name">Classe 41 — Formation professionnelle</span><span class="detail-val">40 €</span></div><div class="detail-item"><span class="detail-name">Classe 35 — Franchise &amp; commerce</span><span class="detail-val">40 €</span></div><div class="detail-item"><span class="detail-name">Dépôt logo (optionnel mais recommandé)</span><span class="detail-val">39 €</span></div></div><div class="detail-note">Vérifier la disponibilité gratuitement sur data.inpi.fr avant de déposer. Protection immédiate à la date du dépôt.</div></div>
+  </div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--amber)"></div>
+      <div class="row-body">
+        <div class="row-icon">🏛</div>
+        <div class="row-content"><div class="row-title">Occupation Permit Investisseur — Maurice<span class="badge b-required">Obligatoire</span></div><div class="row-sub">EDB Maurice · Permis 10 ans</div></div>
+        <div class="row-right"><div class="row-amount">~400 €</div><div class="row-period">Frais dossier</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-items"><div class="detail-item"><span class="detail-name">Frais de dossier EDB (~20 000 MUR)</span><span class="detail-val">~400 €</span></div><div class="detail-item"><span class="detail-name">Capital à transférer (reste dans l'entreprise)</span><span class="detail-val">35 000 – 50 000 $</span></div></div><div class="detail-note">Le capital transféré n'est pas une dépense — c'est le capital de roulement de ta société mauricienne qui sert à financer le salon.</div></div>
+  </div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--blue)"></div>
+      <div class="row-body">
+        <div class="row-icon">📋</div>
+        <div class="row-content"><div class="row-title">Enregistrement société Maurice<span class="badge b-required">Obligatoire</span></div><div class="row-sub">Registrar of Companies · Port Louis</div></div>
+        <div class="row-right"><div class="row-amount">~200 €</div><div class="row-period">Une fois</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-items"><div class="detail-item"><span class="detail-name">Frais d'enregistrement société (LTD)</span><span class="detail-val">~200 €</span></div><div class="detail-item"><span class="detail-name">Rédaction statuts (avocat local recommandé)</span><span class="detail-val">300 – 600 €</span></div></div><div class="detail-note">Recommandé : passer par un avocat ou notaire local pour la rédaction des statuts. Budget total conseillé : ~800 €.</div></div>
+  </div>
+
+  <div class="subtotal"><span>Sous-total juridique &amp; administratif</span><span>~1 700 €</span></div>
+
+  <!-- AMÉNAGEMENT -->
+  <div class="sec-lbl"><span class="sec-lbl-num">02</span> Aménagement du salon (100 m²)</div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--amber)"></div>
+      <div class="row-body">
+        <div class="row-icon">🔨</div>
+        <div class="row-content"><div class="row-title">Travaux &amp; rénovation<span class="badge b-required">Obligatoire</span></div><div class="row-sub">Peinture, sol, électricité, plomberie, ventilation</div></div>
+        <div class="row-right"><div class="row-amount">8 000 – 15 000 €</div><div class="row-period">Une fois</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-items"><div class="detail-item"><span class="detail-name">Revêtements sol + peinture (100 m²)</span><span class="detail-val">3 000 – 5 000 €</span></div><div class="detail-item"><span class="detail-name">Électricité &amp; éclairage professionnel</span><span class="detail-val">2 000 – 4 000 €</span></div><div class="detail-item"><span class="detail-name">Plomberie (bacs shampooing, cabines)</span><span class="detail-val">1 500 – 3 000 €</span></div><div class="detail-item"><span class="detail-name">Ventilation (obligatoire en salon coiffure)</span><span class="detail-val">1 000 – 2 000 €</span></div><div class="detail-item"><span class="detail-name">Cloisons, aménagement cabines esthétiques</span><span class="detail-val">500 – 1 000 €</span></div></div><div class="detail-note">À Maurice, les coûts de main d'œuvre sont sensiblement inférieurs à la France. Prévoir des devis locaux.</div></div>
+  </div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--amber)"></div>
+      <div class="row-body">
+        <div class="row-icon">🛋</div>
+        <div class="row-content"><div class="row-title">Mobilier &amp; équipement coiffure<span class="badge b-required">Obligatoire</span></div><div class="row-sub">Fauteuils, bacs, miroirs, postes de coiffage</div></div>
+        <div class="row-right"><div class="row-amount">6 000 – 12 000 €</div><div class="row-period">Une fois</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-items"><div class="detail-item"><span class="detail-name">4 fauteuils de coiffage premium (600–1 000 €/u)</span><span class="detail-val">2 400 – 4 000 €</span></div><div class="detail-item"><span class="detail-name">2–3 bacs à shampooing (700–1 200 €/u)</span><span class="detail-val">1 400 – 3 600 €</span></div><div class="detail-item"><span class="detail-name">Postes de coiffage + miroirs (200–500 €/u)</span><span class="detail-val">800 – 2 000 €</span></div><div class="detail-item"><span class="detail-name">Meuble d'accueil + caisse</span><span class="detail-val">800 – 1 500 €</span></div><div class="detail-item"><span class="detail-name">Chaises d'attente + déco</span><span class="detail-val">600 – 900 €</span></div></div></div>
+  </div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--amber)"></div>
+      <div class="row-body">
+        <div class="row-icon">✂</div>
+        <div class="row-content"><div class="row-title">Matériel professionnel coiffure<span class="badge b-required">Obligatoire</span></div><div class="row-sub">Sèche-cheveux, fers, tondeuses, ciseaux</div></div>
+        <div class="row-right"><div class="row-amount">2 000 – 4 000 €</div><div class="row-period">Une fois</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-items"><div class="detail-item"><span class="detail-name">Sèche-cheveux professionnels (x4)</span><span class="detail-val">600 – 1 200 €</span></div><div class="detail-item"><span class="detail-name">Fers à lisser + boucleurs</span><span class="detail-val">400 – 800 €</span></div><div class="detail-item"><span class="detail-name">Tondeuses + ciseaux professionnels</span><span class="detail-val">500 – 1 000 €</span></div><div class="detail-item"><span class="detail-name">Matériel esthétique (cabines)</span><span class="detail-val">500 – 1 000 €</span></div></div></div>
+  </div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--purple)"></div>
+      <div class="row-body">
+        <div class="row-icon">🎨</div>
+        <div class="row-content"><div class="row-title">Identité visuelle &amp; signalétique<span class="badge b-recommended">Recommandé</span></div><div class="row-sub">Logo, enseigne, tenues, supports print</div></div>
+        <div class="row-right"><div class="row-amount">1 500 – 3 000 €</div><div class="row-period">Une fois</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-items"><div class="detail-item"><span class="detail-name">Création logo + charte graphique</span><span class="detail-val">500 – 1 200 €</span></div><div class="detail-item"><span class="detail-name">Enseigne lumineuse vitrine</span><span class="detail-val">500 – 1 000 €</span></div><div class="detail-item"><span class="detail-name">Tenues uniformisées (x3–4 personnes)</span><span class="detail-val">300 – 500 €</span></div><div class="detail-item"><span class="detail-name">Flyers, cartes de visite, menu services</span><span class="detail-val">200 – 300 €</span></div></div></div>
+  </div>
+
+  <div class="subtotal"><span>Sous-total aménagement</span><span>~17 500 – 34 000 €</span></div>
+
+  <!-- DIGITAL -->
+  <div class="sec-lbl"><span class="sec-lbl-num">03</span> Digital &amp; présence en ligne</div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--blue)"></div>
+      <div class="row-body">
+        <div class="row-icon">🌐</div>
+        <div class="row-content"><div class="row-title">Nom de domaine<span class="badge b-required">Obligatoire</span></div><div class="row-sub">aki-paris.com + aki-paris.mu · Renouvellement annuel</div></div>
+        <div class="row-right"><div class="row-amount">25 – 40 €</div><div class="row-period">Par an</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-items"><div class="detail-item"><span class="detail-name">Domain .com (ex : aki-paris.com)</span><span class="detail-val">~15 €/an</span></div><div class="detail-item"><span class="detail-name">Domain .mu (Maurice)</span><span class="detail-val">~25 €/an</span></div></div><div class="detail-note">Recommandé : acheter les deux extensions pour protéger la marque. Fournisseurs : OVH, Gandi, Ionos.</div></div>
+  </div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--blue)"></div>
+      <div class="row-body">
+        <div class="row-icon">💻</div>
+        <div class="row-content"><div class="row-title">Hébergement web<span class="badge b-required">Obligatoire</span></div><div class="row-sub">o2switch ou OVH · SSL inclus</div></div>
+        <div class="row-right"><div class="row-amount">~27 €</div><div class="row-period">Par an</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-items"><div class="detail-item"><span class="detail-name">Hébergement mutualisé illimité (o2switch)</span><span class="detail-val">~27 €/an</span></div><div class="detail-item"><span class="detail-name">Certificat SSL (souvent inclus)</span><span class="detail-val">Gratuit</span></div></div><div class="detail-note">o2switch = meilleur rapport qualité/prix français. Domaine souvent offert la 1ère année.</div></div>
+  </div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--blue)"></div>
+      <div class="row-body">
+        <div class="row-icon">📅</div>
+        <div class="row-content"><div class="row-title">Logiciel prise de RDV — Planity Pro<span class="badge b-recommended">Recommandé</span></div><div class="row-sub">Agenda + caisse + marketing · ~89 €/mois</div></div>
+        <div class="row-right"><div class="row-amount">~89 €</div><div class="row-period">Par mois</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-items"><div class="detail-item"><span class="detail-name">Formule agenda seul</span><span class="detail-val">~59 €/mois</span></div><div class="detail-item"><span class="detail-name">Formule agenda + caisse NF525</span><span class="detail-val">~89 €/mois</span></div><div class="detail-item"><span class="detail-name">Sans engagement · Sans commission sur RDV directs</span><span class="detail-val">✓</span></div></div><div class="detail-note">Alternative moins chère : SimplyBook.me (~10 €/mois) pour démarrer. Planity apporte aussi de la visibilité via sa marketplace.</div></div>
+  </div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--purple)"></div>
+      <div class="row-body">
+        <div class="row-icon">📱</div>
+        <div class="row-content"><div class="row-title">Création du site web vitrine<span class="badge b-recommended">Recommandé</span></div><div class="row-sub">WordPress ou Webflow · Storytelling AKI</div></div>
+        <div class="row-right"><div class="row-amount">800 – 2 000 €</div><div class="row-period">Une fois</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-items"><div class="detail-item"><span class="detail-name">Création site WordPress (freelance)</span><span class="detail-val">800 – 2 000 €</span></div><div class="detail-item"><span class="detail-name">Thème premium (Divi, Elementor...)</span><span class="detail-val">50 – 120 €</span></div><div class="detail-item"><span class="detail-name">Photos professionnelles du salon</span><span class="detail-val">300 – 600 €</span></div></div><div class="detail-note">Option économique : utiliser Wix ou Squarespace soi-même (~15 €/mois). Option premium : WordPress sur hébergement propre avec site sur-mesure.</div></div>
+  </div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--teal)"></div>
+      <div class="row-body">
+        <div class="row-icon">📧</div>
+        <div class="row-content"><div class="row-title">Adresses email professionnelles<span class="badge b-recommended">Recommandé</span></div><div class="row-sub">contact@aki-paris.com · Google Workspace</div></div>
+        <div class="row-right"><div class="row-amount">~6 €</div><div class="row-period">Par mois</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-items"><div class="detail-item"><span class="detail-name">Google Workspace Business Starter (1 user)</span><span class="detail-val">~6 €/mois</span></div><div class="detail-item"><span class="detail-name">Alternative : email pro via hébergeur (o2switch)</span><span class="detail-val">Inclus</span></div></div></div>
+  </div>
+
+  <div class="subtotal"><span>Sous-total digital (hors mensuel)</span><span>~1 200 – 2 800 €</span></div>
+
+  <!-- LANCEMENT -->
+  <div class="sec-lbl"><span class="sec-lbl-num">04</span> Communication &amp; lancement</div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--coral)"></div>
+      <div class="row-body">
+        <div class="row-icon">📣</div>
+        <div class="row-content"><div class="row-title">Campagne de lancement<span class="badge b-recommended">Recommandé</span></div><div class="row-sub">Flyers, affichage, invitations, influenceurs locaux</div></div>
+        <div class="row-right"><div class="row-amount">1 000 – 2 500 €</div><div class="row-period">Une fois</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-items"><div class="detail-item"><span class="detail-name">Impression flyers + affiches (2 000 ex.)</span><span class="detail-val">200 – 400 €</span></div><div class="detail-item"><span class="detail-name">Affichage dans lieux touristiques</span><span class="detail-val">200 – 500 €</span></div><div class="detail-item"><span class="detail-name">Invitations soirée d'ouverture</span><span class="detail-val">300 – 600 €</span></div><div class="detail-item"><span class="detail-name">Collaboration influenceurs locaux (x2–3)</span><span class="detail-val">300 – 1 000 €</span></div></div></div>
+  </div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--coral)"></div>
+      <div class="row-body">
+        <div class="row-icon">📷</div>
+        <div class="row-content"><div class="row-title">Shooting photo &amp; contenu réseaux sociaux<span class="badge b-recommended">Recommandé</span></div><div class="row-sub">Identité visuelle Instagram · Before/After</div></div>
+        <div class="row-right"><div class="row-amount">500 – 1 200 €</div><div class="row-period">Une fois</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-items"><div class="detail-item"><span class="detail-name">Photographe professionnel (demi-journée)</span><span class="detail-val">300 – 700 €</span></div><div class="detail-item"><span class="detail-name">Création templates Instagram + Canva Pro</span><span class="detail-val">100 – 200 €</span></div><div class="detail-item"><span class="detail-name">Vidéo courte de présentation du salon</span><span class="detail-val">100 – 300 €</span></div></div></div>
+  </div>
+
+  <div class="subtotal"><span>Sous-total communication &amp; lancement</span><span>~2 000 – 4 200 €</span></div>
+
+  <!-- SÉCURITÉ -->
+  <div class="sec-lbl"><span class="sec-lbl-num">05</span> Assurances &amp; sécurité</div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--teal)"></div>
+      <div class="row-body">
+        <div class="row-icon">🛡</div>
+        <div class="row-content"><div class="row-title">Assurance multirisque professionnelle<span class="badge b-required">Obligatoire</span></div><div class="row-sub">RC pro + biens + perte d'exploitation</div></div>
+        <div class="row-right"><div class="row-amount">600 – 1 200 €</div><div class="row-period">Par an</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+      <div class="row-detail"><div class="detail-items"><div class="detail-item"><span class="detail-name">Responsabilité civile professionnelle</span><span class="detail-val">Inclus</span></div><div class="detail-item"><span class="detail-name">Protection du matériel et mobilier</span><span class="detail-val">Inclus</span></div><div class="detail-item"><span class="detail-name">Perte d'exploitation en cas de sinistre</span><span class="detail-val">Inclus</span></div></div><div class="detail-note">Fourchette observée en 2025 : 300 à 1 200 €/an selon surface et CA. Obligatoire avant ouverture.</div></div>
+  </div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--teal)"></div>
+      <div class="row-body">
+        <div class="row-icon">🎵</div>
+        <div class="row-content"><div class="row-title">Licence SACEM / diffusion musicale<span class="badge b-required">Obligatoire</span></div><div class="row-sub">Droit de diffuser de la musique dans le salon</div></div>
+        <div class="row-right"><div class="row-amount">200 – 400 €</div><div class="row-period">Par an</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-note">Obligatoire si vous diffusez de la musique dans le salon (radio, playlist...). Tarif calculé selon surface et nombre d'enceintes. Équivalent mauricien à se renseigner localement.</div></div>
+  </div>
+
+  <div class="subtotal"><span>Sous-total assurances &amp; licences</span><span>~800 – 1 600 €/an</span></div>
+
+  <!-- PRODUITS -->
+  <div class="sec-lbl"><span class="sec-lbl-num">06</span> Stock initial de produits</div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--purple)"></div>
+      <div class="row-body">
+        <div class="row-icon">🧴</div>
+        <div class="row-content"><div class="row-title">Produits coiffure &amp; soins<span class="badge b-required">Obligatoire</span></div><div class="row-sub">Colorations, shampooings, soins · Marques françaises</div></div>
+        <div class="row-right"><div class="row-amount">2 000 – 4 000 €</div><div class="row-period">Stock initial</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-items"><div class="detail-item"><span class="detail-name">Colorations professionnelles (Schwarzkopf, L'Oréal Pro)</span><span class="detail-val">800 – 1 500 €</span></div><div class="detail-item"><span class="detail-name">Shampooings, soins, masques</span><span class="detail-val">500 – 1 000 €</span></div><div class="detail-item"><span class="detail-name">Produits esthétiques (cires, huiles, soins visage)</span><span class="detail-val">400 – 800 €</span></div><div class="detail-item"><span class="detail-name">Produits vente comptoir (revente aux clients)</span><span class="detail-val">300 – 700 €</span></div></div><div class="detail-note">Utiliser des marques françaises (Kérastase, L'Oréal Professionnel) renforce l'image premium et le savoir-faire français.</div></div>
+  </div>
+
+  <div class="subtotal"><span>Sous-total stock produits</span><span>~2 000 – 4 000 €</span></div>
+
+  <!-- TRÉSORERIE -->
+  <div class="sec-lbl"><span class="sec-lbl-num">07</span> Fonds de roulement (trésorerie de sécurité)</div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--red)"></div>
+      <div class="row-body">
+        <div class="row-icon">🏦</div>
+        <div class="row-content"><div class="row-title">Réserve de trésorerie — 3 mois de charges<span class="badge b-required">Essentiel</span></div><div class="row-sub">Couvrir les premiers mois avant rentabilité</div></div>
+        <div class="row-right"><div class="row-amount">~14 400 €</div><div class="row-period">3 mois</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-items"><div class="detail-item"><span class="detail-name">Loyer × 3 mois (600 € × 3)</span><span class="detail-val">1 800 €</span></div><div class="detail-item"><span class="detail-name">Salaires × 3 mois (~2 800 € × 3)</span><span class="detail-val">8 400 €</span></div><div class="detail-item"><span class="detail-name">Charges courantes × 3 mois (~1 400 € × 3)</span><span class="detail-val">4 200 €</span></div></div><div class="detail-note">Idéalement viser 6 mois de réserve (~28 800 €). La clientèle hôtelière met 1 à 3 mois à se constituer.</div></div>
+  </div>
+
+  <div class="subtotal"><span>Sous-total fonds de roulement (3 mois)</span><span>~14 400 €</span></div>
+
+  <!-- TOTAL INVEST -->
+  <div class="total-bar">
+    <div>
+      <div class="total-label">Budget total d'ouverture estimé</div>
+      <div class="total-val">38 000 – 60 000 €</div>
+      <div class="total-sub">Hors capital EDB Maurice (35–50k$ restent dans la société)</div>
+    </div>
+    <div class="total-right">
+      <div class="total-label">Dont indispensable</div>
+      <div class="total-val" style="font-size:1.5rem">~25 000 €</div>
+      <div class="total-sub">Version économique avec bon sourcing</div>
+    </div>
+  </div>
+
+  <div class="alert"><strong>Conseil :</strong> à Maurice, les coûts de main d'œuvre et de matériel sont sensiblement inférieurs à la France. Obtenir des devis locaux avant de fixer le budget définitif. Le poste "aménagement" peut être réduit de 30 à 40 % par rapport aux estimations françaises.</div>
+
+</div>
+
+<!-- ========================
+     PANEL 2 — MENSUEL
+======================== -->
+<div class="panel" id="panel-mensuel">
+
+  <div class="sec-lbl"><span class="sec-lbl-num">01</span> Loyer &amp; charges fixes</div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--amber)"></div>
+      <div class="row-body">
+        <div class="row-icon">🏠</div>
+        <div class="row-content"><div class="row-title">Loyer du local<span class="badge b-required">Obligatoire</span></div><div class="row-sub">100 m² zone touristique Maurice</div></div>
+        <div class="row-right"><div class="row-amount">600 €</div><div class="row-period">Par mois</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-note">Loyer indiqué = estimation du projet. À Maurice, les locaux commerciaux en zone touristique (Grand Baie, Tamarin) se louent entre 1 500 et 2 500 €/mois pour 100 m². À confirmer selon l'emplacement exact choisi.</div></div>
+  </div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--amber)"></div>
+      <div class="row-body">
+        <div class="row-icon">⚡</div>
+        <div class="row-content"><div class="row-title">Électricité, eau, internet<span class="badge b-required">Obligatoire</span></div><div class="row-sub">Climatisation + usage professionnel</div></div>
+        <div class="row-right"><div class="row-amount">300 – 500 €</div><div class="row-period">Par mois</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-items"><div class="detail-item"><span class="detail-name">Électricité (clim + matériel)</span><span class="detail-val">200 – 350 €</span></div><div class="detail-item"><span class="detail-name">Eau (bacs shampooing × usage intensif)</span><span class="detail-val">60 – 100 €</span></div><div class="detail-item"><span class="detail-name">Internet fibre pro</span><span class="detail-val">40 – 50 €</span></div></div></div>
+  </div>
+
+  <div class="subtotal"><span>Sous-total loyer + charges</span><span>~900 – 1 100 €/mois</span></div>
+
+  <div class="sec-lbl"><span class="sec-lbl-num">02</span> Masse salariale</div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--blue)"></div>
+      <div class="row-body">
+        <div class="row-icon">👥</div>
+        <div class="row-content"><div class="row-title">2 coiffeurs / esthéticiennes locaux<span class="badge b-required">Obligatoire</span></div><div class="row-sub">Salaire brut ~18 000 MUR / mois chacun</div></div>
+        <div class="row-right"><div class="row-amount">~720 €</div><div class="row-period">Par mois (2 pers.)</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-items"><div class="detail-item"><span class="detail-name">Coiffeur 1 (~18 000 MUR brut)</span><span class="detail-val">~360 €</span></div><div class="detail-item"><span class="detail-name">Coiffeur 2 / esthéticienne (~18 000 MUR brut)</span><span class="detail-val">~360 €</span></div></div><div class="detail-note">1 € ≈ 50 MUR. Salaire moyen secteur beauté à Maurice : 13 800 – 36 600 MUR/mois. Les charges patronales à Maurice sont inférieures à celles en France.</div></div>
+  </div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--blue)"></div>
+      <div class="row-body">
+        <div class="row-icon">🙋</div>
+        <div class="row-content"><div class="row-title">Assistant(e) d'accueil (mi-temps)<span class="badge b-recommended">Recommandé</span></div><div class="row-sub">Accueil clients, réseaux sociaux, caisse</div></div>
+        <div class="row-right"><div class="row-amount">~200 €</div><div class="row-period">Par mois</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-note">Poste essentiel pour maintenir l'image premium : accueil chaleureux, gestion des réservations, animation réseaux sociaux. Peut être un étudiant en alternance ou en formation.</div></div>
+  </div>
+
+  <div class="subtotal"><span>Sous-total masse salariale</span><span>~920 €/mois</span></div>
+
+  <div class="sec-lbl"><span class="sec-lbl-num">03</span> Digital &amp; outils récurrents</div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--teal)"></div>
+      <div class="row-body">
+        <div class="row-icon">📅</div>
+        <div class="row-content"><div class="row-title">Planity Pro — Agenda + caisse<span class="badge b-recommended">Recommandé</span></div><div class="row-sub">Réservations en ligne + gestion salon</div></div>
+        <div class="row-right"><div class="row-amount">~89 €</div><div class="row-period">Par mois</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-note">Formule complète avec caisse NF525, rappels SMS automatiques, marketplace pour trouver de nouveaux clients. Alternative économique : SimplyBook.me à ~10 €/mois pour démarrer.</div></div>
+  </div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--teal)"></div>
+      <div class="row-body">
+        <div class="row-icon">🌐</div>
+        <div class="row-content"><div class="row-title">Hébergement + domaine (mensuel)<span class="badge b-required">Obligatoire</span></div><div class="row-sub">Site web + emails pro</div></div>
+        <div class="row-right"><div class="row-amount">~9 €</div><div class="row-period">Par mois</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-items"><div class="detail-item"><span class="detail-name">Hébergement o2switch (~27 €/an)</span><span class="detail-val">~2 €/mois</span></div><div class="detail-item"><span class="detail-name">Nom de domaine (~40 €/an)</span><span class="detail-val">~3 €/mois</span></div><div class="detail-item"><span class="detail-name">Email pro Google Workspace</span><span class="detail-val">~6 €/mois</span></div></div></div>
+  </div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--purple)"></div>
+      <div class="row-body">
+        <div class="row-icon">🎨</div>
+        <div class="row-content"><div class="row-title">Canva Pro — Contenus visuels<span class="badge b-recommended">Recommandé</span></div><div class="row-sub">Stories, posts, supports print</div></div>
+        <div class="row-right"><div class="row-amount">~13 €</div><div class="row-period">Par mois</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-note">Canva Pro permet de créer tous les visuels Instagram, stories, flyers et menus de services sans graphiste. Indispensable pour maintenir une image soignée au quotidien.</div></div>
+  </div>
+
+  <div class="subtotal"><span>Sous-total digital récurrent</span><span>~111 €/mois</span></div>
+
+  <div class="sec-lbl"><span class="sec-lbl-num">04</span> Marketing &amp; communication</div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--coral)"></div>
+      <div class="row-body">
+        <div class="row-icon">📱</div>
+        <div class="row-content"><div class="row-title">Publicité réseaux sociaux (Instagram / Facebook)<span class="badge b-recommended">Recommandé</span></div><div class="row-sub">Sponsoring posts · Ciblage touristes &amp; locaux</div></div>
+        <div class="row-right"><div class="row-amount">100 – 300 €</div><div class="row-period">Par mois</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-note">Avec 100 €/mois bien ciblé, tu peux toucher plusieurs milliers de personnes dans un rayon de 20 km autour du salon. Monter à 200–300 €/mois les 3 premiers mois pour le lancement.</div></div>
+  </div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--coral)"></div>
+      <div class="row-body">
+        <div class="row-icon">🤝</div>
+        <div class="row-content"><div class="row-title">Commissions partenariats hôteliers<span class="badge b-recommended">Recommandé</span></div><div class="row-sub">Rémunération concierges + hôtels prescripteurs</div></div>
+        <div class="row-right"><div class="row-amount">100 – 200 €</div><div class="row-period">Par mois</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-note">Prévoir 5–10 % de commission sur les clients apportés par les hôtels (concierges, conciergeries). C'est un investissement rentable : chaque client hôtelier a un panier moyen 2× plus élevé que la moyenne locale.</div></div>
+  </div>
+
+  <div class="subtotal"><span>Sous-total marketing mensuel</span><span>~200 – 500 €/mois</span></div>
+
+  <div class="sec-lbl"><span class="sec-lbl-num">05</span> Produits &amp; consommables</div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--purple)"></div>
+      <div class="row-body">
+        <div class="row-icon">🧴</div>
+        <div class="row-content"><div class="row-title">Réapprovisionnement produits<span class="badge b-required">Obligatoire</span></div><div class="row-sub">Colorations, soins, consommables cabines</div></div>
+        <div class="row-right"><div class="row-amount">500 – 900 €</div><div class="row-period">Par mois</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-items"><div class="detail-item"><span class="detail-name">Colorations &amp; produits chimiques</span><span class="detail-val">200 – 400 €</span></div><div class="detail-item"><span class="detail-name">Shampooings, soins, masques</span><span class="detail-val">150 – 250 €</span></div><div class="detail-item"><span class="detail-name">Produits esthétiques consommables</span><span class="detail-val">100 – 200 €</span></div><div class="detail-item"><span class="detail-name">Lingerie, serviettes, consommables divers</span><span class="detail-val">50 – 50 €</span></div></div></div>
+  </div>
+
+  <div class="subtotal"><span>Sous-total produits</span><span>~500 – 900 €/mois</span></div>
+
+  <div class="sec-lbl"><span class="sec-lbl-num">06</span> Assurances &amp; divers récurrents</div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--teal)"></div>
+      <div class="row-body">
+        <div class="row-icon">🛡</div>
+        <div class="row-content"><div class="row-title">Assurance pro multirisque<span class="badge b-required">Obligatoire</span></div><div class="row-sub">~900 € / an = 75 €/mois</div></div>
+        <div class="row-right"><div class="row-amount">~75 €</div><div class="row-period">Par mois</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-note">Fourchette annuelle : 600 – 1 200 €. Soit 50 – 100 €/mois. Payer annuellement permet souvent d'obtenir une remise de 5 à 10 %.</div></div>
+  </div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--teal)"></div>
+      <div class="row-body">
+        <div class="row-icon">🧹</div>
+        <div class="row-content"><div class="row-title">Entretien, nettoyage &amp; hygiène<span class="badge b-required">Obligatoire</span></div><div class="row-sub">Produits ménagers, blanchisserie serviettes</div></div>
+        <div class="row-right"><div class="row-amount">100 – 200 €</div><div class="row-period">Par mois</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-note">Inclut : produits désinfectants, blanchisserie ou renouvellement serviettes, entretien matériel (stérilisation ciseaux), produits nettoyage sols.</div></div>
+  </div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:var(--blue)"></div>
+      <div class="row-body">
+        <div class="row-icon">📊</div>
+        <div class="row-content"><div class="row-title">Comptabilité &amp; gestion<span class="badge b-recommended">Recommandé</span></div><div class="row-sub">Comptable ou logiciel compta</div></div>
+        <div class="row-right"><div class="row-amount">50 – 150 €</div><div class="row-period">Par mois</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-items"><div class="detail-item"><span class="detail-name">Logiciel compta (Pennylane, Indy...)</span><span class="detail-val">15 – 30 €/mois</span></div><div class="detail-item"><span class="detail-name">Expert-comptable externe (si nécessaire)</span><span class="detail-val">80 – 150 €/mois</span></div></div><div class="detail-note">En auto-entreprise, un logiciel suffit au départ. Dès que tu as une société à Maurice, un comptable local devient indispensable.</div></div>
+  </div>
+
+  <div class="subtotal"><span>Sous-total assurances &amp; divers</span><span>~225 – 425 €/mois</span></div>
+
+  <!-- TOTAL MENSUEL -->
+  <div class="total-bar">
+    <div>
+      <div class="total-label">Total charges mensuelles estimées</div>
+      <div class="total-val">~2 856 – 3 945 €</div>
+      <div class="total-sub">Hors salaires · Hors ta propre rémunération</div>
+    </div>
+    <div class="total-right">
+      <div class="total-label">Avec salaires (2 employés)</div>
+      <div class="total-val" style="font-size:1.5rem">~3 776 – 4 865 €</div>
+      <div class="total-sub">Seuil de rentabilité : 10 clients/jour à 50 €</div>
+    </div>
+  </div>
+
+  <div class="alert"><strong>Seuil de rentabilité :</strong> pour couvrir 4 800 €/mois de charges, il faut un CA de ~4 800 €/mois. Avec un panier moyen de 50 €, cela représente 96 clients/mois soit seulement 4–5 clients par jour d'ouverture. L'objectif de 10 clients/jour dégage donc une marge confortable.</div>
+
+</div>
+
+<!-- ========================
+     PANEL 3 — ANNUEL
+======================== -->
+<div class="panel" id="panel-annuel">
+
+  <div class="sec-lbl"><span class="sec-lbl-num">Synthèse</span> Vue annuelle — Année 1</div>
+
+  <div class="chart-section">
+    <div class="chart-row"><div class="chart-label">Aménagement salon</div><div class="chart-track"><div class="chart-fill" style="width:35%;background:#EF9F27"></div></div><div class="chart-val">~20 000 €</div></div>
+    <div class="chart-row"><div class="chart-label">Fonds de roulement</div><div class="chart-track"><div class="chart-fill" style="width:28%;background:#E24B4A"></div></div><div class="chart-val">~14 400 €</div></div>
+    <div class="chart-row"><div class="chart-label">Produits (stock + mensuel)</div><div class="chart-track"><div class="chart-fill" style="width:20%;background:#7F77DD"></div></div><div class="chart-val">~10 000 €</div></div>
+    <div class="chart-row"><div class="chart-label">Juridique &amp; admin</div><div class="chart-track"><div class="chart-fill" style="width:8%;background:#1D9E75"></div></div><div class="chart-val">~3 700 €</div></div>
+    <div class="chart-row"><div class="chart-label">Digital &amp; site web</div><div class="chart-track"><div class="chart-fill" style="width:6%;background:#185FA5"></div></div><div class="chart-val">~3 400 €</div></div>
+    <div class="chart-row"><div class="chart-label">Communication</div><div class="chart-track"><div class="chart-fill" style="width:6%;background:#D85A30"></div></div><div class="chart-val">~3 200 €</div></div>
+    <div class="chart-row"><div class="chart-label">Assurances &amp; divers</div><div class="chart-track"><div class="chart-fill" style="width:4%;background:#888780"></div></div><div class="chart-val">~2 000 €</div></div>
+  </div>
+
+  <div class="sec-lbl" style="margin-top:2.5rem">Projections CA — Scénarios</div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:#E24B4A"></div>
+      <div class="row-body">
+        <div class="row-icon">📉</div>
+        <div class="row-content"><div class="row-title">Scénario pessimiste</div><div class="row-sub">5 clients/jour · Panier moyen 40 €</div></div>
+        <div class="row-right"><div class="row-amount">~50 000 €</div><div class="row-period">CA annuel</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-items"><div class="detail-item"><span class="detail-name">CA mensuel (5 clients × 40 € × 25 j)</span><span class="detail-val">~5 000 €</span></div><div class="detail-item"><span class="detail-name">Charges mensuelles totales</span><span class="detail-val">~4 800 €</span></div><div class="detail-item"><span class="detail-name">Marge mensuelle</span><span class="detail-val">~200 € (à l'équilibre)</span></div></div></div>
+  </div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:#EF9F27"></div>
+      <div class="row-body">
+        <div class="row-icon">📊</div>
+        <div class="row-content"><div class="row-title">Scénario réaliste</div><div class="row-sub">10 clients/jour · Panier moyen 50 €</div></div>
+        <div class="row-right"><div class="row-amount">~125 000 €</div><div class="row-period">CA annuel</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-items"><div class="detail-item"><span class="detail-name">CA mensuel (10 clients × 50 € × 25 j)</span><span class="detail-val">~12 500 €</span></div><div class="detail-item"><span class="detail-name">Charges mensuelles totales</span><span class="detail-val">~4 800 €</span></div><div class="detail-item"><span class="detail-name">Marge mensuelle brute</span><span class="detail-val">~7 700 € (62 %)</span></div></div><div class="detail-note">Objectif atteignable dès le 3e mois avec 2 partenariats hôteliers actifs.</div></div>
+  </div>
+
+  <div class="budget-block">
+    <div class="budget-row" onclick="toggleRow(this)">
+      <div class="row-accent" style="background:#1D9E75"></div>
+      <div class="row-body">
+        <div class="row-icon">📈</div>
+        <div class="row-content"><div class="row-title">Scénario optimiste</div><div class="row-sub">15 clients/jour · Panier moyen 65 €</div></div>
+        <div class="row-right"><div class="row-amount">~243 750 €</div><div class="row-period">CA annuel</div></div>
+        <div class="row-toggle">+</div>
+      </div>
+    </div>
+    <div class="row-detail"><div class="detail-items"><div class="detail-item"><span class="detail-name">CA mensuel (15 clients × 65 € × 25 j)</span><span class="detail-val">~24 375 €</span></div><div class="detail-item"><span class="detail-name">Charges mensuelles totales</span><span class="detail-val">~4 800 €</span></div><div class="detail-item"><span class="detail-name">Marge mensuelle brute</span><span class="detail-val">~19 575 € (80 %)</span></div></div><div class="detail-note">Réaliste dès l'année 2 avec la formation comme levier de CA additionnel.</div></div>
+  </div>
+
+  <div class="total-bar">
+    <div>
+      <div class="total-label">Objectif seuil rentabilité</div>
+      <div class="total-val">4–5 clients/jour</div>
+      <div class="total-sub">À 50 € de panier moyen</div>
+    </div>
+    <div class="total-right">
+      <div class="total-label">Retour sur investissement</div>
+      <div class="total-val" style="font-size:1.5rem">18 – 24 mois</div>
+      <div class="total-sub">Scénario réaliste (10 clients/j)</div>
+    </div>
+  </div>
+
+  <div class="alert"><strong>Levier formation :</strong> dès le 3e mois, lancer des sessions de formation en soirée (5 000–15 000 MUR/participant) génère un CA additionnel sans coût fixe supplémentaire. C'est le vrai accélérateur de rentabilité d'AKI.</div>
+
+</div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">AKI<small>Hair &amp; Beauty · Île Maurice</small></div>
+    <ul class="footer-nav">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="aki-etude-marche.html">Étude de marché</a></li>
+      <li><a href="aki-juridique.html">Juridique</a></li>
+      <li><a href="aki-budget.html">Budget</a></li>
+    </ul>
+    <div class="footer-copy">Budget prévisionnel AKI · 2025</div>
+  </div>
+</footer>
+
+<script>
+  function toggleRow(row) {
+    row.classList.toggle('open');
+  }
+  function switchTab(id) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById('panel-' + id).classList.add('active');
+    window.scrollTo({ top: document.querySelector('.tabs-wrap').offsetTop - 80, behavior: 'smooth' });
+  }
+  function toggleNav() {
+    document.getElementById('burger').classList.toggle('open');
+    document.getElementById('mobileNav').classList.toggle('open');
+  }
+  function closeNav() {
+    document.getElementById('burger').classList.remove('open');
+    document.getElementById('mobileNav').classList.remove('open');
+  }
+  document.addEventListener('click', e => {
+    const b = document.getElementById('burger');
+    const m = document.getElementById('mobileNav');
+    if (b && m && !b.contains(e.target) && !m.contains(e.target)) {
+      b.classList.remove('open'); m.classList.remove('open');
+    }
+  });
+</script>
+
+<script src="nav.js"></script>
+</body>
+</html>
