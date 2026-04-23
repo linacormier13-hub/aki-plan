@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AKI — Plan d'action stratégique</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="grain"></div>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo-block">
+        <span class="logo-name">AKI</span>
+        <span class="logo-sub">Hair &amp; Beauty · Maurice</span>
+      </div>
+      <div class="header-label">Plan d'action stratégique</div>
+    </div>
+    <div class="header-line"></div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <p class="hero-eyebrow">Vision 2025 — 2027</p>
+      <h1 class="hero-title">De la fondation<br /><em>à la franchise</em></h1>
+      <p class="hero-desc">Un projet en trois phases : salon premium, centre de formation, marque internationale. Chaque étape construit la suivante.</p>
+      <div class="hero-phases">
+        <div class="hp" data-phase="1">Phase 1<span>Salon</span></div>
+        <div class="hp-arrow">→</div>
+        <div class="hp" data-phase="2">Phase 2<span>Formation</span></div>
+        <div class="hp-arrow">→</div>
+        <div class="hp" data-phase="3">Phase 3<span>Franchise</span></div>
+      </div>
+    </section>
+
+    <section class="timeline" id="timeline">
+
+      <!-- BLOC 1 -->
+      <div class="phase-label">
+        <span class="phase-num">①</span>
+        <span class="phase-text">Socle juridique &amp; administratif</span>
+      </div>
+
+      <div class="step" data-index="0">
+        <div class="step-left">
+          <div class="step-num">01</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div>
+              <div class="step-title">Structuration juridique</div>
+              <div class="step-sub">Créer les entités légales en France et à Maurice</div>
+            </div>
+            <div class="step-icon">+</div>
+          </div>
+          <div class="step-detail">
+            <ul>
+              <li>Créer une auto-entreprise (ou société) en France pour gérer la marque et commercialiser</li>
+              <li>Obtenir les autorisations d'exercer sur le sol mauricien</li>
+              <li>Se rapprocher de la Chambre des Métiers à l'Île Maurice</li>
+              <li>Clarifier le cadre légal pour une future franchise</li>
+              <li>Vérifier la disponibilité juridique du nom et déposer la marque</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" data-index="1">
+        <div class="step-left">
+          <div class="step-num">02</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div>
+              <div class="step-title">Étude de marché</div>
+              <div class="step-sub">Valider les hypothèses avant tout investissement</div>
+            </div>
+            <div class="step-icon">+</div>
+          </div>
+          <div class="step-detail">
+            <ul>
+              <li>Analyser le panier moyen beauté d'un client local mauricien et d'un touriste</li>
+              <li>Étudier la concurrence locale : salons existants, niveaux de prix</li>
+              <li>Identifier les flux touristiques dans la zone cible (hôtels 4 et 5 étoiles)</li>
+              <li>Valider la demande pour des formations professionnelles</li>
+              <li>Ajuster la grille tarifaire en conséquence</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOC 2 -->
+      <div class="phase-label">
+        <span class="phase-num">②</span>
+        <span class="phase-text">Identité de marque &amp; branding</span>
+      </div>
+
+      <div class="step" data-index="2">
+        <div class="step-left">
+          <div class="step-num">03</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div>
+              <div class="step-title">Naming &amp; identité visuelle</div>
+              <div class="step-sub">Poser les bases de l'image de marque AKI</div>
+            </div>
+            <div class="step-icon">+</div>
+          </div>
+          <div class="step-detail">
+            <ul>
+              <li>Finaliser le nom commercial : AKI / AKI Paris / AKI Signature / AKI Concept</li>
+              <li>Déposer la marque officiellement</li>
+              <li>Définir la palette visuelle : blanc, beige, doré — style épuré et premium</li>
+              <li>Créer le logo et le slogan associé au savoir-faire français</li>
+              <li>Décliner l'identité sur tous les supports (salon, digital, produits)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" data-index="3">
+        <div class="step-left">
+          <div class="step-num">04</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div>
+              <div class="step-title">Positionnement &amp; personas</div>
+              <div class="step-sub">Définir les cibles et la promesse de valeur</div>
+            </div>
+            <div class="step-icon">+</div>
+          </div>
+          <div class="step-detail">
+            <ul>
+              <li>Persona 1 : touriste international haut de gamme — discrétion, qualité, expertise française</li>
+              <li>Persona 2 : client local — sensible au prix, aux promos, aux jours de formation</li>
+              <li>Construire la promesse : excellence française + accessibilité tarifaire</li>
+              <li>Définir une communication différenciée selon les deux segments</li>
+              <li>Préparer les offres : tarifs d'ouverture, promos hebdos, packages touristiques</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOC 3 -->
+      <div class="phase-label">
+        <span class="phase-num">③</span>
+        <span class="phase-text">Création &amp; aménagement du salon</span>
+      </div>
+
+      <div class="step" data-index="4">
+        <div class="step-left">
+          <div class="step-num">05</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div>
+              <div class="step-title">Conception de l'espace</div>
+              <div class="step-sub">Aménager le salon de 100 m² avec l'expérience premium</div>
+            </div>
+            <div class="step-icon">+</div>
+          </div>
+          <div class="step-detail">
+            <ul>
+              <li>Organiser les espaces : coiffure, cabines esthétiques, onglerie, extensions de cils</li>
+              <li>Décorer selon l'identité visuelle AKI : minimalisme, élégance parisienne</li>
+              <li>Habiller le personnel : tenues uniformisées, posture, langage</li>
+              <li>Mettre en place un parcours client fluide et mémorable</li>
+              <li>Positionner le salon comme un lieu signature reconnaissable</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" data-index="5">
+        <div class="step-left">
+          <div class="step-num">06</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div>
+              <div class="step-title">Recrutement &amp; formation des équipes</div>
+              <div class="step-sub">Constituer et former les équipes locales aux standards français</div>
+            </div>
+            <div class="step-icon">+</div>
+          </div>
+          <div class="step-detail">
+            <ul>
+              <li>Recruter coiffeurs, esthéticiennes et staff d'accueil</li>
+              <li>Former aux standards français : accueil, qualité, discrétion</li>
+              <li>Créer un pipeline : former des talents locaux puis les employer</li>
+              <li>Contractualiser les profils (contrat pro, alternance)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOC 4 -->
+      <div class="phase-label">
+        <span class="phase-num">④</span>
+        <span class="phase-text">Marketing &amp; communication</span>
+      </div>
+
+      <div class="step" data-index="6">
+        <div class="step-left">
+          <div class="step-num">07</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div>
+              <div class="step-title">Stratégie marketing</div>
+              <div class="step-sub">Construire le plan de communication avant le lancement</div>
+            </div>
+            <div class="step-icon">+</div>
+          </div>
+          <div class="step-detail">
+            <ul>
+              <li>Définir la stratégie de prix : yield management, jours de formation moins chers</li>
+              <li>Préparer les canaux : Instagram, Facebook, influenceurs locaux</li>
+              <li>Créer les supports physiques : flyers, affichage dans les lieux touristiques</li>
+              <li>Nouer des partenariats hôteliers pour capter la clientèle touristique</li>
+              <li>Planifier la campagne de lancement : invitations ciblées, offres d'ouverture</li>
+              <li>Construire le storytelling : savoir-faire français, impact social, montée en gamme</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOC 5 -->
+      <div class="phase-label">
+        <span class="phase-num">⑤</span>
+        <span class="phase-text">Présence digitale</span>
+      </div>
+
+      <div class="step" data-index="7">
+        <div class="step-left">
+          <div class="step-num">08</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div>
+              <div class="step-title">Site web &amp; outils de réservation</div>
+              <div class="step-sub">Créer l'écosystème digital du salon</div>
+            </div>
+            <div class="step-icon">+</div>
+          </div>
+          <div class="step-detail">
+            <ul>
+              <li>Créer un site web premium : storytelling, services, galerie, réservation en ligne</li>
+              <li>Mettre en place une application de prise de RDV (inspiration Planity)</li>
+              <li>Automatiser les réservations pour optimiser le taux de remplissage</li>
+              <li>Collecter les données clients pour affiner les offres</li>
+              <li>Ouvrir et animer les réseaux sociaux Instagram et Facebook</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOC 6 -->
+      <div class="phase-label">
+        <span class="phase-num">⑥</span>
+        <span class="phase-text">Lancement du salon</span>
+      </div>
+
+      <div class="step" data-index="8">
+        <div class="step-left">
+          <div class="step-num">09</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div>
+              <div class="step-title">Ouverture &amp; activation</div>
+              <div class="step-sub">Lancer les opérations et générer les premiers clients</div>
+            </div>
+            <div class="step-icon">+</div>
+          </div>
+          <div class="step-detail">
+            <ul>
+              <li>Lancer les offres d'ouverture : tarifs préférentiels, invitations ciblées</li>
+              <li>Activer les partenariats hôteliers pour convertir la clientèle existante</li>
+              <li>Mettre en place les offres promotionnelles hebdomadaires</li>
+              <li>Objectif opérationnel : 10 clients minimum par jour</li>
+              <li>Suivre les indicateurs : taux de remplissage, panier moyen, taux de conversion</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOC 7 -->
+      <div class="phase-label">
+        <span class="phase-num">⑦</span>
+        <span class="phase-text">Pôle formation</span>
+      </div>
+
+      <div class="step" data-index="9">
+        <div class="step-left">
+          <div class="step-num">10</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div>
+              <div class="step-title">Déploiement de la formation</div>
+              <div class="step-sub">Structurer le centre de formation physique et digital</div>
+            </div>
+            <div class="step-icon">+</div>
+          </div>
+          <div class="step-detail">
+            <ul>
+              <li>Créer les programmes : techniques, standards internationaux, accueil client</li>
+              <li>Proposer des sessions en soirée pour les actifs en journée</li>
+              <li>Développer la plateforme de formation à distance et le logiciel dédié</li>
+              <li>Partenariats : ambassade de Maurice, chambre des métiers, réseaux français</li>
+              <li>Communiquer sur l'impact social : emplois créés, parcours transformés</li>
+              <li>Reverser 20 % du CA à des actions sociales et le valoriser publiquement</li>
+              <li>Monétiser : programmes certifiants, abonnements e-learning</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOC 8 -->
+      <div class="phase-label">
+        <span class="phase-num">⑧</span>
+        <span class="phase-text">Expansion &amp; franchise</span>
+      </div>
+
+      <div class="step" data-index="10">
+        <div class="step-left">
+          <div class="step-num">11</div>
+          <div class="step-line last"></div>
+        </div>
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div>
+              <div class="step-title">Développement de la marque &amp; franchise</div>
+              <div class="step-sub">Dupliquer le modèle à Maurice puis à l'international</div>
+            </div>
+            <div class="step-icon">+</div>
+          </div>
+          <div class="step-detail">
+            <ul>
+              <li>Créer un manuel opérationnel et des process standardisés</li>
+              <li>Obtenir le droit de franchiser sur le sol mauricien</li>
+              <li>Lancer une gamme de produits capillaires français</li>
+              <li>Déployer dans d'autres hôtels et nouveaux points de vente</li>
+              <li>Étendre le modèle en Europe (opportunités de marché)</li>
+              <li>Générer des revenus via droits d'entrée, redevances, ventes de produits</li>
+              <li>Positionner AKI comme un label de qualité française reconnu</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <footer>
+      <div class="footer-inner">
+        <span class="footer-logo">AKI</span>
+        <span class="footer-copy">Plan stratégique — Île Maurice</span>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>
