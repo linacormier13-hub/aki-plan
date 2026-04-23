@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AKI Book — Document Stratégique</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --cream:#FAF8F4;--beige:#F0EBE1;
+      --gold:#C4A96A;--gold-light:#D4BC8A;--gold-dark:#9A7D42;
+      --charcoal:#1C1A17;--text-main:#2A2318;--text-muted:#7A6E5E;--text-faint:#B0A898;
+      --line:rgba(196,169,106,0.22);--card-bg:#FEFCF8;--card-border:rgba(196,169,106,0.22);
+      --teal:#0F6E56;--teal-bg:#E1F5EE;--blue:#185FA5;--blue-bg:#E6F1FB;
+      --amber:#854F0B;--amber-bg:#FAEEDA;--coral:#993C1D;--coral-bg:#FAECE7;
+      --purple:#534AB7;--purple-bg:#EEEDFE;--green:#3B6D11;--green-bg:#EAF3DE;
+      --font-serif:'Cormorant Garamond',Georgia,serif;--font-sans:'DM Sans',sans-serif;
+      --max-w:860px;--pad:clamp(1.25rem,5vw,3rem);
+    }
+    html{scroll-behavior:smooth;}
+    body{background:var(--cream);color:var(--text-main);font-family:var(--font-sans);font-size:15px;line-height:1.65;}
+    .grain{position:fixed;inset:0;pointer-events:none;z-index:999;opacity:.025;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:128px;}
+
+    /* HERO */
+    .hero{background:var(--charcoal);padding:5rem var(--pad) 4rem;text-align:center;}
+    .hero-inner{max-width:var(--max-w);margin:0 auto;}
+    .hero-ey{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.25rem;}
+    .hero-logo{font-family:var(--font-serif);font-size:clamp(3rem,8vw,6rem);font-weight:300;color:#FAF8F4;letter-spacing:.1em;line-height:1;margin-bottom:.5rem;}
+    .hero-logo span{color:var(--gold);}
+    .hero-tagline{font-family:var(--font-serif);font-size:1.2rem;font-weight:300;font-style:italic;color:var(--gold-light);margin-bottom:2rem;}
+    .hero-desc{font-size:14px;color:rgba(250,248,244,.6);max-width:500px;margin:0 auto 2.5rem;line-height:1.85;}
+    .hero-badges{display:flex;justify-content:center;gap:.5rem;flex-wrap:wrap;}
+    .hb{font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:.35rem .9rem;border-radius:20px;border:1px solid rgba(196,169,106,.3);color:var(--gold-light);}
+
+    /* MAIN */
+    main{max-width:var(--max-w);margin:0 auto;padding:3rem var(--pad) 5rem;}
+
+    /* SECTION */
+    .sec-lbl{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin:3rem 0 1.25rem;padding-bottom:.6rem;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:.6rem;}
+    .sec-lbl-n{font-family:var(--font-serif);font-size:1.1rem;color:var(--gold-light);}
+    .sec-title{font-family:var(--font-serif);font-size:1.6rem;font-weight:300;color:var(--charcoal);margin-bottom:1rem;}
+    .insight{background:var(--card-bg);border-left:3px solid var(--gold);padding:.9rem 1.1rem;margin:.75rem 0;font-size:13.5px;color:var(--text-muted);line-height:1.7;border-radius:0 4px 4px 0;}
+    .insight strong{color:var(--charcoal);font-weight:500;}
+
+    /* KPI */
+    .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:1rem 0 1.5rem;}
+    .kpi{background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;padding:1rem 1.1rem;}
+    .kpi-lbl{font-size:11px;color:var(--text-faint);letter-spacing:.05em;margin-bottom:.4rem;}
+    .kpi-val{font-family:var(--font-serif);font-size:1.9rem;font-weight:300;color:var(--charcoal);line-height:1;}
+    .kpi-sub{font-size:11px;color:var(--text-muted);margin-top:.3rem;}
+
+    /* CARDS */
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-bottom:1rem;}
+    .card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:10px;padding:1.2rem 1.3rem;}
+    .badge{display:inline-block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:3px;margin-bottom:.7rem;font-weight:500;}
+    .b-teal{background:var(--teal-bg);color:var(--teal);}
+    .b-blue{background:var(--blue-bg);color:var(--blue);}
+    .b-amber{background:var(--amber-bg);color:var(--amber);}
+    .b-coral{background:var(--coral-bg);color:var(--coral);}
+    .b-purple{background:var(--purple-bg);color:var(--purple);}
+    .b-green{background:var(--green-bg);color:var(--green);}
+    .card-title{font-family:var(--font-serif);font-size:1.05rem;font-weight:400;color:var(--charcoal);margin-bottom:.45rem;line-height:1.25;}
+    .card-body{font-size:12.5px;color:var(--text-muted);line-height:1.7;}
+
+    /* TABLE */
+    .table-wrap{overflow-x:auto;border:1px solid var(--card-border);border-radius:8px;margin-bottom:1rem;}
+    table{width:100%;border-collapse:collapse;font-size:13px;}
+    th{text-align:left;font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text-faint);padding:.7rem 1rem;background:rgba(196,169,106,.05);border-bottom:1px solid var(--card-border);}
+    td{padding:.65rem 1rem;border-bottom:1px solid rgba(196,169,106,.1);color:var(--text-muted);vertical-align:top;line-height:1.5;}
+    tr:last-child td{border-bottom:none;}
+    td:first-child{color:var(--text-main);font-weight:500;}
+    tr.hl td{background:rgba(196,169,106,.04);}
+
+    /* FEATURE LIST */
+    .feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-bottom:1rem;}
+    .feat-item{background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;padding:.85rem 1rem;display:flex;align-items:flex-start;gap:.7rem;}
+    .feat-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
+    .feat-name{font-size:13px;font-weight:500;color:var(--charcoal);line-height:1.25;margin-bottom:2px;}
+    .feat-desc{font-size:11px;color:var(--text-faint);line-height:1.4;}
+
+    /* TIMELINE */
+    .timeline{display:flex;flex-direction:column;}
+    .tl-item{display:flex;gap:1.5rem;padding-bottom:2rem;position:relative;}
+    .tl-item:last-child{padding-bottom:0;}
+    .tl-item:not(:last-child)::before{content:'';position:absolute;left:19px;top:40px;bottom:0;width:1px;background:var(--line);}
+    .tl-dot{width:38px;height:38px;border-radius:50%;background:var(--card-bg);border:1px solid var(--card-border);display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-size:1rem;color:var(--gold);flex-shrink:0;}
+    .tl-body{flex:1;padding-top:.3rem;}
+    .tl-head{display:flex;align-items:center;gap:.75rem;margin-bottom:.4rem;flex-wrap:wrap;}
+    .tl-title{font-family:var(--font-serif);font-size:1.1rem;font-weight:400;color:var(--charcoal);}
+    .tl-time{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint);}
+    .tl-desc{font-size:13px;color:var(--text-muted);line-height:1.7;}
+    .tl-items{margin-top:.6rem;display:flex;flex-direction:column;gap:.2rem;}
+    .tl-li{font-size:12.5px;color:var(--text-muted);padding:.2rem 0 .2rem 1rem;position:relative;}
+    .tl-li::before{content:"→";position:absolute;left:0;color:var(--gold-light);font-size:11px;top:.25rem;}
+
+    /* PRICING */
+    .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:1rem;}
+    .pricing-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:10px;overflow:hidden;}
+    .pricing-card.featured{border-color:var(--gold);border-width:2px;}
+    .pricing-head{padding:1.2rem 1.3rem;border-bottom:1px solid var(--line);}
+    .pricing-tier{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint);margin-bottom:.35rem;font-weight:500;}
+    .pricing-name{font-family:var(--font-serif);font-size:1.2rem;font-weight:400;color:var(--charcoal);margin-bottom:.5rem;}
+    .pricing-price{font-family:var(--font-serif);font-size:2rem;font-weight:300;color:var(--charcoal);line-height:1;}
+    .pricing-price span{font-size:.85rem;color:var(--text-muted);font-family:var(--font-sans);}
+    .pricing-body{padding:1rem 1.3rem;}
+    .pricing-li{font-size:12.5px;color:var(--text-muted);padding:.28rem 0 .28rem 1rem;border-bottom:1px solid rgba(196,169,106,.07);position:relative;}
+    .pricing-li:last-child{border-bottom:none;}
+    .pricing-li::before{content:"✓";position:absolute;left:0;color:var(--teal);font-size:11px;top:.33rem;}
+
+    /* COMPETITION BAR */
+    .comp-row{display:flex;align-items:center;gap:.75rem;margin-bottom:.8rem;}
+    .comp-name{font-size:12px;font-weight:500;color:var(--text-main);width:100px;flex-shrink:0;}
+    .comp-track{flex:1;height:8px;background:rgba(196,169,106,.12);border-radius:4px;overflow:hidden;}
+    .comp-fill{height:100%;border-radius:4px;}
+    .comp-tag{font-size:11px;color:var(--text-faint);width:120px;flex-shrink:0;}
+
+    /* TOTAL BAR */
+    .total-bar{background:var(--charcoal);border-radius:10px;padding:1.5rem 1.75rem;margin-top:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+    .total-lbl{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,248,244,.5);margin-bottom:.3rem;}
+    .total-val{font-family:var(--font-serif);font-size:2rem;font-weight:300;color:#FAF8F4;line-height:1;}
+    .total-sub{font-size:11px;color:rgba(250,248,244,.4);margin-top:.25rem;}
+
+    /* FOOTER */
+    footer{background:var(--charcoal);padding:2rem var(--pad);}
+    .footer-inner{max-width:var(--max-w);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;}
+    .footer-logo{font-family:var(--font-serif);font-size:1.2rem;font-weight:600;letter-spacing:.18em;color:rgba(250,248,244,.9);}
+    .footer-logo small{display:block;font-size:9px;letter-spacing:.15em;color:var(--gold-light);font-family:var(--font-sans);font-weight:400;text-transform:uppercase;margin-top:2px;}
+    .footer-copy{font-size:11px;color:rgba(250,248,244,.3);}
+
+    @media(max-width:580px){
+      .pricing-grid{grid-template-columns:1fr;}
+      .kpi-grid{grid-template-columns:1fr 1fr;}
+    }
+  </style>
+</head>
+<body>
+<div class="grain"></div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <p class="hero-ey">Document stratégique — Application SaaS</p>
+    <div class="hero-logo">AKI<span>Book</span></div>
+    <div class="hero-tagline">La plateforme de réservation beauté pensée pour l'Océan Indien</div>
+    <p class="hero-desc">Application web + mobile multi-salons avec tableau de bord admin, prise de RDV, gestion clients, caisse et paiement en ligne. Conçue pour AKI, revendue à d'autres salons.</p>
+    <div class="hero-badges">
+      <span class="hb">Web + Mobile</span>
+      <span class="hb">Multi-salons</span>
+      <span class="hb">SaaS</span>
+      <span class="hb">Paiement intégré</span>
+      <span class="hb">B2B revendable</span>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- 01 OPPORTUNITÉ MARCHÉ -->
+  <div class="sec-lbl"><span class="sec-lbl-n">01</span> Opportunité de marché</div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-lbl">Marché mondial logiciels salon</div><div class="kpi-val">1,57 Md$</div><div class="kpi-sub">En 2025 · +11,5 %/an</div></div>
+    <div class="kpi"><div class="kpi-lbl">Projection 2033</div><div class="kpi-val">3,75 Md$</div><div class="kpi-sub">CAGR 11,5 %</div></div>
+    <div class="kpi"><div class="kpi-lbl">Salons avec réservation en ligne</div><div class="kpi-val">72 %</div><div class="kpi-sub">+24 % de RDV via digital</div></div>
+    <div class="kpi"><div class="kpi-lbl">RDV via mobile en 2024</div><div class="kpi-val">65 %</div><div class="kpi-sub">Mobile first obligatoire</div></div>
+  </div>
+  <div class="insight"><strong>Opportunité spécifique Océan Indien :</strong> aucune plateforme de réservation beauté n'est positionnée spécifiquement sur Maurice, La Réunion, Madagascar et les Maldives. AKIBook peut s'imposer comme la référence régionale avant que Fresha ou Treatwell n'y arrivent.</div>
+
+  <!-- 02 POSITIONNEMENT -->
+  <div class="sec-lbl"><span class="sec-lbl-n">02</span> Positionnement &amp; différenciation</div>
+  <div class="insight"><strong>Le problème des concurrents actuels :</strong> Fresha prend 20 % de commission sur les nouveaux clients. Treatwell prend 35 %. Planity coûte ~89 €/mois sans personnalisation. Aucun n'est pensé pour les marchés émergents ni pour être revendu sous marque blanche.</div>
+
+  <div style="margin-bottom:1.25rem;">
+    <div class="comp-row"><div class="comp-name">Fresha</div><div class="comp-track"><div class="comp-fill" style="width:75%;background:#85B7EB"></div></div><div class="comp-tag">20 % commission</div></div>
+    <div class="comp-row"><div class="comp-name">Treatwell</div><div class="comp-track"><div class="comp-fill" style="width:65%;background:#85B7EB"></div></div><div class="comp-tag">35 % commission</div></div>
+    <div class="comp-row"><div class="comp-name">Planity</div><div class="comp-track"><div class="comp-fill" style="width:55%;background:#85B7EB"></div></div><div class="comp-tag">~89 €/mois fixe</div></div>
+    <div class="comp-row"><div class="comp-name" style="color:var(--gold-dark);font-weight:600">AKIBook</div><div class="comp-track"><div class="comp-fill" style="width:90%;background:var(--gold)"></div></div><div class="comp-tag" style="color:var(--teal);font-weight:500">0 % commission</div></div>
+  </div>
+
+  <div class="cards">
+    <div class="card"><span class="badge b-teal">Avantage 1</span><div class="card-title">Zéro commission</div><div class="card-body">Abonnement mensuel fixe. Le salon garde 100 % de ses revenus. Pas de surprise en fin de mois. C'est le principal reproche fait à Fresha et Treatwell.</div></div>
+    <div class="card"><span class="badge b-blue">Avantage 2</span><div class="card-title">Marque blanche complète</div><div class="card-body">Chaque salon achète l'app sous son propre nom et logo. Le client réserve sur "AKI Book" ou "Salon Dupont Book" — pas sur une marketplace concurrente.</div></div>
+    <div class="card"><span class="badge b-purple">Avantage 3</span><div class="card-title">Pensé Océan Indien</div><div class="card-body">Interface en français ET en anglais. Paiement en MUR, EUR, AUD. Support adapté au marché mauricien. Aucun concurrent ne cible cette région.</div></div>
+    <div class="card"><span class="badge b-amber">Avantage 4</span><div class="card-title">Multi-salons natif</div><div class="card-body">Un franchisé AKI gère tous ses salons depuis un seul tableau de bord. Contrairement à Planity qui facture par établissement.</div></div>
+  </div>
+
+  <!-- 03 FONCTIONNALITÉS -->
+  <div class="sec-lbl"><span class="sec-lbl-n">03</span> Fonctionnalités — Version 1 complète</div>
+
+  <p style="font-size:13px;color:var(--text-muted);margin-bottom:1rem;font-weight:500;">MODULE CLIENT (ce que voit le client)</p>
+  <div class="feat-grid">
+    <div class="feat-item"><div class="feat-icon">📅</div><div><div class="feat-name">Réservation en ligne 24h/24</div><div class="feat-desc">Choix du service, du praticien et du créneau en temps réel</div></div></div>
+    <div class="feat-item"><div class="feat-icon">📱</div><div><div class="feat-name">App mobile iOS + Android</div><div class="feat-desc">Notifications push, rappels automatiques J-1 et H-2</div></div></div>
+    <div class="feat-item"><div class="feat-icon">💳</div><div><div class="feat-name">Paiement en ligne sécurisé</div><div class="feat-desc">CB, virement, avance à la réservation. Stripe ou PayHere</div></div></div>
+    <div class="feat-item"><div class="feat-icon">⭐</div><div><div class="feat-name">Avis &amp; notes clients</div><div class="feat-desc">Système de notation post-RDV, réponses du salon</div></div></div>
+    <div class="feat-item"><div class="feat-icon">🎁</div><div><div class="feat-name">Cartes cadeaux numériques</div><div class="feat-desc">Achat, envoi par email, utilisation en ligne ou en caisse</div></div></div>
+    <div class="feat-item"><div class="feat-icon">♦</div><div><div class="feat-name">Programme de fidélité</div><div class="feat-desc">Points, abonnements, parrainage intégrés dans l'app</div></div></div>
+  </div>
+
+  <p style="font-size:13px;color:var(--text-muted);margin:1.25rem 0 1rem;font-weight:500;">MODULE SALON (ce que voit le gérant)</p>
+  <div class="feat-grid">
+    <div class="feat-item"><div class="feat-icon">🗓</div><div><div class="feat-name">Agenda intelligent</div><div class="feat-desc">Vue jour/semaine/mois, glisser-déposer, gestion multi-praticiens</div></div></div>
+    <div class="feat-item"><div class="feat-icon">👥</div><div><div class="feat-name">Fiche client complète</div><div class="feat-desc">Historique, préférences, allergies, photos avant/après</div></div></div>
+    <div class="feat-item"><div class="feat-icon">🧴</div><div><div class="feat-name">Gestion des stocks</div><div class="feat-desc">Suivi produits, alertes rupture, commandes fournisseurs</div></div></div>
+    <div class="feat-item"><div class="feat-icon">💰</div><div><div class="feat-name">Caisse &amp; encaissement</div><div class="feat-desc">POS tactile, multi-modes de paiement, tickets par SMS/email</div></div></div>
+    <div class="feat-item"><div class="feat-icon">📊</div><div><div class="feat-name">Tableaux de bord &amp; stats</div><div class="feat-desc">CA, taux remplissage, praticien le plus rentable, heures creuses</div></div></div>
+    <div class="feat-item"><div class="feat-icon">📣</div><div><div class="feat-name">Marketing intégré</div><div class="feat-desc">SMS/email automatiques, promos ciblées, relances clients inactifs</div></div></div>
+  </div>
+
+  <p style="font-size:13px;color:var(--text-muted);margin:1.25rem 0 1rem;font-weight:500;">MODULE ADMIN (tableau de bord multi-salons)</p>
+  <div class="feat-grid">
+    <div class="feat-item"><div class="feat-icon">🏢</div><div><div class="feat-name">Gestion multi-établissements</div><div class="feat-desc">Vue consolidée de tous les salons depuis un seul login</div></div></div>
+    <div class="feat-item"><div class="feat-icon">👤</div><div><div class="feat-name">Gestion des accès</div><div class="feat-desc">Rôles : super-admin, gérant salon, praticien, comptable</div></div></div>
+    <div class="feat-item"><div class="feat-icon">📈</div><div><div class="feat-name">Reporting réseau</div><div class="feat-desc">CA consolidé, comparaison salons, tendances réseau</div></div></div>
+    <div class="feat-item"><div class="feat-icon">🎨</div><div><div class="feat-name">Marque blanche</div><div class="feat-desc">Logo, couleurs, nom d'app personnalisés par salon/franchisé</div></div></div>
+  </div>
+
+  <!-- 04 MODÈLE ÉCONOMIQUE -->
+  <div class="sec-lbl"><span class="sec-lbl-n">04</span> Modèle économique SaaS</div>
+
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="pricing-head">
+        <div class="pricing-tier">Formule Starter</div>
+        <div class="pricing-name">AKIBook Solo</div>
+        <div class="pricing-price">29 <span>€ HT/mois</span></div>
+      </div>
+      <div class="pricing-body">
+        <div class="pricing-li">1 établissement</div>
+        <div class="pricing-li">Jusqu'à 3 praticiens</div>
+        <div class="pricing-li">Réservation en ligne</div>
+        <div class="pricing-li">App mobile (marque AKIBook)</div>
+        <div class="pricing-li">Rappels SMS automatiques</div>
+        <div class="pricing-li">Fiche client de base</div>
+      </div>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pricing-head">
+        <div class="pricing-tier" style="color:var(--gold)">⭐ Formule phare</div>
+        <div class="pricing-name">AKIBook Pro</div>
+        <div class="pricing-price">69 <span>€ HT/mois</span></div>
+      </div>
+      <div class="pricing-body">
+        <div class="pricing-li">1 établissement</div>
+        <div class="pricing-li">Praticiens illimités</div>
+        <div class="pricing-li">Caisse + paiement en ligne</div>
+        <div class="pricing-li">App mobile marque blanche</div>
+        <div class="pricing-li">Marketing automatisé</div>
+        <div class="pricing-li">Gestion stocks</div>
+        <div class="pricing-li">Statistiques avancées</div>
+        <div class="pricing-li">Cartes cadeaux + fidélité</div>
+      </div>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-head">
+        <div class="pricing-tier">Formule Réseau</div>
+        <div class="pricing-name">AKIBook Network</div>
+        <div class="pricing-price">149 <span>€ HT/mois</span></div>
+      </div>
+      <div class="pricing-body">
+        <div class="pricing-li">Jusqu'à 10 établissements</div>
+        <div class="pricing-li">Tableau de bord admin</div>
+        <div class="pricing-li">Toutes fonctions Pro</div>
+        <div class="pricing-li">Marque blanche complète</div>
+        <div class="pricing-li">Reporting réseau</div>
+        <div class="pricing-li">Support prioritaire</div>
+        <div class="pricing-li">Onboarding dédié</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight"><strong>Revenus additionnels :</strong> frais de setup (~300 € par nouveau salon), SMS payants au-delà du quota inclus (~0,05 €/SMS), frais de traitement paiement (1,5 % par transaction), modules optionnels (formation en ligne, analytics avancés).</div>
+
+  <!-- 05 PROJECTIONS -->
+  <div class="sec-lbl"><span class="sec-lbl-n">05</span> Projections revenus SaaS</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Horizon</th><th>Salons abonnés</th><th>Formule moyenne</th><th>MRR (mensuel)</th><th>ARR (annuel)</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>An 1 — Test marché</td><td>5 (AKI + 4 partenaires)</td><td>Pro 69 €</td><td>~345 €</td><td>~4 140 €</td></tr>
+        <tr><td>An 2 — Lancement Maurice</td><td>20 salons</td><td>Mix Solo/Pro</td><td>~1 200 €</td><td>~14 400 €</td></tr>
+        <tr class="hl"><td>An 3 — Expansion régionale</td><td>60 salons</td><td>Majority Pro</td><td>~4 140 €</td><td>~49 680 €</td></tr>
+        <tr><td>An 4 — Océan Indien</td><td>150 salons</td><td>Mix Pro/Network</td><td>~11 000 €</td><td>~132 000 €</td></tr>
+        <tr class="hl"><td>An 5 — Objectif cible</td><td>300 salons</td><td>Average 70 €</td><td>~21 000 €</td><td>~252 000 €</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="total-bar">
+    <div>
+      <div class="total-lbl">Valorisation SaaS estimée (an 5)</div>
+      <div class="total-val">~2,5 M€</div>
+      <div class="total-sub">Multiple x10 ARR · Standard marché SaaS beauté</div>
+    </div>
+    <div>
+      <div class="total-lbl">Seuil de rentabilité app</div>
+      <div class="total-val">~30 salons</div>
+      <div class="total-sub">Couvre les coûts d'hébergement et maintenance</div>
+    </div>
+  </div>
+
+  <!-- 06 STACK TECHNIQUE -->
+  <div class="sec-lbl"><span class="sec-lbl-n">06</span> Stack technique recommandée</div>
+  <div class="cards">
+    <div class="card">
+      <span class="badge b-teal">Option A — No-code</span>
+      <div class="card-title">Bubble.io + Adalo</div>
+      <div class="card-body">Bubble pour la web app, Adalo pour le mobile. Budget : 5 000 – 12 000 €. Délai : 3 à 6 mois. Idéal pour valider le concept rapidement avant d'investir dans du code sur-mesure. Limite : scalabilité à surveiller au-delà de 500 salons.</div>
+    </div>
+    <div class="card">
+      <span class="badge b-blue">Option B — Low-code</span>
+      <div class="card-title">Supabase + React + Expo</div>
+      <div class="card-body">Backend Supabase (open source), frontend React web + React Native mobile via Expo. Budget : 15 000 – 30 000 €. Délai : 6 à 9 mois. Meilleur rapport qualité/prix pour un vrai produit évolutif.</div>
+    </div>
+    <div class="card">
+      <span class="badge b-purple">Option C — Sur-mesure</span>
+      <div class="card-title">Node.js + Next.js + Flutter</div>
+      <div class="card-body">Développement full-stack complet. Budget : 40 000 – 80 000 €. Délai : 12 à 18 mois. Pour une version premium scalable à plusieurs milliers de salons. Nécessite une équipe ou agence.</div>
+    </div>
+  </div>
+  <div class="insight"><strong>Ma recommandation :</strong> commencer avec l'<strong>Option B (Supabase + React + Expo)</strong>. C'est le meilleur compromis entre vitesse, coût et scalabilité. Un bon développeur freelance full-stack peut livrer en 6 mois pour ~20 000 €. La version No-code est parfaite pour une démo investisseurs mais trop limitée pour un vrai produit SaaS revendable.</div>
+
+  <!-- 07 ROADMAP -->
+  <div class="sec-lbl"><span class="sec-lbl-n">07</span> Roadmap de développement</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot">1</div>
+      <div class="tl-body">
+        <div class="tl-head"><div class="tl-title">Phase Discovery — Cahier des charges</div><span class="tl-time">Mois 1 — 2</span></div>
+        <div class="tl-desc">Avant d'écrire une ligne de code, définir précisément ce qu'on construit.</div>
+        <div class="tl-items">
+          <div class="tl-li">Rédiger le cahier des charges fonctionnel complet (User Stories)</div>
+          <div class="tl-li">Créer les maquettes UI/UX sur Figma (wireframes de toutes les écrans)</div>
+          <div class="tl-li">Choisir la stack technique et recruter le développeur</div>
+          <div class="tl-li">Définir le modèle de données (base de données)</div>
+          <div class="tl-li">Budget estimé : 2 000 – 5 000 € (designer UX)</div>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">2</div>
+      <div class="tl-body">
+        <div class="tl-head"><div class="tl-title">Phase MVP — Version minimale fonctionnelle</div><span class="tl-time">Mois 3 — 6</span></div>
+        <div class="tl-desc">Construire le strict nécessaire pour tester avec de vrais utilisateurs.</div>
+        <div class="tl-items">
+          <div class="tl-li">Réservation en ligne (web) + agenda salon</div>
+          <div class="tl-li">Fiche client + historique</div>
+          <div class="tl-li">Rappels SMS automatiques</div>
+          <div class="tl-li">Tableau de bord basique (CA, RDV du jour)</div>
+          <div class="tl-li">Déploiement sur AKI Paris en conditions réelles</div>
+          <div class="tl-li">Budget estimé : 8 000 – 15 000 €</div>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">3</div>
+      <div class="tl-body">
+        <div class="tl-head"><div class="tl-title">Phase V1 — Produit complet</div><span class="tl-time">Mois 7 — 12</span></div>
+        <div class="tl-desc">Enrichir avec toutes les fonctionnalités prévues, app mobile, paiement.</div>
+        <div class="tl-items">
+          <div class="tl-li">App mobile iOS + Android (React Native / Expo)</div>
+          <div class="tl-li">Paiement en ligne (Stripe)</div>
+          <div class="tl-li">Caisse tactile + encaissement</div>
+          <div class="tl-li">Marketing automatisé + cartes cadeaux</div>
+          <div class="tl-li">Gestion stocks + multi-praticiens</div>
+          <div class="tl-li">Onboarding des 5 premiers salons beta</div>
+          <div class="tl-li">Budget estimé : 10 000 – 20 000 €</div>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">4</div>
+      <div class="tl-body">
+        <div class="tl-head"><div class="tl-title">Phase V2 — Multi-salons &amp; marque blanche</div><span class="tl-time">Mois 13 — 18</span></div>
+        <div class="tl-desc">Passer d'un produit AKI à un produit revendable à d'autres.</div>
+        <div class="tl-items">
+          <div class="tl-li">Tableau de bord admin multi-établissements</div>
+          <div class="tl-li">Système de marque blanche (logo + couleurs personnalisables)</div>
+          <div class="tl-li">Gestion des abonnements et facturation automatique</div>
+          <div class="tl-li">Reporting réseau pour franchisés AKI</div>
+          <div class="tl-li">Lancement commercial sur Maurice</div>
+          <div class="tl-li">Budget estimé : 8 000 – 15 000 €</div>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">5</div>
+      <div class="tl-body">
+        <div class="tl-head"><div class="tl-title">Phase V3 — Expansion &amp; IA</div><span class="tl-time">An 2 — 3</span></div>
+        <div class="tl-desc">Différenciation par l'intelligence artificielle et l'expansion géographique.</div>
+        <div class="tl-items">
+          <div class="tl-li">IA : recommandations de créneaux, prédiction no-shows, suggestions clients</div>
+          <div class="tl-li">Marketplace AKIBook (annuaire de salons partenaires)</div>
+          <div class="tl-li">Extension La Réunion, Madagascar, Maldives</div>
+          <div class="tl-li">API publique pour intégrations tierces</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 08 BUDGET TOTAL -->
+  <div class="sec-lbl"><span class="sec-lbl-n">08</span> Budget total de développement</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Phase</th><th>Poste</th><th>Budget estimé</th><th>Délai</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>Discovery</td><td>Designer UX/UI + cahier des charges</td><td>2 000 – 5 000 €</td><td>2 mois</td></tr>
+        <tr><td>MVP</td><td>Développeur full-stack (web)</td><td>8 000 – 15 000 €</td><td>4 mois</td></tr>
+        <tr class="hl"><td>V1</td><td>App mobile + paiement + fonctions complètes</td><td>10 000 – 20 000 €</td><td>6 mois</td></tr>
+        <tr><td>V2</td><td>Multi-salons + marque blanche</td><td>8 000 – 15 000 €</td><td>6 mois</td></tr>
+        <tr class="hl"><td>Hébergement</td><td>Serveur cloud (Supabase + Vercel)</td><td>~100 – 300 €/mois</td><td>Récurrent</td></tr>
+        <tr><td>Maintenance</td><td>Développeur en régie (20h/mois)</td><td>~1 000 – 2 000 €/mois</td><td>Récurrent</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="total-bar">
+    <div>
+      <div class="total-lbl">Budget total MVP → V2</div>
+      <div class="total-val">28 000 – 55 000 €</div>
+      <div class="total-sub">Sur 18 mois · Option Supabase + React + Expo</div>
+    </div>
+    <div>
+      <div class="total-lbl">Option no-code (Bubble)</div>
+      <div class="total-val">5 000 – 12 000 €</div>
+      <div class="total-sub">Pour valider le concept rapidement</div>
+    </div>
+  </div>
+
+  <!-- 09 PROCHAINES ÉTAPES -->
+  <div class="sec-lbl"><span class="sec-lbl-n">09</span> Prochaines étapes immédiates</div>
+  <div class="cards">
+    <div class="card"><span class="badge b-teal">Cette semaine</span><div class="card-title">Nommer l'application</div><div class="card-body">Choisir le nom définitif : AKIBook, AKIRdv, BookAKI, ou autre. Vérifier la disponibilité du nom de domaine et déposer la marque en même temps qu'AKI.</div></div>
+    <div class="card"><span class="badge b-blue">Mois 1</span><div class="card-title">Maquette Figma</div><div class="card-body">Faire réaliser les maquettes UI de toutes les écrans clés (15–20 écrans) par un designer UX. Budget : 1 500 – 3 000 €. C'est ce qu'on présentera aux investisseurs et aux premiers salons.</div></div>
+    <div class="card"><span class="badge b-amber">Mois 2</span><div class="card-title">Recruter le développeur</div><div class="card-body">Chercher un développeur full-stack React / React Native sur Malt, Upwork ou via la CCI France-Maurice. Prévoir un test technique avant de signer.</div></div>
+    <div class="card"><span class="badge b-purple">Mois 3</span><div class="card-title">Lancer le MVP</div><div class="card-body">Démarrer le développement du MVP. L'utiliser en premier sur le salon AKI. C'est le meilleur cas d'usage réel pour tester et améliorer le produit avant de le vendre.</div></div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">AKIBook<small>Plateforme SaaS beauté · 2025</small></div>
+    <div class="footer-copy">Document stratégique confidentiel · AKI · Île Maurice</div>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
+</body>
+</html>
