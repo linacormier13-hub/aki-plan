@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AKI — Étude de marché · Île Maurice 2025</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #FAF8F4;
+      --beige: #E8E0D0;
+      --gold: #C4A96A;
+      --gold-light: #D4BC8A;
+      --gold-dark: #9A7D42;
+      --charcoal: #1C1A17;
+      --brown-mid: #5C4E38;
+      --text-main: #2A2318;
+      --text-muted: #7A6E5E;
+      --text-faint: #B0A898;
+      --line: rgba(196,169,106,0.22);
+      --card-bg: #FEFCF8;
+      --card-border: rgba(196,169,106,0.22);
+      --teal: #0F6E56; --teal-bg: #E1F5EE;
+      --amber: #854F0B; --amber-bg: #FAEEDA;
+      --coral: #993C1D; --coral-bg: #FAECE7;
+      --purple: #534AB7; --purple-bg: #EEEDFE;
+      --blue: #185FA5; --blue-bg: #E6F1FB;
+      --red: #A32D2D; --red-bg: #FCEBEB;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'DM Sans', sans-serif;
+      --max-w: 820px;
+      --pad: clamp(1.5rem, 5vw, 3rem);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .grain {
+      position: fixed; inset: 0; pointer-events: none; z-index: 1000;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 128px;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,248,244,0.93);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .header-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 1rem var(--pad);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo-name { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 600; letter-spacing: .18em; color: var(--charcoal); }
+    .logo-sub { font-size: 10px; letter-spacing: .14em; color: var(--gold); text-transform: uppercase; display: block; margin-top: 2px; }
+    .header-tag { font-size: 11px; letter-spacing: .1em; color: var(--text-muted); text-transform: uppercase; }
+
+    /* HERO */
+    .hero {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 4rem var(--pad) 3rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .hero-eyebrow { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .hero-title { font-family: var(--font-serif); font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 300; line-height: 1.1; color: var(--charcoal); margin-bottom: 1.2rem; }
+    .hero-title em { font-style: italic; color: var(--gold-dark); }
+    .hero-desc { font-size: 14px; color: var(--text-muted); max-width: 520px; line-height: 1.8; margin-bottom: 2rem; }
+    .hero-pills { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .pill {
+      font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+      padding: .35rem .9rem; border: 1px solid var(--card-border);
+      border-radius: 20px; color: var(--text-muted); background: var(--card-bg);
+    }
+
+    /* MAIN LAYOUT */
+    main { max-width: var(--max-w); margin: 0 auto; padding: 3rem var(--pad) 5rem; }
+
+    /* SECTION */
+    .section { margin-bottom: 3rem; }
+    .section-label {
+      font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.2rem;
+      padding-bottom: .6rem; border-bottom: 1px solid var(--line);
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .section-num {
+      font-family: var(--font-serif); font-size: 1rem; color: var(--gold-light);
+    }
+
+    /* KPI GRID */
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
+    .kpi { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 6px; padding: 1rem 1.1rem; }
+    .kpi-label { font-size: 11px; color: var(--text-faint); letter-spacing: .05em; margin-bottom: .4rem; }
+    .kpi-val { font-family: var(--font-serif); font-size: 2rem; font-weight: 400; color: var(--charcoal); line-height: 1; }
+    .kpi-sub { font-size: 11px; color: var(--text-muted); margin-top: .3rem; }
+
+    /* BARS */
+    .bar-wrap { margin-bottom: 1rem; }
+    .bar-meta { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: .3rem; }
+    .bar-meta span:first-child { color: var(--text-main); font-weight: 500; }
+    .bar-meta span:last-child { color: var(--text-muted); }
+    .bar-track { height: 7px; background: var(--beige); border-radius: 4px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 4px; background: var(--gold); }
+    .bar-fill.accent { background: var(--gold-light); }
+
+    /* CARDS GRID */
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-bottom: 1rem; }
+    .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; padding: 1.1rem 1.2rem; }
+    .card-badge { display: inline-block; font-size: 10px; letter-spacing: .06em; padding: 2px 8px; border-radius: 3px; margin-bottom: .6rem; }
+    .card-title { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 400; color: var(--charcoal); margin-bottom: .5rem; line-height: 1.3; }
+    .card-body { font-size: 12.5px; color: var(--text-muted); line-height: 1.7; }
+
+    /* TABLE */
+    .table-wrap { overflow-x: auto; margin-bottom: .75rem; border: 1px solid var(--card-border); border-radius: 8px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { text-align: left; font-size: 10px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--text-faint); padding: .7rem 1rem; background: rgba(196,169,106,0.05); border-bottom: 1px solid var(--card-border); }
+    td { padding: .65rem 1rem; border-bottom: 1px solid rgba(196,169,106,0.1); color: var(--text-muted); vertical-align: top; line-height: 1.5; }
+    tr:last-child td { border-bottom: none; }
+    td:first-child { color: var(--text-main); font-weight: 500; }
+    tr.hl td { background: rgba(196,169,106,0.04); }
+    .note { font-size: 11px; color: var(--text-faint); margin-top: .4rem; }
+
+    /* INSIGHT BOX */
+    .insight {
+      background: var(--card-bg);
+      border-left: 3px solid var(--gold);
+      padding: .85rem 1.1rem;
+      margin-bottom: .75rem;
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      border-radius: 0 4px 4px 0;
+    }
+    .insight strong { color: var(--charcoal); font-weight: 500; }
+
+    /* SWOT */
+    .swot { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .swot-cell { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 6px; padding: 1rem 1.1rem; }
+    .swot-cell.s { border-top: 2px solid #1D9E75; }
+    .swot-cell.w { border-top: 2px solid #D85A30; }
+    .swot-cell.o { border-top: 2px solid var(--blue); }
+    .swot-cell.t { border-top: 2px solid #E24B4A; }
+    .swot-head { font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; margin-bottom: .6rem; }
+    .swot-head.s { color: #0F6E56; } .swot-head.w { color: #993C1D; } .swot-head.o { color: var(--blue); } .swot-head.t { color: #A32D2D; }
+    .swot-li { font-size: 12.5px; color: var(--text-muted); line-height: 1.65; padding: .15rem 0 .15rem 1rem; position: relative; }
+    .swot-li::before { content: "—"; position: absolute; left: 0; color: var(--gold-light); font-size: 11px; top: .2rem; }
+
+    /* BADGES */
+    .b-teal { background: var(--teal-bg); color: var(--teal); }
+    .b-amber { background: var(--amber-bg); color: var(--amber); }
+    .b-coral { background: var(--coral-bg); color: var(--coral); }
+    .b-purple { background: var(--purple-bg); color: var(--purple); }
+    .b-blue { background: var(--blue-bg); color: var(--blue); }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--line); margin-top: 2rem; }
+    .footer-inner { max-width: var(--max-w); margin: 0 auto; padding: 2rem var(--pad); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-logo { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 600; letter-spacing: .18em; color: var(--charcoal); }
+    .footer-copy { font-size: 11px; color: var(--text-faint); }
+
+    @media (max-width: 580px) {
+      .swot { grid-template-columns: 1fr; }
+      .header-tag { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header>
+  <div class="header-inner">
+    <div>
+      <span class="logo-name">AKI</span>
+      <span class="logo-sub">Hair &amp; Beauty · Île Maurice</span>
+    </div>
+    <span class="header-tag">Étude de marché 2025</span>
+  </div>
+</header>
+
+<section class="hero">
+  <p class="hero-eyebrow">Analyse stratégique — données 2024–2025</p>
+  <h1 class="hero-title">Étude de marché<br /><em>Île Maurice</em></h1>
+  <p class="hero-desc">Analyse du marché beauté et coiffure à Maurice : contexte touristique, concurrence locale, segmentation clientèle, grille tarifaire et modèle économique. Budget d'ouverture : 20 000 – 50 000 €.</p>
+  <div class="hero-pills">
+    <span class="pill">Clientèle &amp; personas</span>
+    <span class="pill">Concurrence locale</span>
+    <span class="pill">Pricing &amp; panier moyen</span>
+    <span class="pill">Formation &amp; employabilité</span>
+  </div>
+</section>
+
+<main>
+
+  <!-- 1. CONTEXTE MACRO -->
+  <div class="section">
+    <div class="section-label"><span class="section-num">01</span> Contexte macro — île Maurice</div>
+    <div class="kpi-grid">
+      <div class="kpi"><div class="kpi-label">Touristes en 2024</div><div class="kpi-val">1,38M</div><div class="kpi-sub">+6,7 % vs 2023</div></div>
+      <div class="kpi"><div class="kpi-label">Revenus tourisme</div><div class="kpi-val">1,9 Md$</div><div class="kpi-sub">Record post-Covid</div></div>
+      <div class="kpi"><div class="kpi-label">Séjour moyen</div><div class="kpi-val">11–12 j</div><div class="kpi-sub">Stable depuis 2 ans</div></div>
+      <div class="kpi"><div class="kpi-label">Hôtels actifs</div><div class="kpi-val">110+</div><div class="kpi-sub">Taux d'occupation 72 %</div></div>
+    </div>
+    <div class="insight"><strong>Opportunité directe :</strong> avec 1,38 million de touristes séjournant 11 jours en moyenne, le gisement potentiel de clientèle beauté est considérable — notamment via les hôtels 4 et 5 étoiles qui concentrent la clientèle haut de gamme française, britannique et sud-africaine.</div>
+  </div>
+
+  <!-- 2. MARCHÉS ÉMETTEURS -->
+  <div class="section">
+    <div class="section-label"><span class="section-num">02</span> Origines des touristes — marchés prioritaires</div>
+    <div class="bar-wrap"><div class="bar-meta"><span>France</span><span>1er marché — sensible au label parisien</span></div><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div></div>
+    <div class="bar-wrap"><div class="bar-meta"><span>Afrique du Sud</span><span>2e marché</span></div><div class="bar-track"><div class="bar-fill" style="width:58%"></div></div></div>
+    <div class="bar-wrap"><div class="bar-meta"><span>Inde</span><span>3e marché — en forte croissance</span></div><div class="bar-track"><div class="bar-fill" style="width:44%"></div></div></div>
+    <div class="bar-wrap"><div class="bar-meta"><span>Royaume-Uni</span><span>4e marché</span></div><div class="bar-track"><div class="bar-fill" style="width:32%"></div></div></div>
+    <div class="bar-wrap"><div class="bar-meta"><span>Europe de l'Est &amp; Moyen-Orient</span><span>Nouveaux marchés — croissance rapide</span></div><div class="bar-track"><div class="bar-fill accent" style="width:20%"></div></div></div>
+    <div class="insight"><strong>Avantage AKI :</strong> la France est le premier marché émetteur. Un salon portant l'image du savoir-faire parisien bénéficie d'une reconnaissance immédiate auprès de la cible la plus présente sur l'île.</div>
+  </div>
+
+  <!-- 3. PERSONAS -->
+  <div class="section">
+    <div class="section-label"><span class="section-num">03</span> Segmentation clientèle &amp; personas</div>
+    <div class="cards">
+      <div class="card">
+        <span class="card-badge b-teal">Persona 1 — prioritaire</span>
+        <div class="card-title">Le touriste haut de gamme</div>
+        <div class="card-body">Français, Britannique ou Sud-Africain. Séjour 10–14 jours en hôtel 4/5 étoiles. Budget beauté intégré au voyage. Cherche discrétion, qualité et expertise. Très sensible au label "Paris". Panier estimé : 60–120 € par visite.</div>
+      </div>
+      <div class="card">
+        <span class="card-badge b-amber">Persona 2 — volume</span>
+        <div class="card-title">Le client local fidèle</div>
+        <div class="card-body">Mauricien(ne) actif(ve), revenus intermédiaires. Visite 1 à 2 fois par mois. Sensible au prix et aux promotions. Intéressé par les jours de formation à tarif réduit. Panier estimé : 15–35 € par visite.</div>
+      </div>
+      <div class="card">
+        <span class="card-badge b-purple">Persona 3 — formation</span>
+        <div class="card-title">Le professionnel en reconversion</div>
+        <div class="card-body">Coiffeur ou esthéticien local souhaitant monter en compétences. Disponible en soirée. Intéressé par des certifications reconnues. Soutien possible via la Chambre des Métiers. Valeur vie client élevée si fidélisé.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. CONCURRENCE -->
+  <div class="section">
+    <div class="section-label"><span class="section-num">04</span> Analyse concurrentielle — acteurs en place</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:22%">Acteur</th>
+            <th style="width:18%">Positionnement</th>
+            <th style="width:30%">Points forts</th>
+            <th style="width:30%">Faille vs AKI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="hl"><td>Maison Sasha</td><td><span class="card-badge b-teal">Premium local</span></td><td>4 établissements, 70 ans d'ancienneté, prix "Icône Afrique"</td><td>Pas d'ancrage français, pas de formation digitale</td></tr>
+          <tr><td>Bénédicte Summers</td><td><span class="card-badge b-teal">Luxe nord</span></td><td>Salon haut de gamme Grand Baie, clientèle touristique</td><td>Un seul point de vente, offre limitée</td></tr>
+          <tr class="hl"><td>Rezah Hairway &amp; School</td><td><span class="card-badge b-amber">Semi-premium</span></td><td>Certifications internationales, formation intégrée</td><td>Peu visible auprès des touristes, pas de spa</td></tr>
+          <tr><td>Salons hôteliers (in-house)</td><td><span class="card-badge b-coral">Captif luxe</span></td><td>Accès direct à la clientèle hôtelière</td><td>Prix très élevés, peu personnalisé, aucun lien avec la France</td></tr>
+          <tr class="hl"><td>Petits salons locaux</td><td><span class="card-badge b-amber">Entrée de gamme</span></td><td>Prix très bas, tissu local dense</td><td>Pas de standardisation, pas de savoir-faire international</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="insight"><strong>Espace libre identifié :</strong> aucun acteur ne combine simultanément ancrage français, offre beauté complète (coiffure + esthétique + onglerie), formation digitale certifiante et partenariats hôteliers structurés. C'est le positionnement exact d'AKI.</div>
+  </div>
+
+  <!-- 5. PRICING -->
+  <div class="section">
+    <div class="section-label"><span class="section-num">05</span> Grille tarifaire — positionnement prix recommandé</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:28%">Prestation</th>
+            <th style="width:22%">Marché local (MUR)</th>
+            <th style="width:22%">Positionnement AKI</th>
+            <th style="width:28%">Tarif touriste (MUR)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Coupe femme</td><td>600 – 1 200</td><td>900 – 1 400</td><td>1 800 – 2 500</td></tr>
+          <tr class="hl"><td>Shampoing + coupe + brushing</td><td>800 – 1 500</td><td>1 200 – 1 800</td><td>2 200 – 3 200</td></tr>
+          <tr><td>Coloration complète</td><td>1 500 – 3 000</td><td>2 500 – 4 000</td><td>4 000 – 6 000</td></tr>
+          <tr class="hl"><td>Soin esthétique / massage</td><td>1 000 – 2 500</td><td>1 800 – 3 000</td><td>3 000 – 5 000</td></tr>
+          <tr><td>Onglerie / pose gel</td><td>500 – 1 200</td><td>900 – 1 500</td><td>1 500 – 2 500</td></tr>
+          <tr class="hl"><td>Package beauté complet</td><td>—</td><td>4 500 – 7 000</td><td>8 000 – 12 000</td></tr>
+          <tr><td>Jour de formation (tarif réduit)</td><td>—</td><td>–30 % sur toutes prestations</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">1 € ≈ 48–50 MUR (2025). Les salons hôteliers pratiquent généralement 3 à 5× le tarif du marché local.</p>
+  </div>
+
+  <!-- 6. MODÈLE ÉCONOMIQUE -->
+  <div class="section">
+    <div class="section-label"><span class="section-num">06</span> Modèle économique — projections phase 1</div>
+    <div class="kpi-grid">
+      <div class="kpi"><div class="kpi-label">Objectif clients / jour</div><div class="kpi-val">10</div><div class="kpi-sub">250 jours ouvrés/an</div></div>
+      <div class="kpi"><div class="kpi-label">Panier moyen estimé</div><div class="kpi-val">~50 €</div><div class="kpi-sub">Mix local / touriste</div></div>
+      <div class="kpi"><div class="kpi-label">CA annuel cible</div><div class="kpi-val">~125 k€</div><div class="kpi-sub">Seuil de rentabilité</div></div>
+      <div class="kpi"><div class="kpi-label">Budget ouverture</div><div class="kpi-val">20–50 k€</div><div class="kpi-sub">Hors fonds de roulement</div></div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:40%">Poste de coût</th><th style="width:32%">Estimation mensuelle</th><th style="width:28%">Remarques</th></tr></thead>
+        <tbody>
+          <tr><td>Loyer (100 m² zone touristique)</td><td>70 000–120 000 MUR</td><td>~1 500–2 500 €/mois</td></tr>
+          <tr class="hl"><td>Masse salariale (2–3 personnes)</td><td>60 000–90 000 MUR</td><td>Coiffeur : 15–22 k MUR/mois</td></tr>
+          <tr><td>Produits &amp; consommables</td><td>15 000–25 000 MUR</td><td>Produits français = différenciation</td></tr>
+          <tr class="hl"><td>Marketing &amp; communication</td><td>10 000–20 000 MUR</td><td>RS, flyers, partenariats hôtels</td></tr>
+          <tr><td>Charges diverses</td><td>~15 000 MUR</td><td>Eau, électricité, télécom</td></tr>
+          <tr class="hl" style="font-weight:500"><td>Total charges mensuelles</td><td>160 000–250 000 MUR</td><td>~3 300–5 200 €/mois</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="insight"><strong>Point de viabilité :</strong> avec 10 clients/jour à 50 € de panier moyen, le CA mensuel atteint environ 10 500 €, couvrant largement les charges. La clé est d'atteindre ce flux rapidement via les partenariats hôteliers dès l'ouverture.</div>
+  </div>
+
+  <!-- 7. FORMATION -->
+  <div class="section">
+    <div class="section-label"><span class="section-num">07</span> Marché de la formation — potentiel sous-exploité</div>
+    <div class="cards">
+      <div class="card">
+        <span class="card-badge b-blue">Contexte</span>
+        <div class="card-title">Un secteur en manque de qualification</div>
+        <div class="card-body">Le niveau technique local est insuffisant pour répondre aux attentes de la clientèle internationale. Les hôtels de luxe déplorent l'absence de coiffeurs formés aux standards européens.</div>
+      </div>
+      <div class="card">
+        <span class="card-badge b-blue">Débouchés</span>
+        <div class="card-title">Employabilité directe</div>
+        <div class="card-body">Les hôtels de luxe recrutent régulièrement. Un centre de formation certifiant devient un vivier de talents permanent. Pipeline interne : former puis employer au sein d'AKI.</div>
+      </div>
+      <div class="card">
+        <span class="card-badge b-purple">Revenus additionnels</span>
+        <div class="card-title">Monétisation du savoir-faire</div>
+        <div class="card-body">Formations présentiel : 5 000–15 000 MUR/participant. Abonnements e-learning : 500–1 500 MUR/mois. Programmes certifiants : +30 % de valorisation tarifaire.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. SWOT -->
+  <div class="section">
+    <div class="section-label"><span class="section-num">08</span> Analyse SWOT — AKI à l'île Maurice</div>
+    <div class="swot">
+      <div class="swot-cell s">
+        <div class="swot-head s">Forces</div>
+        <div class="swot-li">Savoir-faire français = différenciation forte</div>
+        <div class="swot-li">Offre complète et inédite sur le marché</div>
+        <div class="swot-li">Double cible locale + touriste</div>
+        <div class="swot-li">Modèle formation intégré = revenus récurrents</div>
+      </div>
+      <div class="swot-cell w">
+        <div class="swot-head w">Faiblesses</div>
+        <div class="swot-li">Budget limité (20–50 k€) = 1 seul point de vente</div>
+        <div class="swot-li">Notoriété nulle au démarrage</div>
+        <div class="swot-li">Dépendance aux partenariats hôteliers</div>
+        <div class="swot-li">Contraintes administratives (droit d'exercer)</div>
+      </div>
+      <div class="swot-cell o">
+        <div class="swot-head o">Opportunités</div>
+        <div class="swot-li">1,38 million de touristes/an (record 2024)</div>
+        <div class="swot-li">Aucun concurrent "France + formation digitale"</div>
+        <div class="swot-li">Soutien ambassade &amp; Chambre des Métiers</div>
+        <div class="swot-li">Demande croissante en beauté et bien-être</div>
+      </div>
+      <div class="swot-cell t">
+        <div class="swot-head t">Menaces</div>
+        <div class="swot-li">Maison Sasha = acteur dominant bien ancré</div>
+        <div class="swot-li">Saisonnalité touristique (juin–août = creux)</div>
+        <div class="swot-li">Difficulté de recrutement de profils qualifiés</div>
+        <div class="swot-li">Risque de copie rapide du modèle</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. RECOMMANDATIONS -->
+  <div class="section">
+    <div class="section-label"><span class="section-num">09</span> Recommandations prioritaires</div>
+    <div class="insight"><strong>1. Commencer par Grand Baie ou Tamarin</strong> — zones les plus denses en hôtels 4/5 étoiles et en touristes européens. Loyer plus élevé mais flux client garanti dès l'ouverture.</div>
+    <div class="insight"><strong>2. Signer 2–3 partenariats hôteliers avant l'ouverture</strong> — c'est la variable clé pour atteindre 10 clients/jour dès le lancement. Les concierges d'hôtel sont les meilleurs prescripteurs de l'île.</div>
+    <div class="insight"><strong>3. Valider le prix local via un soft launch d'1 mois</strong> — proposer des tarifs d'ouverture à –20 % pour générer du bouche-à-oreille et tester l'élasticité prix de la clientèle locale.</div>
+    <div class="insight"><strong>4. Déposer la marque AKI dès maintenant</strong> — en France et à Maurice. Le dépôt de marque est la première barrière à l'entrée contre toute tentative de copie.</div>
+    <div class="insight"><strong>5. Lancer la formation en soirée dès le 3e mois</strong> — sans attendre une plateforme digitale complète. Sessions présentiel = revenus immédiats avec investissement minimal.</div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <span class="footer-logo" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.2rem;font-weight:600;letter-spacing:.18em;color:#1C1A17">AKI</span>
+    </div>
+    <span style="font-size:11px;color:#B0A898;letter-spacing:.06em">Étude de marché · Île Maurice · 2025 — Données sources : Statistics Mauritius, Tourism Authority Mauritius, SalaryExplorer, GREA Africa</span>
+  </div>
+</footer>
+
+</body>
+</html>
